@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+<script>
+    // Perbedaan Tipe Data Primitive dan Object
+
+//     Tipe data primitif disebut demikian karena tipe data ini “sederhana” dan hanya terdiri dari 1
+// nilai. Di dalam JavaScript terdapat 6 tipe data primitif
+// 1. Number
+// 2. String
+// 3. Boolean
+// 4. Null
+// 5. Undefined
+// 6. Symbol*
+
+// Object bisa disebut sebagai tipe data “khusus” yang prilaku
+// dan isinya bermacam-macam
+// 1. Array
+// 2. Date
+// 3. RegExp
+// 4. Map dan WeakMap*
+// 5. Set dan WeakSet*
+
+// ============== TIPE DATA NUMBER ===========================
+var angka1 = 100;
+var angka2 = -60;
+var angka3 = 0.2;
+
+// ================= Penulisan Scientific Notation ====================
+// Selain angka “normal”, JavaScript juga mendukung penulisan scientific notation, yakni penulisan
+// seperti 3e3, atau 0.4e-3. Huruf e diantara angka ini menandakan pangkat sepuluh. Sebagai
+// contoh 3e3 artinya 3 x 103 = 3000, sedangkan 0.4e-3 artinya 0.4 x 10-3 = 0.0004
+
+var foo = 3e3;
+var bar = 0.4e-3;
+var baz = -942e5;
+
+// ======================= Bilangan Desimal, Biner, Oktal, dan Heksadesimal =============
+var foo;
+
+foo = 999 /* Decimal */
+foo = 0b111001 /*Biner*/
+foo = 01747 /*oktal*/
+foo = 0o1747 /*Oktal*/
+foo = 0x3E7 /*Hexadesimal*/
+
+// ============= NaN dan Infinity ====================
+// Kedua nilai ini hadir untuk menampung hasil matematika yang “tidak umum”, seperti
+// contoh berikut
+
+var foo;
+
+foo = 9 * "a"; /*Nan dalah singkatan dari Not a Number*/
+foo = 9 / "a"; /*Nan*/
+
+foo = 5 / 0 ; /*Infinity tak terhingga*/
+foo = -5 / 0 ; /*Infinity*/
+
+
+// ========= Kesalahan Pembulatan Tipe Data Number ==========
+// Tapi untuk nilai pecahan, terdapat kemungkinan perhitungan yang salah karena
+// keterbatasan memory komputer.
+var foo;
+
+foo = 0.1 + 0.2; /*0.3000000000 == cara mengatasinya menggunakan mathRound()*/ 
+
+// ================ Tipe Data String ====================
+var foo;
+
+foo = "Irfan";
+foo = "123";
+foo = "Irfam 'Nur' Muhammad"
+
+// ============= Escape Character ==================
+// Escape character adalah cara memasukkan karakter khusus ke dalam string. Untuk membuat
+// escape character, digunakan tanda backslash yakni karakter ( \ )
+
+$foo = "hari Jum\'at"; /*anda \' artinya saya menginformasikan kepada JavaScript bahwa tanda kutip tersebut bukan
+sebagai penanda akhir string, tapi hanya sebagai karakter “biasa”.*/
+// • \0: Karakter NUL
+// • \b: Backspace
+// • \t: Horizontal tab
+// • \n: Newline
+// • \v: Vertical tab
+// • \f: Form feed
+// • \r: Carriage return
+// • \": Tanda kutip dua (double quote)
+// • \': Tanda kutip satu (apostrophe atau single quote)
+// • \\: Garis miring backslash
+// • \xXX: Karakter Latin-1 dengan menggunakan dua digit heksa desimal XX
+// • \uXXXX: Karakter Unicode dengan menggunakan empat digit heksa XXXX
+
+// ============ Menulis Karakter Unicode ==========
+// Dari daftar escape character, dua poin terakhir, yakni \xXX dan \uXXXX digunakan untuk menulis
+// karakter unicode ke dalam string. Apa maksud karakter unicode ini?
+var foo = "J\u1EA3v\u1EB3\u1E68\u1E09\u1E2D\u1E57\u1E71";
+
+// ================== Template String ==================
+// Template String (atau dikenal juga dengan sebutan string interpolation) merupakan fitur baru
+// di ECMAScript 6.
+var tampbah = "Nur Muhammad"
+var foo = "Irfam"
+var nama = "Irfan ${tambah}"
+var lengkap = foo + tambah; 
+
+//  ================ Tipe Data Boolean ====================
+// Tipe data Boolean adalah tipe data yang hanya mempunyai dua nilai, yakni true (benar) atau
+// false (salah). Sama seperti penulisan keyword lain di dalam JavaScript, nilai boolean ini harus ditulis dalam
+// huruf kecil,
+
+var foo = true;
+var bar = false;
+
+// ================== Tipe Data Null dan Undefined =========================
+// Menyebut null dan undefined sebagai tipe data terasa kurang pas, karena kedua tipe data ini
+// menyatakan “data yang tidak ada”.
+
+var foo = null;
+console.log(foo) /* null */
+
+var foo = undefined;
+console.log(foo) /* undefined */
+
+// ============= Operator typeof ==========================
+// Operator typeof digunakan untuk melihat tipe data dari sebuah variabel. Apakah tipe datanya
+// number, string, boolean, undefined, atau sebuah object.
+
+var foo;
+console.log (typeof foo); /*undinfined*/
+
+var foo = 12;
+console.log (typeof foo); /*number*/
+
+var foo = "Irfan";
+console.log (typeof foo); /*string*/
+
+var foo = false;
+console.log (typeof foo); /*boolean*/
+
+var foo  = null;
+console.log (typeof foo); /*null*/
+
+//  ==================== Tipe Data Array ====================================
+// Array (dalam bahasa indonesia disebut juga sebagai larik) adalah tipe data yang berisi kumpulan
+// tipe data lain.
+
+var array = ["irfan","nur","Muhammad"];
+console.log(array[1]) // "nur"
+
+// ============= Mengubah Element Array ==============\
+// Jika kita mengakses element array dengan menulis nomor indexnya, cara yang sama juga bisa
+// digunakan untuk mengubah isi dari element array tersebut
+
+var foo = ["irfan","nur","muhammad"];
+foo[0] = "IPIN";
+console.log(foo); // ["Ipin", "Nur", "Muhammad"]
+
+// ===================== Array 2 Dimensi =============================
+var kooordinat = [[2,4],[9,5],[3,8]];
+
+console.log(kooordinat[1][2]) // 5
+
+var greeting = [
+    ["Selamat","Belajar","JS"],
+    ["Selamat","Malam","Dunia"]
+]
+
+greeting[1][1] = "Pagi"
+console.log([1])  // Selamat Pagi Dunia
+</script>
+</body>
+</html>

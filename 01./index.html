@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- =========== Atribut Async =================
+    Jika atribut async ditambahkan ke dalam tag <script>, file JavaScript akan diproses pada
+    saat yang bersamaan dengan kode HTML (secara simultan). Dengan kata lain, web browser
+    tidak “terkunci” untuk menjalankan kode JavaScript. Metode ini juga dikenal dengan istilah
+    Asynchronous JavaScript. -->
+<script src="js/myscript.js" async></script>
+
+<!-- =========== Atribut Defer ================ -->
+<!-- Atribut defer digunakan untuk mengatur kapan file JavaScript dijalankan. Dengan atribut ini,
+file JavaScript baru di download dan dieksekusi setelah seluruh kode HTML  -->
+
+<script src="js/myscript.js" defer></script>
+
+<!-- Efek dari atribut async dan defer mungkin terdengar sama. Perbedaaan mendasar
+adalah, async digunakan untuk mengatur cara eksekusi kode JavaScript, sedangkan
+defer untuk mengatur kapan file JavaScript tersebut di download dan diproses -->
+
+<!-- =============== Function console.log ====================
+fungsi ini berguna untuk menampilkan hasil kode program ke tab Console -->
+<script>
+    console.log("Irfan Nur Muhammad");
+    console.log(99*2+1);
+</script>
+
+<!-- ============= No Script ================== -->
+<!-- Tag ini digunakan untuk menampilkan teks keterangan yang hanya bisa
+terlihat pada web browser yang tidak memiliki JavaScript (atau JavaScriptnya dimatikan). -->
+<noscript>
+    no script Tag ini digunakan untuk menampilkan teks keterangan yang hanya bisa
+    terlihat pada web browser yang tidak memiliki JavaScript (atau JavaScriptnya dimatikan).
+</noscript>
+</body>
+</html>
