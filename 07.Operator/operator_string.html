@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+// ================ Operator String ==============
+// Dalam JavaScript terdapat 1 operator yang digunakan untuk penyambungan string (string
+// concatenation). Operator ini menggunakan karakter tambah ( + ). Jika data yang akan disambung
+// bukan bertipe string, akan dikonversi menjadi string secara otomatis.
+$foo  = "Irfan" + "Nur" + "Muhammad";
+console.log($foo) // IrfanNurMuhammad
+
+$foo = "Irfan" + 23 + "Tahun"
+console.log($foo) // Irfan23Tahun
+
+$array = ["irfan","dani","rido","slamet"];
+$foo = $array[0] + "Mendapatkan 1B"
+console.log($foo) //IRfan Mendapatkan 1B
+
+$foo = $array[0] + " dan " + $array[2] + "Mendapatkan" + 10*80 + "B";
+console.log($foo) // Irfan dan rido mendapatkan 800B
+
+$foo = '${array[0]} mendapatkan {4*50}}'
+console.log($foo) // IRfan mendaptkan 200B
+
+// ================ Penyambungan String atau Penambahan Angka =============
+// Di dalam JavaScript, operator penyambungan string dan penambahan angka (aritmatika) sama-
+// sama menggunakan tanda tambah ( + ). Karena sifat JavaScript yang bisa mengubah tipe data
+// secara otomatis, ini bisa menjadi efek yang ‘menjebak’.
+
+$foo = '10' + 10 + 1;
+console.log($foo) // 1011
+
+$foo = 10 + '10' + 10 ;
+console.log($foo) // 101010
+
+// ===================== Operator assignment =======================
+// adalah operator yang digunakan untuk memasukkan nilai ke dalam
+// sebuah variabel. Kita sudah berkali-kali menggunakan operator ini, yakni tanda sama dengan (
+// = ).
+
+// Nama Operator           Operator        Contoh               Hasil
+// plus-equals             +=              b += 10             b = b + 10
+// minus-equals            -=              b -= 10             b = b - 10
+// divide-equals           /=              b /= 10             b = b / 10
+// multiply-equals         *=              b *= 10             b = b * 10
+// modulus-equals          %=              b %= 10             b = b % 10
+// bitwise-xor-equals      ˆ=              b ˆ= 10             b = b ˆ 10
+// bitwise-and-equals      &=              b &= 10             b = b & 10
+// bitwise-or-equals       |=              b |= 10             b = b | 10
+// left-shift-equals       <<=             b <<= 10            b = b << 10
+// right-shift-equals      >>=             b >>= 10            b = b >> 10
+
+$a = 12;
+$b = "Irfan";
+
+$a = $a + 10;
+$a = $a + $a + 5
+
+$b = $b + " Nur";
+$b = $b + " Muhammad";
+
+console.log($a); // 49
+console.log($b); // Irfan Nur Muhammad
+
+// ================ Operator spread=======================
+// atau spread operator, merupakan operator baru di ECMAScript 6. Operator
+// ini digunakan untuk berbagai keperluan yang berhubungan dengan array, salah satunya untuk
+// menggabungkan array.
+// Spread operator menggunakan tanda titik tiga kali (...), kemudian diikuti dengan nama variabel.
+// Berikut contoh penggunaannya:
+
+
+$array_angka = [1,2,3,4,5]
+$array_string = ['a','b','c','d'];
+
+$array_spread1 = [...$array_string,"e","f"];
+console.log($array_spread1) // a,b,c,d,e,f 
+
+$array_spread2 = [0,...$array_angka,6,7]
+console.log($array_spread2) // 0,1,2,3,4,5,6,7
+
+$array_spread2 = [0,...$array_angka,6,7,...$array_spread1]
+console.log($array_spread2) // 0,1,2,3,4,5,6,7,'a',"b"DLL
+
+
+// ================ Urutan Operator dalam JavaScript =============
+// Tabel berikut merangkum urutan operator di dalam JavaScript. Operator paling atas memiliki
+// kekuatan paling tinggi.
+// Operator type                       Individual operators
+// member                              . []
+// call / create instance              () new
+// negation/increment                  ! ∼ - + ++ -- typeof void delete
+// multiply/divide                     * / %
+// addition/subtraction                + -
+// bitwise shift                       << >> >>>
+// relational                          < <= > >= in instanceof
+// equality                            == != === !==
+// bitwise-and                         &
+// bitwise-xor                         ˆ
+// bitwise-or                          |
+// logical-and                         &&
+// logical-or                          ||
+// conditional                         ? :
+// assignment                          = += -= *= /= %= <<= >>= >>>= &= ˆ= |=
+</script>
+</body>
+</html>
