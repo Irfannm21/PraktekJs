@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<script>
+// =============== Operator aritmatika ========================
+//      adalah operator yang biasa kita gunakan untuk melakukan perhitungan
+// dengan angka, yakni penambahan, pengurangan, perkalian, dan pembagian.
+var foo;
+foo = +100;
+console.log(foo); // 100
+
+foo =  -20;
+console.log(foo); // -20
+
+foo =  10 + 100; 
+console.log(foo); //110
+
+foo = 30 % 7;
+console.log(foo); //2
+
+foo = (10 / 5) + 4.5
+console.log(foo) // 6.5
+
+// ===================== Operator Increment dan Decrement ================
+// pre-increment ++a tambah nilai a dengan 1, lalu kirim nilai a
+// post-increment a++ kirim nilai a, lalu tambah nilai a dengan 1
+// pre-decrement --a kurangi nilai a dengan 1, lalu kirim nilai a
+// post-decrement a-- kirim nilai a, lalu kurangi nilai a dengan 1
+
+var foo;
+foo = 7;
+console.log(foo) // 7
+console.log(++foo) // 8
+console.log(--foo) // 6
+
+// ========== Operator perbandingan ======================= 
+// berfungsi untuk memeriksa bagaimana hubungan sebuah nilai dengan
+// nilai lain, apakah sama besar, tidak sama, lebih besar atau lebih kecil.
+// Nama Operator               Operator        Contoh          Hasil
+
+// Sama dengan                   ==           a == b          TRUE jika nilai a sama dengan b
+// Identik dengan                ===          a === b          TRUE jika nilai a sama dengan b, dan memiliki tipe data yang sama
+// Tidak sama dengan             != a         != b             TRUE jika nilai a tidak sama dengan b
+// Tidak identik dengan          !== a        !== b            TRUE jika nilai a tidak sama dengan b, dan memiliki tipe data yang tidak sama
+// Kurang dari                   < a          < b             TRUE jika nilai a kurang dari b
+// Lebih dari                    > a          > b             TRUE jika nilai a lebih dari b
+// Kurang dari atau sama dengan  <= a          <= b            TRUE jika nilai a kurang dari atau sama dengan b
+// Lebih dari atau sama dengan   >= a          >= b            TRUE jika nilai a lebih dari atau sama dengan b
+
+
+// ============= Perbedaan antara == dengan ===============
+
+$foo = 9 == '9';
+console.log($foo) // True
+
+$foo = 9 === '9';
+console.log($foo) // false
+
+$foo = true == 1;
+console.log($foo) // True
+
+$foo = true === 1;
+console.log($foo) // False
+
+
+// ====================== Falsy dan Truthy Value ================
+// di dalam JavaScript sebuah tipe data akan berubah menjadi tipe
+// data lain tergantung operator yang digunakan. Untuk operator perbandingan, tipe data ini akan
+// dikonversi menjadi boolean, apakah itu menjadi boolean true, atau boolean false
+
+// Nilai yang hasil konversinya menjadi false dikenal dengan istilah falsy value, sedangkan yang
+// akan dikonversi menjadi true disebut sebagai truthy value.
+// Berikut daftar falsy value di dalam JavaScript:
+// • false
+// • null
+// • undefined
+// • 0
+// • NaN
+// • '' (string kosong)
+// • "" (string kosong)
+// Selain nilai-nilai diatas, akan di konversi menjadi truthy value, termasuk:
+// • true
+// • { } (object kosong)
+// • [ ] (array kosong)
+// • 42 (sembarang angka, termasuk angka negatif dan pecahan, selain angka 0)
+// • "foo" (sembarang string, selama bukan string kosong)
+// • infinity (termasuk -infinity)
+
+$foo = '' == '0'
+console.log($foo); // false
+
+$foo = 0 == ''
+console.log($foo); // true
+
+$foo = 0 == '0'
+console.log($foo); // true
+
+$foo = false == 'false'
+console.log($foo); // false
+
+$foo = false == '0'
+console.log($foo); // true
+
+$foo = false == undefined
+console.log($foo); // false
+
+// ============== Operator Logika ================
+// Operator logika digunakan untuk membandingkan 2 kondisi logika, yakni logika benar (true)
+// dan logika salah (false). Nilai yang dibandingkan harus bertipe boolean. Jika tidak, JavaScript
+// akan mengkonversinya secara otomatis berdasarkan falsy dan truthy value.
+
+// Untuk operasi logika, JavaScript menjalankan perintah tersebut dari kiri ke kanan, kecuali jika
+// terdapat operator && dan || dalam 1 operasi (operator && akan dijalankan terlebih dahulu)
+
+// Nama Operator       Operator        Contoh      Hasil
+// and                 &&              a && b      true, jika a dan b sama-sama bernilai true
+// or                  ||              a || b      true, jika salah satu dari a atau b bernilai true
+// not                 !               ! a         true, jika a bernilai false.
+
+$foo = true && false;
+console.log($foo) // false
+
+$foo = true || false;
+console.log($foo) // true
+
+$foo = !false;
+console.log($foo) // false
+
+$foo = true || false && false;
+console.log($foo) // true
+
+$foo = false && true || true;
+console.log($foo) // true
+
+
+//  ================ Konsep Short-circuit Evaluation =============== 
+// Ketika memproses operasi logika yang cukup panjang, JavaScript mengunakan konsep short-
+// circuit evaluation. Maksudnya, jika dengan memeriksa 1 nilai saja hasil operasi tersebut sudah
+// diketahui, nilai - nilai lain tidak akan di periksa
+// Untuk operasi logika, JavaScript menjalankan perintah tersebut dari kiri ke kanan, kecuali jika
+// terdapat operator && dan || dalam 1 operasi (operator && akan dijalankan terlebih dahulu)
+
+$foo = true || false || true;
+console.log($foo);  //true
+
+$foo = false && true && true;
+console.log($foo);  //false
+
+$bar = fales;
+$foo = $bar && alert("hellow indonenesia")
+// Disini, fungsi alert() baru akan berjalan jika variabel bar bernilai true. Jika variabel hasil
+// bernilai false, efek short-circuit akan memutus kode program dan alert() tidak akan diproses
+
+$bar = true;
+$foo = $bar && alert("hellow indonenesia") // hellow indonesia
+
+// ============ Operasi Logika non Boolean ================
+// Salah satu fitur unik di dalam JavaScript adalah, jika operasi logika dijalankan untuk data
+// non boolean, hasil akhir dari operasi ini juga bukan berupa boolean, tapi nilai terakhir dari
+// pemrosesan tersebut
+
+$foo = "Irfan" || "Nur";
+console.log($foo) // Irfan
+// Ketika baris tersebut di proses, JavaScript melihat nilai pertama berupa string "Duniailkom", ini
+// dipahami sebagai nilai true (lihat kembali konsep falsy dan truthy value). Setelah itu ditemukan
+// operator ||. Sesuai dengan prinsip short-circuit, proses akan berhenti karena apapun nilai setelah
+// ||, tidak akan mempengaruhi hasil akhir dari operator “or”. Hasil akhirnya pasti true.
+// Karena proses berhenti sampai disini, nilai true ini seharusnya dikembalikan ke dalam variabel
+// foo (foo akan berisi boolean true). Akan tetapi karena tipe data asal adalah string "Duniailkom",
+// nilai string inilah yang dikembalikan ke dalam foo, bukan true.
+
+
+$foo = "Irfan" || "Nur";
+console.log($foo) // Nur
+// Saat baris ini diproses, JavaScript melihat nilai pertama adalah string "Duniailkom", ini dipahami
+// sebagai nilai true. Setelah itu terdapat operator &&. Sampai disini, konsep short-circuit tidak
+// bisa dijalankan. Jika nilai berikutnya false, hasil dari operasi ini adalah false, jika true, hasil
+// akhirnya adalah true. JavaScript harus melihat nilai kedua.
+// Ternyata nilai kedua adalah string "JavaScript", yang artinya juga true. Kembali, nilai true
+// seharusnya yang diisi ke dalam variabel foo. Namun karena tipe data asal adalah string
+// "JavaScript", nilai ini yang dikembalikan ke dalam foo, bukan true.
+// Tunggu dulu, kenapa yang dikembalikan "JavaScript", bukannya "Duniailkom"? Bukankah
+// ada 2 nilai yang dibandingkan? keduanya juga sama-sama bernilai true?
+// Konsep lain dari operasi seperti ini adalah, JavaScript akan mengembalikan nilai dari posisi
+// terakhir yang diperiksa. Karena yang terakhir diperiksa terakhir adalah "JavaScript", hasil
+// akhirnya berupa string "JavaScript", bukan "Duniailkom
+
+$foo = true || "irfan";
+console.log($foo)  // true
+// Jika anda sudah memahami penjelasan sebelumnya saya yakin anda bisa paham kenapa hasilnya
+// berupa boolean true. Yup, karena yang diproses adalah true dan ketemu operator ||, konsep
+// short-circuit akan berjalan, dan nilai true dikembalikan ke variabel foo.
+
+$foo = false || "Irfan"
+console.log($foo) // Irfan
+// Tapi karena yang diproses pertama kali adalah false dan ketemu operator ||, konsep short-cir-
+// cuit tidak bisa dijalankan. JavaScript harus melihat nilai berikutnya, yakni string "JavaScript".
+// Hasil akhir dari proses ini adalah true, yang tipe data aslinya berupa string "JavaScript".
+
+$foo = "irfan" && false
+consol.log($foo) // false 
+// Apakah short-circuit bisa dijalankan? Tidak! sebab nilai pertama yang diperoleh adalah string
+// "JavaScript" (true), sehingga harus dilihat apa nilai berikutnya. Ternyata nilai kedua adalah
+// boolean false, nilai inilah yang dikembalikan ke variabel foo
+
+$foo = false && 'irfan'
+console.log($foo)  // false
+// Namun karena nilai false bertemu dengan operator &&, proses akan langsung berhenti dan
+// mengembalikan nilai false (terjadi short-circuit).
+
+var foo = false || false && true || "JavaScript";
+// Sama seperti sebelumnya, kita harus menjalankan kode ini dari kiri ke kanan untuk memeriksa
+// apakah terdapat short-circuit. Yang juga tidak boleh dilupakan, operator && memiliki kekuatan
+// yang lebih tinggi, sehingga akan diproses terlebih dahulu.
+// Dengan demikian, operasi ini dijalankan sebagai berikut:
+// var foo = false || (false && true) || "JavaScript";
+// Yang akan menjadi:
+// var foo = false || false || "JavaScript";
+
+var foo = true || false && true || "JavaScript";
+// Dapatkah anda menjelaskan kenapa hasil akhirnya adalah true? Yup, disini terjadi short-circuit.
+// Konsep operasi logika non boolean di JavaScript ini sangat unik dan jarang ditemukan dalam
+// bahasa pemrograman lain
+</script>
+</body>
+</html>

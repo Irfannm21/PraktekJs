@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script>
+// ============== Logika IF ELSE =====================
+// Struktur logika if digunakan untuk membuat percabangan kode program yang bergantung
+// apakah sebuah kondisi bisa dipenuhi atau tidak. Condition ini biasanya berupa operasi perbandingan, yang
+// akan menghasilkan nilai true atau false
+
+$day = "Senin";
+if ($day === "Senin") {
+    console.log("Sekarang Harisenin")
+} else {
+    console.log("Bukan Hari Senin")
+}
+
+if (typeof $day === "String") {
+    console.log("Ini String")
+} else if (typeof $day === "number") {
+    console.log("ini Number")
+} else {
+    console.log("Tidak Valid")
+}
+
+// ============= Nested IF ELSE =================
+// Nested if else, dikenal juga dengan struktur if bersarang. Disini kita membuat percabangan
+// kode program yang cukup kompleks, dimana di dalam if, terdapat if lain.
+
+$foo = 10
+console.log("Nillai $foo" + $foo)
+
+if(typeof $foo === "number") {
+    console.log("Ini Bumber")
+    if($foo >= 10) {
+        console.log("Lebih Dari 10");
+    }
+} else {
+    console.log("Type INVALID")
+}
+
+// EXAMP
+
+if (typeof $foo === "number" && $foo >= 10) {
+    console.log("Valid Type Number")
+    console.log("Angka Lebih besar")
+} else if (typeof $foo === "string") {
+    console.log("$foo bertipe string")
+} else {
+    console.log("$foo tidak valid")
+}
+
+// ============== Struktur logika switch ============================
+//  kurang lebih mirip seperti if else, tapi lebih efisien jika kondisi yang
+// diperiksa ada banyak.
+
+$hari = 'Kamis';
+
+switch ($hari) {
+    case "Senin" :
+        console.log("Senin")
+        break;
+    case "Selasa" :
+        console.log("Selasa")
+        break;
+    case "Rabu" :
+        console.log("Rabu")
+        break;
+    case "Kamis" :
+        console.log("Kamis")
+        break;    
+        
+}
+
+$angka = 6;
+switch ($angka) {
+    case 1 :
+    case 2 :
+    case 3 :
+    case 4 :
+    case 5 :
+        console.log("Berlajar lagi");
+        break;
+    case 6 :
+    case 7 :
+    case 8 :
+        console.log("Tingkatkan")
+        break;
+    case 9 :
+    case 10 :
+        console.log("Pertahankan")
+        break;
+    default : 
+        console.log("Masukan angka 1 - 10");
+}
+
+// ============ Operator Conditional ==============
+// JavaScript memiliki 1 operator conditional yang mirip seperti struktur if else. Berikut format
+// dasar dari operator conditional ini:
+
+// result = (condition) ? statement_true : statement_false
+
+$nilai = 150;
+
+$total = $nilai > 100 ? $nilai * 10 : $nilai / 2;
+
+console.log($total) /* 75 */
+
+$user = "Admin"
+
+$hakAkses = $user === "Admin"? true : false;
+
+if ($hakAkses === "Admin") {
+    console.log("Selamat Datang Admin")
+} else {
+    console.log("Mohon Maaf Anda Bukan Admin");
+}
+
+// ================ Perulangan FOR =================
+// for (start; condition; increment) {
+// statement;
+// }
+
+for ($i = 1 ; $i < 10 ; $i++){
+    console.log("Cetak Angka ini " + $i)  /*Cetak 9x*/
+}
+
+for ($i = 2 ; $i <= 20 ; $i= $i + 2) {
+    console.log("Cetak " + $i)  // Cetak 2,4,6,8,10,12,14,16,18,20
+}
+
+// =========== Perulangan Bersarang (Nested Loop) ======================
+// for (start1; condition1; increment1) {
+// statement1;
+// for (start2; condition2; increment2) {
+// statement2;
+// }
+// }
+// Tampak ada dua buah perulangan, perulangan luar (outer loop) dan perulangan dalam (inner
+// loop). Setiap kali perulangan luar naik 1 angka, perulangan dalam akan dijalankan seluruhnya.
+// Misalkan perulangan luar saya jalankan sebanyak 5 kali dan perulangan dalam 3 kali. Secara
+// total, baris statement2 akan dijalankan sebanyak 15 kali, didapat dari 5 * 3.
+
+for ($i = 1; $i <= 4; $i++) {
+    for($j = 1; $j <= 2 ; $j++) {
+        console.log("Variabel i bernilai : " + $i + "Variabel j Bernilai : " + $j);
+    }
+}
+
+// ================= Infinity loop ===============
+//  adalah perulangan yang berjalan terus menerus dan tidak akan pernah selesai. Ini
+// biasanya terjadi karena kesalahan dari kita, 
+
+for ($i = 20 ; $i > 10 ; $i++){
+    console.log("Heloo Indoneisa  erro karena memulau dari 20 ")
+}
+// Disini saya memiliki perulangan for yang dimulai dari i = 20, dengan kenaikan i++. Perulangan
+// akan berhenti saat i > 10. Lalu dimana letak salahnya?
+// Perhatikan kondisi akhir i > 10 dan nilai awal i = 20. Artinya, kondisi i > 10 akan selalu
+// benar, sedangkan nilai i tidak akan pernah dibawah 10, karena awalnya saja sudah 20 dan
+// increment malah ditambah lagi i++
+
+
+// =============== Perintah Break dan Continue ==================
+// Perintah break dan continue digunakan untuk menghentikan sebuah perulangan sebelum
+// waktunya, atau dengan kata lain perulangan berhenti secara prematur
+
+for ($i = 1; $i <= 10 ; $i++) {
+    if ($i === 5) {
+        break
+    }
+    console.log("Berhenti di ankga" + $i)
+}
+
+// ==================  Perulangan WHILE =================
+// Perulangan kedua yang akan kita bahas adalah while. Perulangan ini mirip seperti perulangan
+// for, tapi dengan memecah bagian start, condition, dan increment.
+// start;
+// while (condition) {
+// statement;
+// increment;
+// }
+
+$i = 0;
+while ($i <= 3) {
+    console.log("Angka ke :" + $i)
+    $i++;
+}
+
+$i = 0;
+while ($i <= 3) {
+    if ($i === 2 ) {
+        break;
+    }
+    console.log("Angka ke :" + $i)
+    $i++;
+}
+
+
+
+$i = 100;
+while ($i > 0) {
+    console.log($i + " * 5 = " + $i * 5);
+    $i = $i - 5;
+}
+
+// ============== Perulangan DO WHILE ======================
+// Perulangan do while sangat mirip seperti perulangan while. Bedanya, dalam perulangan do
+// while, kondisi di cek diakhir block perulangan
+
+$i = 1
+do {
+    console.log("cetak")
+    $i++
+} while ($i < 100)
+
+// ================ Menampilkan Element Array Dengan Perulangan ==================
+// Salah satu penggunaan terbanyak dari perulangan adalah untuk menampilkan element array.
+// Mari kita lihat cara penggunaannya:
+
+$array = ["Irfan","Nur","Muhammad","Alni","Rindiani"];
+
+for ($i = 0 ; $i <= 3; $i++){
+    console.log($array[$i])
+}
+// Untuk mengambil jumlah element dari array siswa, saya bisa menulis seperti ini:
+// var jumlah_siswa = siswa.length;
+$jumlah = $array.length;
+console.log("Jumlah Nama : " + $jumlah)
+
+
+// ============ Perulangan For Of =================
+// terdapat sebuah perulangan baru, yakni
+// perulangan for of yang digunakan khusus digunakan untuk menampilkan element array. Jika
+// anda sudah pernah belajar PHP, perulangan for of ini mirip seperti perulangan foreach PHP.
+$array = ["Irfan","Nur","Muhammad","Alni","Rindiani"];
+
+for ($i of $array) {
+    console.log($i)
+}
+</script>
+</body>
+</html>
