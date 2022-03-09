@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // function test($tap){
+        //     $array = "Test disini " + $tap
+        //     return $array
+        // }
+        
+        // $result = test("Tap Tap")
+        
+        // console.log($result);
+
+//         function rata2(a,b,c,d){
+//     $value = (a + b + c + d)/4;
+//     return $value;
+// }
+
+// console.log(rata2(8,5,2)); // Nan Tidak Error
+// console.log(rata2(8,5,2,4)); // 4.75
+
+// function angka(){
+//     console.log(arguments[0]);
+//     console.log(arguments[1]);
+//     console.log(arguments[2]);
+// }
+
+// angka(4,8,3);
+
+function rata2(){
+    $totalArg   = arguments.length;
+    $hasil      = 0;
+    for ($i = 0; $i < $totalArg ; $i++){
+        $hasil = $hasil + arguments[$i];
+    }
+    return $hasil/$totalArg;
+}
+
+$a = rata2(1,9)
+console.log($a) // 5
+// Nilai ini didapat dari argument pertama (1) ditambah argument kedua (9), lalu dibagi dengan
+// jumlah argument yang ada (2). 
+// 1
+// 9
+// $HASIL = 1 + 9
+// 10 / $totalAtg = 2
+// 5
+
+$b = rata2(4,8,3,7);
+console.log($b) // 5.5
+
+// 4
+// 8
+// 3
+// 7
+// $hasil =  4+8+3+7 / $totalArg = 4
+// 5.5
+
+// ================ Spread Operator untuk Argument =========================
+// Spread operator (...) merupakan fitur baru di ECMAScript 6. Fungsi pertamanya sudah kita
+// bahas di bab tentang operator, yakni untuk menggabungkan array. 
+
+function angka(...arg){
+    console.log(arh)
+}
+    </script>
+</body>
+</html>
