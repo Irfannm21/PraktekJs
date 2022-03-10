@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<script>
+// ====================== Pengertian Function =========================
+// Function atau dalam bahasa indonesia disebut sebagai fungsi, adalah kumpulan kode program
+// yang dirancang untuk menyelesaikan sebuah tugas tertentu, dan merupakan bagian dari pro-
+// gram utama. Function diperlukan untuk memecah alur program yang besar menjadi beberapa
+// program kecil agar mudah di kelola
+
+// Berikut format dasar pembuatan function di dalam JavaScript:
+// function function_name (argument1, argument2,...) {
+// statement;
+// statement;
+// return value;
+// }
+
+// Argument adalah variabel yang
+// berfungsi sebagai nilai input ke dalam function. Argument ditulis di dalam tanda kurung setelah
+// function_name
+
+//  ============== Membuat dan Memanggil Function =================
+// Fungsi diatas tidak memiliki argument, namun tetap harus ditulis dengan tanda kurung kosong:
+// pagi()
+
+//  function SelamatPagi(){
+//      console.log("Selamat Pagi");
+//  }
+//  SelamatPagi();
+
+
+// ================ Mengembalikan Nilai Function ====================
+// Fungsi pagi() yang kita rancang sebelum ini sangat praktis untuk menampilkan 4 salam dalam
+// setiap kali pemanggilan. Tapi bagaimana jika saya ingin salam ini tidak langsung tampil, tapi
+// ditampung dulu ke dalam variabel (untuk nantinya diproses lagi)? Kita bisa menggunakan
+// keyword return. Perintah return akan mengembalikan suatu nilai ketika fungsi ini dipanggil
+
+function SelamatPagi() {
+    return "Selamat Pagi";
+}
+
+$salam = SelamatPagi();
+console.log($salam); // Selamat Pagi
+
+
+function SelamatPagi(){
+    $greetings = "Selamat Pagi";
+    return $greetings;
+}
+console.log(SelamatPagi());
+
+// ======== Mengembalikan Array ===============
+// Salah satu aturan dari perintah return adalah, kita hanya boleh mengembalikan 1 nilai saja,
+// apakah itu 1 string, maupun 1 variabel. Jadi, bagaimana jika nilai yang dikembalikan ada banyak?
+// Kita bisa memanfaatkan array
+
+function Arrays(){
+    $angka = [1,2,3,4,5,6,7,8,9,10]
+    return $angka;
+}
+$result = Arrays();
+
+console.log($result) /*1,2,3,4,Dll*/
+
+// ==================  Argument Function =======================
+// Fitur berikutnya dari function adalah argument, yakni mengirim satu atau beberapa nilai ke
+// dalam function untuk diproses.
+
+function Days(input){
+    $AllDays = "Hari " + input
+    return $AllDays;
+}
+
+$result = Days("Rabu");
+
+console.log($result);
+
+console.log(Days("Senin")); // Hari Senin
+console.log(Days("Selasa"));
+console.log(Days("Rabu"));
+
+function greetings(when, who){
+    $greet = "Good" + when + who;
+    return $greet
+}
+
+console.log(greetings("Morning","Bandung")) // Good MorningBandung
+console.log(greetings("Morning","Bandung"))
+
+function rata2(a,b,c,d){
+    $value = (a + b + c + d)/2;
+    return $value;
+}
+
+console.log(rata2(8,5,2,4)); // Nan Error
+console.log(rata2(8,5,2,4)); // 4.75
+// NaN. Ini terjadi karena saat argument ke-4 tidak ditulis, JavaScript
+// memberikan nilai undefined kepada variabel d. Operasi (8 + 5 +2 + undefined) / 2 hasilnya
+// adalah NaN
+
+// ================ Argumen vs Parameter ========================
+// Jika anda mempelajari buku teks algoritma dan pemrograman, terdapat istilah argument dan
+// parameter. Keduanya hampir sama, tetapi sedikit berbeda.
+// Parameter adalah sebutan untuk inputan fungsi pada saat pendefenisian fungsi tersebut.
+// Variabel a, b, c, dan d dari fungsi rata2() disebut sebagai parameter.
+// Sedangkan argument adalah sebutan untuk inputan fungsi pada saat pemanggilan fungsi
+// tersebut. Angka 8, 5, 2 dan 4 saat pemanggilan fungsi rata2(8, 5, 2, 4) disebut sebagai
+// argument.
+
+// ======================== Default Argument======================
+// Default argument adalah mempersiapkan nilai awal untuk argument. Dengan tujuan, jika
+// argument ini tidak diinput, nilai awal akan digunakan.
+
+function rata2(a = 10,b = 10,c = 10,d = 10){
+    $result = (a + b + c + d)/4;
+    return $result;
+}
+
+console.log(rata());    // 10
+console.log(rata(20)); // argument a = 20
+
+console.log(rata2(undefined, undefined, 5, 5))
+// Hal yang unik adalah, saya menuliskan nilai undefined pada saat pemanggilan fungsi. Dengan
+// ditulis seperti ini, argument a dan b akan mengambil nilai default. 
+
+// ===================== Arguments Object =======================================
+// Arguments object adalah sebutan untuk ‘object’ yang menampung seluruh argument pada saat
+// pemanggilan function. Arguments object sebenarnya lebih mirip seperti array.
+function angka(){
+    console.log(arguments[0]);
+    console.log(arguments[1]);
+    console.log(arguments[2]);
+}
+
+angka(4,8,3,7);
+
+function angka2(){
+    $totalArg = arguments.length;
+    return $totalArg;
+}
+
+$a = angka(1,9);
+console.log($a) // 2
+
+$a = angka(1,9,3,4,5,2,1);
+console.log($a) // 7
+
+function rata2(){
+    $totalArg   = arguments.length;
+    $hasil      = 0;
+    for ($i = 0; $i < $totalArg ; $i++){
+        $hasil = $hasil + arguments[$i];
+    }
+    return $hasil/$totalArg;
+}
+
+$a = rata2(1,9)
+console.log($a) // 5
+// Nilai ini didapat dari argument pertama (1) ditambah argument kedua (9), lalu dibagi dengan
+// jumlah argument yang ada (2). 
+// 1
+// 9
+// $HASIL = 1 + 9
+// 10 / $totalAtg = 2
+// 5
+
+$b = rata2(4,8,3,7);
+console.log($b) // 5.5
+
+// 4
+// 8
+// 3
+// 7
+// $hasil =  4+8+3+7 / $totalArg = 4
+// 5.5
+
+// ================ Spread Operator untuk Argument =========================
+// Spread operator (...) merupakan fitur baru di ECMAScript 6. Fungsi pertamanya sudah kita
+// bahas di bab tentang operator, yakni untuk menggabungkan array. 
+
+function angka(...arg){
+    console.log(arg[0])
+    console.log(arg[0])
+    console.log(arg[0])
+}
+angka(4,8,3,7)
+// Jika fungsi angka() dipanggil dengan argument, masukkan seluruh argument
+// tersebut ke dalam variabel arg.
+// Variabel arg akan menjadi array yang berisi seluruh argument ketika pemanggilan fungsi.
+// Kurang lebih mirip seperti arguments object yang kita pelajari sebelum ini.
+
+function angka(a,b,...sisa){
+    console.log(a); // 4
+    console.log(b); // 8
+    console.log(sisa); // 3,7
+}
+
+angka(4,8,3,7)
+// Pendefinisian function angka(a, b, ...sisa) bisa dibaca: Jika fungsi angka() dipanggil oleh
+// lebih dari 3 argument, maka argument pertama dan kedua masuk ke variabel a dan b, sisanya
+// disimpan kedalam array sisa
+
+
+function angka(...arg){
+    $totalArg = arguments.length
+    $hasil = 0;
+    for ($i of $totalArg){
+        $hasil = $hasil + $i
+    }
+    return $hasil / $totalArg;
+}
+
+$a = angka(1,9)
+
+console.log($a)
+
+// =========== Variable Scope ================
+// Variable scope adalah istilah tentang sejauh mana sebuah variabel masih dapat diakses. Di
+// dalam JavaScipt terdapat global variable, yakni variabel yang bisa diakses darimana saja. Selain
+// itu ada local variable, yakni variabel yang hanya bisa diakses di dalam ruang lingkup terbatas,
+// seperti di dalam sebuah function.
+
+$a = "Irfan Nur Muhammad";
+
+function foo(){
+    console.log($a);
+}
+
+foo(); // Irfan Nur Muhammad
+
+function foo(a,b){
+    $a = 21;
+    $b = 56;
+    return (a + b);
+}
+// Sampai disini, di dalam function foo() terdapat 2 buah variabel: a dan b, yang didefenisikan
+// sebagai argument. Variabel a dan b ini merupakan variabel baru, yakni variabel local scope yang
+// berbeda dengan variabel a dan b di luar function.
+
+$a = 5
+$b = 10
+
+$c = foo(a,b);
+
+console.log(a)  // 5
+console.log(b)  // 10
+console.log(c)  // 77
+
+
+function foo(){
+    a = 21
+    b = 56
+    return (a + b)
+}
+
+$a = 5
+$b = 10
+$c = foo()
+
+console.log(a) // 21
+console.log(b) // 56
+console.log(c) // 77
+// Perbedaannya adalah, di dalam function foo(), saya mendefenisikan variabel a dan b tanpa
+// perintah var.
+// Ini merupakan perbedaan mendasar jika sebuah variabel di defenisikan tanpa var. Ketika ditulis
+// seperti ini, variabel a akan berefek ke global scope, walaupun ditulis dari dalam function.
+
+
+// ================== Perbedaan Cara Membuat Variabel var vs let =================
+// Perbedaan antara var dan let ada di variable scope. Jika kita membuat variabel dengan var,
+// variabel tersebut dibatasi di ruang function. Dengan kata lain, yang bisa membatasi scope
+// variabel yang di defenisikan dengan keyword var hanyalah sebuah function.
+// Dilain pihak, variabel yang dibuat menggunakan let memiliki scope yang lebih kecil, yakni
+// dibatasi oleh tanda kurung kurawal yang biasanya digunakan untuk block kode program.
+{
+    $a = "Irfan";
+    console.log($a) // IRfan
+}
+console.log($a) // IRfan
+{
+    let b = "Nur Muhammad";
+    console.log($b) // Nur Muhammad
+}
+console.log($b) // ReferencesError : b is not Defined
+// Dapat anda lihat bahwa variabel b tidak terdefinisi jika diakses dari luar block kode program.
+// Dimana block kode program ini ditandai dengan tanda kurung kurawal
+
+// Sekilas terlihat membuat variabel dengan let lebih merepotkan, karena kita tidak bisa diakses
+// nilainya dari luar scope. Tapi ini sebenarnya sebuah keuntungan. Dengan membatasi ruang
+// lingkup sebuah variabel, kita terhindar dari masalah bentrok antar variabel. Terutama jika kode
+// program sudah cukup banyak dan melibatkan ratusan variabel.
+$i = 10000;
+for ($i=0; $i<3; $i++){
+    console.log("Belajar JS" + $i)
+}
+console.log("Harga Barang = " + 1) // Harga Barang 3
+// Kemudian saya membuat perulangan, yang kebetulan juga menggunakan variabel i. Efeknya,
+// setelah perulangan selesai, nilai dari variabel i akan tertimpa.
+// Jika menggunakan let, kode program kita akan lebih aman:
+$i = 10000;
+for (let i=0; $i<3; $i++){
+    console.log("Belajar JS" + $i)
+}
+console.log("Harga Barang = " + 1) // Harga Barang 10000
+
+// ==================== JavaScript Hoisting =================================
+// JavaScript hoisting adalah hal yang unik dari JavaScript, yang jika tidak diketahui bisa
+// menjadi bug dan mendatangkan error. JavaScript hoisting berkaitan dengan cara JavaScript
+// mengeksekusi kode program, dimana JavaScript akan “mengangkat” pendefenisian variabel dan
+// function ke baris paling atas kode progra
+
+$a = "Irfan";
+function foo(){
+    console.log("Di dalam function " + $a) // dicetak pertama
+}
+
+foo();
+console.log($a) // di cetak kedua
+//////////////////////////////////////////////
+$a = "Irfan";
+function foo(){
+    $a = "Nur Muhammad"
+    console.log("$a Di dalam function " + $a) // Irfan Nur Muha dicetak pertama
+}
+
+foo();
+console.log("$a dluar function " + $a) // Irfan di cetak kedua
+// ini artinya saya membuat variabel a
+// baru di dalam function, yang sepenuhnya berbeda dengan variabel a yang ada diluar function.
+// Dengan kata lain, variabel a di dalam function berisi string "Belajar JavaScript", ini meru-
+// pakan local variable. Sedangkan variabel a diluar function berisi "Belajar Pemrograman Web",
+// ini merupakan global variable.
+
+$a = "Irfan";
+function foo(){
+    console.log("$a Di dalam function " + $a) // Undinfined
+    $a = "Nur Muhammad"
+}
+
+foo();
+console.log("$a dluar function " + $a) // Irfan di cetak kedua
+// da baris pertama saya langsung mengakses variabel a. Tapi karena
+// belum ada instruksi pembuatan local variable a, maka seharusnya a disini berisi global variable
+// a, yakni "Belajar Pemrograman Web", tapi ternyata isinya undefined, apa yang terjadi?
+// Kondisi inilah yang dinamakan JavaScript hoisting. Dimana ketika sebuah variable di de-
+// fenisikan, variabel tersebut akan “dikerek” (bahasa inggris: hoist) ke atas
+// Yang akan diproses oleh JavaScript di dalam function foo() adalah seperti ini
+function foo(){
+    $a;
+    console.log("$a Di dalam function " + $a) // Undinfined
+    $a = "Nur Muhammad";
+}
+
+// Situasi diatas sering menjadi bug dan membuat bingung, karena JavaScript tidak mengeluarkan
+// error apapun. Jika saya ganti pendefenisian variabel menggunakan let, hasilnya akan error
+$a = "Irfan";
+function foo(){
+    console.log("$a Di dalam function " + $a) // Error
+    $a = "Nur Muhammad"
+}
+
+foo();
+console.log("$a dluar function " + $a) // Irfan di cetak kedua
+// ini juga yang menjadi alasan banyak tutorial atau buku JavaScript terbaru yang menyarankan
+// menggunakan let daripada var dalam pendefenisian variabel JavaScript. Namun memang
+// perintah let baru tersedia di ECMAScript 
+////////////////////////////////////////////////////////
+// Cara paling efektif untuk menghindari efek JavaScript hoisting ini adalah, selalu mende-
+// fenisikan variabel di awal kode program
+//////////////////////////////////////////////////////
+
+// =================  Function: First-class Citizen ======================
+// Artinya, function bisa disimpan ke dalam
+// variabel, serta bisa digunakan sebagai argumen sebagaimana layaknya tipe data biasa
+
+$result = function rata2(a,b){
+    return (a + b)/2;
+}
+console.log($result(4,8)) //6
+// Dalam istilah pemrograman JavaScript, fitur ini dikenal sebagai Function Expressions. Sedan-
+// gkan mendefenisikan fungsi secara normal (seperti mayoritas fungsi yang kita buat dalam bab
+// ini), disebut sebagai Function Declarations. Function Expression nantinya banyak digunakan
+// untuk membuat JavaScript Object
+
+$result = function rata2(a,b){
+    return (a + b)/2;
+}
+console.log($result(4,8)) //6
+console.log(rata2(4,8)) //ReferenceError : Rata2 is not defined
+// Karena itu, JavaScript membolehkan kita menghapus nama rata2(), menjadi seperti berikut:
+$result = function (a,b){ return (a + b)/2; }
+console.log($result(4,8)) //6
+// Cara penulisan fungsi “tanpa nama” seperti ini dikenal sebagai Anonymous Functions. Di
+// dalam library JavaScript seperti jQuery,
+
+function Rata2(a,b){
+    return ($a + $b)/2;
+}
+
+function tambah(c,d){
+    return ($c + $d);
+}
+
+$hasil = tambah(6, rata2(4,2));
+console.log($hasil); //12
+// Oleh karena di dalam pemanggilan ini terdapat fungsi rata2(4,8), maka ini dulu yang dihitung.
+// Hasil dari rata2(4,8) = 6, nilai 6 ini dikembalikan ke dalam perintah tambah(6, rata2(4,8)),
+// sehingga menjadi tambah(6, 6), hasilnya adalah 12.
+
+// ini juga bukan yang dimaksud sebagai “men-girim function sebagai argumen”, karena yang dikirim tetap hasil dari pemanggilan function
+// rata2(4,8), bukan function itu sendiri.
+// Yang saya maksud “mengirim function sebagai argumen” adalah sebagai berikut:
+function Rata2(a,b){
+    return ($a + $b)/2;
+}
+
+function tambah(c,d){
+    return $c + $d(4,8);
+}
+
+$hasil = tambah(6, rata2);
+// Argument kedua dari fungsi ini adalah sebuah function! Mari kita bahas
+console.log($hasil); //12
+// Saat saya memanggil fungsi tambah(6, rata2), nilai 6 dan rata2 akan dikirim ke argument
+// c dan d (perhatikan kembali pendefenisian fungsi tambah()). Oleh karena untuk argument d
+// yang dikirim berupa sebuah function, cara penulisannya tanpa menggunakan tanda kurung,
+// tapi cukup nama fungsi itu saja: rata2.
+// Di dalam fungsi tambah(), variabel d berprilaku sebagaimana layaknya fungsi rata2(). Saya
+// menulis d(4,8), artinya sama dengan rata2(4,8). Hanya saja kali ini diwakilkan oleh variabel
+// d.
+// Hasil dari d(4,8) adalah 6, dengan demikian yang dijalankan dari fungsi tambah(6, rata2)
+// adalah tambah(6, 6), hasilnya 12
+
+// Jika anda masih kurang paham, mari kita coba contoh selanjutnya:
+function foo(apa){
+    alert(apa);
+}
+
+function salam(bar){
+    bar("Selamat Malam");
+}
+
+salam(foo);
+
+// ================ Arrow Notation ===============================
+// Arrow Notation juga merupakan fitur baru di ECMAScript 6. Ini merupakan alternatif
+// penulisan dari function expression. Disebut sebagai arrow notation, karena kita menggunakan
+// tanda panah (arrow) => untuk membuat function
+
+$pagi = function() {return "Selamat Pagi"}
+$pagiJuga = () => {return "Selamat Pagi"}
+
+console.log(pagi()) // Selamatt PAgi
+console.log($pagiJuga())  // Selamat Pagi
+// Untuk variabel pagi, saya mengisinya menggunakan function expression seperti yang sudah
+// kita pelajari sebelumnya. Disini saya menggunakan anonymous functions, dimana pada saat
+// pendefenisian fungsi, fungsi ini tidak bernama, tapi langsung dibuat tanda kurung (sebagai
+// tempat untuk argument).
+// Untuk variabel pagiJuga, saya menggunakan arrow notation. Perhatikan cara penulisannya,
+// kita tidak perlu menulis keyword function, tapi cukup tanda kurung (), kemudian diikuti tanda
+// panah =>. Setelah itu, kurung kurawal menandakan dimulainya block function seperti fungsi
+// reguler.
+$total = function(a,b,c) {return a+b+c}
+$result = (a,b,c) => {return a+b+c}
+
+console.log($total(4,5,6)) //15
+console.log($result(4,5,6)) //15
+
+
+</script>
+</body>
+</html>

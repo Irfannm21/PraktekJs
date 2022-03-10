@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script>
+// ===================== Javascript Object ========================
+// Fungsi alert() merupakan
+// method dari window object. Fungsi console.log() merupakan cara pemanggilan method log()
+// dari console object. Array pun termasuk ke dalam object.
+// Dalam bab ini kita akan mempelajari tentang Object di dalam JavaScript, membahas pengertian
+// property dan method, serta bagaimana cara pembuatannya.
+
+// ======================== Format Dasar Object ===================
+// JavaScript disebut sebagai classless programming language. Dimana untuk membuat object, kita tidak perlu
+// membuat class terlebih dahulu.  Saat ini anda cukup memahami bahwa untuk membuat object di
+// JavaScript, caranya adalah dengan langsung menulis object tersebut (tidak perlu
+// membuat class)
+var namaObject = {
+property1 : "isi_property1",
+property2 : "isi_property2",
+property3 : "isi_property3",
+method1 : function (){
+"isi method 1";
+},
+method2 : function (){
+"isi method 2";
+}
+}
+
+// ======================= Object Property ==========================
+var mahasiswa = {
+    nama    : "Irfan Nur Muhammad",
+    bagian  : "IT",
+    ipk     : 3.67,
+    semester: 4
+}
+// Terdapat 2 cara pengaksesan property (property accessors): menggunakan tanda titik (dot
+// notation) atau menggunakan tanda kurung siku (bracket notation). Format dasarnya sebagai
+
+object.property
+object["property"]
+
+console.log(mahasiswa.nama) // Irfan Nur Muhammad
+console.log(mahasiswa.ipk) // 3.67
+// Untuk mengakses property nama dari object mahasiswa, ditulis sebagai mahasiswa.nama. Pengak-
+// sesan property menggunakan dot notation merupakan cara yang paling umum dan paling sering
+// digunakan di dalam JavaScript.
+
+var mahasiswa = {
+    "nama"    : "Irfan Nur Muhammad",
+    "bagian"  : "IT",
+    "ipk"     : 3.67,
+    "semester": 4
+}
+
+console.log(mahasiswa.nama) // Irfan Nur Muhammad
+console.log(mahasiswa["ipk"]) // 3.67
+// Perhatikan kali ini saya menulisan nama property dengan menggunakan tanda kutip: "nama":
+// "Andi". Penulisan property seperti ini tetap bisa diakses menggunakan dot notation maupun
+// bracket notation
+var mahasiswa = {
+    "nama lengkap"    : "Irfan Nur Muhammad",
+    "bagian"  : "IT",
+    "ipk"     : 3.67,
+    "semester": 4
+}
+
+console.log(mahasiswa.nama lengkap) // SyntaxError: missing ) after argument list
+// Inilah salah satu kelemahan penggunaan dot notation untuk mengakses object property. Untuk
+// property yang tidak umum (seperti memiliki spasi), kita hanya bisa menggunakan bracket
+// notation
+console.log(mahasiswa["nama lengkap"]) // Irfan Nur Muhammad
+
+var absensi = {
+    1 : "Irfan",
+    2 : "Nur",
+    3 : "Muhammad"
+}
+console.log(absensi[1]) // Irfan
+console.log(absensi["2"]) // Nur 
+// Property yang ditulis menggunakan angka seperti ini juga tidak bisa diakses menggunakan dot
+// notation. Dot notation hanya bisa digunakan untuk mengakses property yang memenuhi syarat
+// identifier,
+
+// =================== Menambah Object Property ==============================
+// Selain membuat langsung property pada saat pendefenisian object, kita juga bisa menambahkan-
+// nya setelah object tersebut dibuat. Caranya mirip seperti mengisi array.
+var mahasiswa = {
+    nama    : "Irfan Nur Muhammad",
+    bagian  : "IT",
+}
+
+mahasiswa.ipk  = 3.67;
+mahasiswa.semester = 4;
+
+console.log(mahasiswa.nama) // Irfan Nur Muhammad   
+console.log(mahasiswa.ipk)  // 3.67
+
+// ========== Mengubah Nilai Object Property ============
+// Untuk mengubah nilai property dari sebuah object, bisa dengan cara menimpa property tersebut,
+// contohnya sebagai berikut:
+var mahasiswa = {
+    nama    : "Irfan Nur Muhammad",
+    bagian  : "IT",
+}
+
+console.log(mahasiswa.nama) // Irfan Nur Muhammad   
+mahasiswa.nama = "Irfan";
+console.log(mahasiswa.nama)  // Irfan
+
+// ==================== Object Method =======================
+// Selain property, di dalam object bisa terdapat method, yakni sebutan untuk function. Penulisan-
+// nya sangat mirip seperti function biasa yang kita bahas pada bab sebelumnya, yakni menggu-
+// nakan function expressions.
+
+var mahasiswa = {
+    nama    : "Irfan Nur Muhammad",
+    bagian  : "IT",
+    kerja   : function (){return "Kerja di insan"}
+}
+// Perhatikan cara pembuatan method hidupkan(), saya menggunakan cara penulisan function
+// expressions, dimana anonymous function diinput ke dalam variabel hidupkan.
+
+console.log(mahasiswa.nama) // Irfan Nur Muhammad   
+mahasiswa.nama = "Irfan";
+console.log(mahasiswa.kerja()) // Kerja di Insan
+
+// Bagaimana jika menggunakan bracket notation? Walaupun tidak umum dipakai, tapi kita bisa
+// menjalankan method menggunakan cara tersebut
+console.log(mahasiswa["kerja"()]) // Kerja di Insan
+
+var mahasiswa = {
+    nama    : "Irfan Nur Muhammad",
+    bagian  : "IT",
+    kerja   : function (tempat){return "Kerja di" + tempat}
+}
+
+console.log(mahasiswa.kerja("Insan")) // Kerja di Insan
+console.log(mahasiswa["kerja"]["Insansandang"]) // Kerja di Insansandang
+
+// Selain di defenisikan di dalam object, method juga bisa diinput setelah pendefinisian object,
+// seperti contoh berikut:
+
+mahasiswa.rumah = function() {return "Dipermata Hijau"}
+mahasiswa.motor = function(merk) {return "Merk Motor " + motor}
+
+console.log(mahasiswa.rumah()) // Kerja di Insan
+console.log(mahasiswa["kerja"]["Insansandang"]) // Kerja di Insansandang
+
+// ======================== Mengubah Object Method ==============================
+// Menambahkan property maupun method ke dalam object JavaScript sangat mudah. Seperti yang
+// sudah kita coba, caranya cukup dengan memberikan nilai baru ke property atau method tersebut.
+
+var mobil = {
+    merk : "Honda",
+    harga : 200000000,
+    warna : "Merah",
+    pergi : function (tempat) {return "Pergi ke " + tempat;}
+}
+
+console.log(mobil.pergi("Jakata")) // Pergi Ke Jakarta
+
+mobil.pergi = "Timpat Method";
+console.log(mobil.pergi("Jakata")) // Error; TypeError: mobil.pergi is not a function
+// Karena perintah ini, method pergi() sudah tidak bisa diakses lagi, karena saya sudah menimpa
+// isinya dengan sebuah string. JavaScript membolehkan hal ini terjadi dan tidak menampilkan
+// pesan error apapun. Error diatas baru tampil ketika saya mencoba mengakses method pergi()
+// yang sudah berubah menjadi property pergi
+
+// ======================  Nested Object ==========================
+// Nested object adalah sebutan untuk object di dalam object. Sebagai mana kita melihat array 2
+// dimensi (array di dalam array), nested object juga seperti itu. Caranya adalah dengan mengisi
+// nilai property dengan sebuah object lain
+
+var mahasiswa = {
+    nama    : "Andi",
+    jurusan : "Teknik Informatika",
+    ipk     : {
+        1   : 3.1,
+        2   : 3.6,
+        3   : 2.7
+    },
+    semester : 4
+}
+
+console.log(mahasiswa.ipk[1]) // 3.1
+console.log(mahasiswa.semester) // 4
+
+// =================== Object Reference =========================
+// Object reference adalah materi yang membahas bagaimana prilaku sebuah object ketika
+// dipindahkan ke variabel lain. Ini pula yang nantinya membedakan hasil operasi perbandingan,
+// ketika yang dibandingkan itu berupa object
+
+var mahasiswa = "Irfan";
+var mahasiswaBaru = "Irfan Nur Muhammad"
+// dalam istilah bahasa pemrograman, operasi var mahasiswaBaru = mahasiswa disebut sebagai
+// “assignment by value”, dimana yang dikirim ke variabel mahasiswaBaru adalah nilai (value)
+// dari variabel mahasiswa. Di dalam JavaScript, seluruh tipe data primitive (number, string, dan
+// boolean) menggunakan prinsip “assignment by value”.
+console.log(mahasiswa) // IRfan
+console.log(mahasiswaBaru) // IRfan Nur Muhammad
+
+mahasiswaBaru = "Joko";
+
+console.log(mahasiswa) // IRfan
+console.log(mahasiswaBaru) // Joko
+
+mahasiswa = "Jack"
+
+console.log(mahasiswa) // Jack
+console.log(mahasiswaBaru) // Joko
+
+
+var mahasiswa = {
+    mahasiswa : "Irfan",
+    jurusan   : "Rekayasa Perangkat Lunak"
+};
+
+var mahasiswaBaru = mahasiswa;
+// Tapi kali ini yang dikirim ke variabel mahasiswaBaru bukanlah nilai, tapi referensi (reference). Operasi
+// ini dikenal dengan istilah: “assignment by reference”.
+console.log(mahasiswa.nama); // Irfan
+console.log(mahasiswaBaru.nama); // Irfan
+
+mahasiswa = "Joko"
+console.log(mahasiswa.nama); // Joko
+console.log(mahasiswaBaru.nama); // Joko
+
+mahasiswaBaru.jurusan = "Sistem Informasi"
+console.log(mahasiswa.jurusan); // Sistem Informasi
+console.log(mahasiswaBaru.jurusan); // Sistem Informasi
+
+// ===================  Perulangan FOR IN ==================
+// JavaScript memiliki sebuah perulangan khusus yang bisa digunakan untuk menampilkan seluruh
+// isi object (property dan method). Perulangan tersebut adalah for in.
+
+var mobil = {
+    merk    : "Honda",
+    tipe    : "MPV",
+    harga   : 200000000,
+    warna   : "Merah",
+    nyala   : function(){return "Mesin dinyalakan"}
+}
+
+var prop;
+for(prop in mobil){
+    console.log(mobil[prop]);  // Honda\nMPV\n200000000\nWarna
+}
+
+var prop;
+for(prop in mobil){
+    console.log("Isi Property" + prop + ' ' + mobil[prop]) // Isi Property merk Honda \n DLL
+}
+
+// ============= perulangan for in Untuk Array =======================
+// Jika anda masih ingat, didalam JavaScript array adalah object. Oleh karena itu, kita juga bisa
+// menggunakan perulangan for in untuk menampilkan array:
+
+var siswa = ["Andri","Joko","Sukma","Rina","Sari"];
+
+var key;
+for(key in siswa) {
+    console.log("Element array siswa ke " + key + " " + siswa[key])
+}
+</script>
+</body>
+</html>
