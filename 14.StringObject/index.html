@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script>
+// ====================  String Object =====================================
+// JavaScript menyediakan berbagai property dan method untuk pemrosesan tipe data String, yang
+// semuanya disimpan ke dalam String Object. Dalam bab kali ini kita akan membahasnya dengan
+// lebih detail.
+
+// membuat object string
+var foo = new String("Belajar JavaScript");
+console.log ( foo ); // String { "Belajar JavaScript", 19 more... }
+
+console.log ( typeof foo ); // object
+console.log ( foo.length ); // 18
+console.log ( foo.toUpperCase() ); // BELAJAR JAVASCRIPT
+
+// membuat string sebagai tipe data primitif (menggunakan string literal)
+var bar = "Belajar JavaScript";
+console.log ( bar ); // Belajar JavaScript
+
+console.log ( typeof bar ); // string
+console.log ( bar.length ); // 18
+console.log ( bar.toUpperCase() ); // BELAJAR JAVASCRIPT
+// Meskipun kedua cara pembuatan string ini bisa dipakai, cara yang disarankan adalah menggu-
+// nakan tipe data primitif string atau disebut juga sebagai string literal, yakni string yang dibuat
+// menggunakan tanda kutip.
+
+// ===================== String Instance Property ====================
+// String instance property adalah property tipe data string yang “melekat” ke hasil instance dari
+// String object. Di dalam JavaScript, hanya terdapat 1 string instance property:
+// • String.prototype.length
+
+// =============  Property String.prototype.length ==============
+// Property length digunakan untuk mengambil info panjang karakter dari sebuah string. Berikut
+// contoh penggunaannya:
+var foo = "Belajar JavaScript";
+console.log ( foo.length ); // 18
+
+var bar = "Learning Something Fun".length;
+console.log ( bar ); // 22
+
+console.log ( "Duniailkom".length ); // 10
+
+// ============== String Instance Method ==========================
+// String instance method adalah method yang “melekat” ke instance dari String object. Method ini
+// cukup banyak, berikut daftar yang saya ambil dari Mozilla Developer Network:
+// • String.prototype.charAt()
+// • String.prototype.charCodeAt()
+// • String.prototype.codePointAt()
+// • String.prototype.concat()
+// • String.prototype.includes()
+// • String.prototype.endsWith()
+// • String.prototype.indexOf()
+// • String.prototype.lastIndexOf()
+// • String.prototype.localeCompare()
+// • String.prototype.match()
+// • String.prototype.normalize()
+// • String.prototype.padEnd()
+// • String.prototype.padStart()
+// • String.prototype.quote()
+// • String.prototype.repeat()
+// • String.prototype.replace()
+// • String.prototype.search()
+// • String.prototype.slice()
+// • String.prototype.split()
+// • String.prototype.startsWith()
+// • String.prototype.substr()
+// • String.prototype.substring()
+// • String.prototype.toLocaleLowerCase()
+// • String.prototype.toLocaleUpperCase()
+// • String.prototype.toLowerCase()
+// • String.prototype.toSource()
+// • String.prototype.toString()
+// • String.prototype.toUpperCase()
+// • String.prototype.trim()
+// • String.prototype.trimLeft()
+// • String.prototype.trimRight()
+// • String.prototype.valueOf()
+// • String.prototype[@@iterator]()
+
+// =============Method String.prototype.toLowerCase() dan String.prototype.toUpperCase() ==========
+// Kedua method ini digunakan untuk mengubah case (bentuk huruf) dari sebuah string. Method
+// toLowerCase() digunakan untuk mengubah string menjadi huruf kecil, sedangkan method
+// toUpperCase() untuk mengubah string menjadi huruf besar.
+
+var foo = "Belajar Javascript"
+
+console.log ( foo.toLowerCase() ); // belajar javascript
+console.log ( foo.toUpperCase() ); // BELAJAR JAVASCRIPT
+console.log ( foo ); // Belajar JavaScript
+
+// ============  Method String.prototype.charAt() ===============
+// Method charAt() berguna untuk menampilkan karakter yang berada di posisi tertentu dari
+// sebuah string. Berikut contoh penggunaannya:
+var foo = "Belajar JavaScript";
+
+console.log ( foo.charAt(1) ); // e
+console.log ( foo.charAt(8) ); // J
+console.log ( 'Duniailkom'.charAt(4) ); // a
+
+// ================ Method String.prototype.substr() ============================
+// Method substr() digunakan untuk mengambil sebagian karakter string. Method ini bisa diisi
+// dengan 2 argumen:
+// • Argumen pertama adalah nomor index awal pengambilan. Jika diisi angka positif,
+// perhitungan index dimulai dari awal string (dari sebelah kiri). Jika diisi angka negatif,
+// perhitungan karakter dimulai dari akhir string (dari sebelah kanan).
+// • Argumen kedua (opsional) menentukan berapa banyak karakter yang ingin diambil.
+// Jumlah karakter dihitung dari index yang terdapat di argumen pertama. Jika argumen
+// kedua ini tidak ditulis, artinya ambil seluruh karakter hingga akhir string
+
+var foo = "Belajar JavaScript";
+
+console.log ( foo.substr(3) ); // ajar JavaScript
+console.log ( foo.substr(-3) ); // ipt
+console.log ( foo.substr(3, 4) ); // ajar
+console.log ( foo.substr(-10, 4) ); // Java
+
+console.log ( foo ); // Belajar JavaScript
+
+// ================= Method String.prototype.substring() ===================
+// Method substring() mirip seperti substr(), yakni sama-sama berfungsi untuk mengambil
+// sebagian karakter string. Bedanya, dalam method substring() argumen pertama adalah index
+// awal pengambilan dan argumen kedua sebagai index akhir pengambilan.
+// Method substring() bisa diisi dengan 2 argumen:
+
+// • Argumen pertama adalah nomor index awal pengambilan. Jika diisi angka positif,
+// perhitungan index dimulai dari awal string. Jika diisi angka negatif, akan dianggap 0
+// dimana perhitungan juga tetap dihitung dari awal string (tidak dari akhir seperti method
+// substr()).
+// • Argumen kedua (opsional) adalah nomor index akhir pengambilan. Jika tidak ditulis,
+// artinya ambil seluruh string hingga akhir. Jika diisi angka positif, perhitungan index
+// dimulai dari awal string. Jika diisi angka negatif, akan dianggap 0, artinya akhir string
+// ada di awal
+
+var foo = "Belajar JavaScript";
+
+console.log ( foo.substring(3) ); // ajar JavaScript
+console.log ( foo.substring(3, 4) ); // a
+console.log ( foo.substring(3, 12) ); // ajar Java
+console.log ( foo.substring(3, 0) ); // Bel
+console.log ( foo.substring(-3) ); // Belajar JavaScript
+console.log ( foo.substring(-3, 12) ); // Belajar Java
+console.log ( foo.substring(-3, -1) ); // (kosong)
+
+console.log ( foo ); 
+
+// ================= Method String.prototype.slice()============================
+// Method slice() juga digunakan untuk mengambil sebagian karakter string. Penggunaannya
+// mirip seperti method substr(), tapi argumen kedua berupa index akhir pengambilan, bukan
+// banyak karakter.
+// Method slice() bisa diisi dengan 2 argumen:
+
+// • Argumen pertama adalah nomor index awal pengambilan. Jika diisi angka positif, perhi-
+// tungan index dimulai dari awal string (sebelah kiri). Jika diisi angka negatif, perhitungan
+// karakter dimulai dari akhir string (sebelah kanan).
+// • Argumen kedua (opsional) adalah nomor index akhir pengambilan. Jika diisi angka
+// positif, perhitungan index dimulai dari awal string (sebelah kiri). Jika diisi angka negatif,
+// perhitungan karakter dimulai dari akhir string (sebelah kanan). Jika tidak ditulis, ambil
+// seluruh string hingga karakter terakhir.
+// Berikut contoh penggunaan dari method slice()
+
+var foo = "Belajar JavaScript";
+
+console.log ( foo.slice(3) ); // ajar JavaScript
+console.log ( foo.slice(3, 4) ); // a
+console.log ( foo.slice(3, 12) ); // ajar Java
+
+console.log ( foo.slice(-3) ); // ipt
+console.log ( foo.slice(-3, 12); // (Kosong)
+console.log ( foo.slice(-3, -1) ); // ip
+
+console.log ( foo ); // Belajar Javascript
+
+// ===================== Method String.prototype.split() ===================
+// Method split() digunakan untuk memecah sebuah string menjadi array. Method ini memiliki
+// 2 argumen:
+// • Argumen pertama (opsional) bisa diinput dengan karakter pembatas yang digunakan
+// untuk memecah string. Jika tidak ditulis, string di konversi menjadi 1 elemen array.
+// Argumen pertama ini juga bisa diisi dengan regular expression.
+// • Argumen kedua (opsional) adalah jumlah elemen array yang ingin diambil. Jika tidak
+// ditulis seluruh string akan dikonversi menjadi array.
+
+var foo = "Belajar";
+console.log(foo.split()) // array["belajar"]
+
+var bar = "satu,dua,tiga,empat,lima";
+console.log ( bar.split(',') ); // Array [ "satu", "dua", "tiga", "empat", "lima" ]
+
+// Untuk variabel bar, setiap kata dipisah dengan tanda koma. Dengan menginput karakter ini
+// sebagai argumen pertama, kita juga mendapatkan hasil yang sama.
+// Mari kita tambahkan argumen kedua:
+var foo = "satu dua tiga empat lima";
+console.log ( foo.split(' ',3) ); // Array [ "satu", "dua", "tiga" ]
+
+var bar = "satu,dua,tiga,empat,lima";
+console.log ( bar.split(',', 7) ); // Array [ "satu", "dua", "tiga", "empat", "lima" ]
+
+// Fitur lain dari argumen pertama method split() adalah bisa menerima regular expression
+
+var foo = "satu,dua;tiga-empat+lima";
+console.log ( foo.split(/\W/) ); // Array [ "satu", "dua", "tiga", "empat", "lima" ]
+// Perintah foo.split(/\W/) artinya, konversi string foo menjadi array dengan batasan setiap
+// element berupa regexp "\W". Di dalam regular expression, pola "\W" akan cocok dengan seluruh
+// karakter selain huruf dan angka. Sehingga karakter , ; - dan + akan menjadi karakter pembatas
+// dari method split().
+
+//========================== Method String.prototype.trim() ========================
+// Method trim() digunakan untuk menghapus karakter whitespace di awal dan akhir string.
+// Whitespace adalah karakter “spasi”, termasuk tab, enter, dan carriage return (karakter penanda
+// untuk pindah baris).
+// Berikut contoh penggunaannya:
+var foo = " JavaScript ";
+console.log ( foo.length ); // 18
+console.log ( foo ); // " JavaScript "
+
+foo = foo.trim();
+console.log ( foo.length ); // 10
+console.log ( foo ); // "JavaScript"
+
+// ==================  Method String.prototype.concat() ==========================
+// Method concat() digunakan untuk penyambungan string. Fungsinya mirip seperti operator ‘+’.
+// String yang ingin disambung diinput sebagai argumen dari method concat(). Berikut contoh
+// penggunaannya:
+var foo = "Belajar";
+var bar = foo.concat(" JavaScript");
+
+console.log ( bar );
+// Belajar JavaScript
+
+console.log ( bar.concat(" di", " Duniailkom", "... semangat!!") );
+// Belajar JavaScript di Duniailkom... semangat!!
+
+// ================== Method String.prototype.includes() =================================
+// Method includes() digunakan untuk mengecek apakah sebuah string ada di dalam string asal
+// atau tidak. Method ini memiliki 2 argumen
+
+// • Argumen pertama adalah string yang ingin dicari.
+// • Argumen kedua (opsional) berupa index dimana pencarian akan dimulai. Jika argumen
+// kedua ini tidak ditulis, pencarian akan dimulai dari awal string (nilai argumen kedua
+// dianggap 0).
+// Proses pengecekan dilakukan secara case sensitif, dimana huruf kecil dan huruf besar dianggap
+// berbeda. Berikut contoh penggunaan dari method includes() :
+
+var foo = "Sedang belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.includes('Uncover') ); // true
+
+console.log ( foo.includes('JavaScript') ); // true
+console.log ( foo.includes('javascript') ); // false
+
+console.log ( foo.includes('Sedang') ); // true
+console.log ( foo.includes('Sedang',1) ); // false
+// Ini terjadi karena pencarian string mulai dari index 1, sedangkan huruf "S" dari
+// kata "Sedang" berada di index 0.
+console.log ( foo.includes('edang',1) ); // true
+// menjadi true karena yang di index 0 hanya huruf “S”,
+// sehingga string 'edang' tetap ditemukan di dalam variabel fo
+
+// ===== Method String.prototype.startsWith() dan String.prototype.endsWith() ========
+// Kedua method ini mirip seperti includes(), yakni untuk mengecek apakah sebuah string ada
+// di dalam string lain atau tidak. Bedanya, method startsWith() menambahkan syarat bahwa
+// string yang dicari harus berada di awal, sedangkan method endsWith() string yang akan di cari
+// berada di akhir.
+// Method startsWith() dan endsWith() memiliki 2 argumen yang sama persis seperti method
+// includes():
+
+// • Argumen pertama adalah string yang ingin dicari.
+// • Argumen kedua (opsional) berupa index dimana pencarian akan dimulai. Jika argumen
+// kedua ini tidak ditulis, pencarian akan dimulai dari awal string (nilai argumen kedua
+// dianggap 0)
+
+// Proses pengecekan dilakukan secara case sensitif, dimana huruf kecil dan huruf besar dianggap
+// berbeda. Berikut contoh penggunaan dari method startsWith() dan endsWith() :
+var foo = "Sedang belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.startsWith('Sedang') ); // true
+console.log ( foo.endsWith('Uncover') ); // true
+
+console.log ( foo.startsWith('sedang') ); // false
+console.log ( foo.endsWith('uncover') ); // false
+
+console.log ( foo.startsWith('belajar',7) ); // true
+console.log ( foo.endsWith('belajar',14) ); // true
+
+// ================  Method String.prototype.repeat() ======================
+// Fungsi dari method repeat() cukup simple, yakni mengulang string beberapa kali. Method ini
+// membutuhkan 1 argumen yang menentukan banyak perulangan. Berikut contoh penggunaan-
+// nya:
+var foo = "semangat.. ";
+console.log ( foo.repeat(1) ); // semangat..
+console.log ( foo.repeat(3) ); // semangat.. semangat.. semangat..
+
+console.log ( '=-'.repeat(10) ); // =-=-=-=-=-=-=-=-=-=-
+
+// ===== Method String.prototype.toString() dan String.prototype.valueOf() =============
+// Method toString() dan valueOf() berfungsi untuk mengkonversi String Object menjadi tipe
+// data primitif. Kedua method ini relatif jarang kita pakai dan hanya digunakan secara internal
+// oleh JavaScript.
+// Berikut contoh penggunaan method toString() dan valueOf()
+var foo = new String ("Belajar JavaScript");
+console.log ( typeof foo ); // object
+console.log ( foo ); // String { "Belajar JavaScript", 19 moreâ€¦ }
+
+bar = foo.toString();
+console.log ( typeof bar ); // string
+console.log ( bar ); // Belajar JavaScript
+
+baz = foo.valueOf();
+console.log ( typeof baz ); // string
+console.log ( baz ); // Belajar JavaScript
+
+// ========  Method String.prototype.indexOf() ========================
+// Method indexOf() berfungsi untuk mencari posisi index dari sebuah string. Sekilas method ini
+// mirip seperti includes(), namun hasil akhirnya bukan hanya true atau false, tapi posisi dari
+// string yang dicari.
+// Method indexOf() bisa diisi dengan 2 argumen:
+// • Argumen pertama adalah string yang ingin dicari.
+// • Argumen kedua (opsional) berupa index dimana pencarian akan dimulai. Jika argumen
+// kedua ini tidak ditulis, pencarian akan dimulai dari awal string (nilai argumen kedua
+// dianggap 0).
+
+// ika method ini tidak menemukan string yang dicari, hasil akhirnya adalah -1. 
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.indexOf('JavaScript') ); // 8
+console.log ( foo.indexOf('buku') ); // 24
+console.log ( foo.indexOf('Buku') ); // -1
+// Perintah pertama: foo.indexOf('JavaScript') hasilnya 8. Artinya string 'JavaScript' dite-
+// mukan di index ke-8 dari variabel foo. Begitu juga dengan perintah foo.indexOf('buku'),
+// dimana string 'buku' ditemukan di posisi index ke 24.
+// Pada baris terakhir, perintah foo.indexOf('Buku') hasilnya -1. Artinya tidak ditemukan ada
+// string 'Buku' di dalam variabelfoo. Yang ada adalah string 'buku', bukan 'Buku'.
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.indexOf('JavaScript') ); // 8
+console.log ( foo.indexOf('JavaScript',9) ); // 29
+// ita bisa menambahkan argumen kedua yang berisi posisi setelah kata 'JavaScript' pertama. Saya bisa mulai dari index ke-9.
+// Dengan demikian, proses pencarian dimulai dari index ke-9.
+console.log ( foo.indexOf('JavaScript',30) ); // -1\
+
+// Sebagai contoh latihan, saya ingin membuat sebuah perulangan untuk mencari berapa kali
+// sebuah kata muncul di dalam string asal. Silahkan anda pelajari sejenak kode program berikut:
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+var count = 0;
+var posisi = foo.indexOf('a');
+
+ while (posisi !== -1) {
+ count++;
+ posisi = foo.indexOf('a', posisi + 1);
+}
+console.log (count); // 7
+ 
+// =============== Method String.prototype.lastIndexOf()==============================
+// Method lastIndexOf() mirip seperti indexOf(), hanya saja proses pencarian di mulai dari akhir
+// string, bukan dari awal string. Method ini juga bisa diisi dengan 2 argumen yang berfungsi sama
+// sebagaimana method indexOf().
+
+// Method lastIndexOf() bisa diisi dengan 2 argumen:
+// • Argumen pertama adalah string yang ingin dicari.
+// • Argumen kedua (opsional) berupa index dimana pencarian akan dimulai. Jika argumen
+// kedua ini tidak ditulis, pencarian akan dimulai dari akhir string.
+// Jika method ini tidak menemukan string yang dicari, hasil akhirnya adalah -1. Pencarian
+// dilakukan secara case sensitif, dimana huruf besar dan kecil akan dibedakan.
+// Berikut contoh penggunaannya
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.lastIndexOf('JavaScript') ); // 29
+console.log ( foo.lastIndexOf('buku') ); // 24
+console.log ( foo.lastIndexOf('Buku') ); // -1
+// Hasil pemanggilan foo.lastIndexOf('JavaScript') adalah 29, artinya method ini mendapati
+// string 'JavaScript' berada di index ke 29.
+// Berikut contoh yang menggunakan argumen:
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.lastIndexOf('JavaScript') ); // 29
+console.log ( foo.lastIndexOf('JavaScript',9) ); // 8
+console.log ( foo.lastIndexOf('JavaScript',7) ); // -1
+// Saya rasa anda sudah bisa paham maksud dari kode program ini, dimana proses pencarian string
+// 'JavaScript' dimulai dari akhir (dari sebelah kanan)
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+var count = 0;
+var posisi = foo.lastIndexOf('a');
+
+ while (posisi !== -1) {
+ count++;
+ posisi = foo.lastIndexOf('a', posisi - 1);
+}
+
+console.log (count);
+
+// Selain mengubah method indexOf() menjadi lastIndexOf(), perubahan lain ada di argumen
+// kedua method lastIndexOf(). Karena pencarian string dimulai dari akhir, maka kita menggu-
+// nakan perhitungan posisi - 1. Dimana posisi pencarian akan mundur 1 karakter saat string
+// ditemukan.
+
+// ===================== Method String.prototype.search() ==========================
+// Method search() berfungsi sebagaimana method indexOf(), yakni untuk mencari lokasi index
+// dari sebuah string. Bedanya method search() mencari berdasarkan regular expression yang
+// diinput sebagai argumen pertama method ini.
+// Jika hasilnya tidak ditemukan, method search() akan mengembalikan nilai -1. 
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.search('JavaScript') ); // 8
+console.log ( foo.search('buku') ); // 24
+console.log ( foo.search('Buku') ); // -1
+
+console.log ( foo.search('Buku') ); // -1
+console.log ( foo.search(/Buku/i) ); // 24
+// Di baris kedua, saya menambahkan karakter i setelah penulisan regular expression. Dengan
+// demikian, string 'Buku' juga akan cocok dengan 'buku'. Tanpa penambahan ini, method
+// 'search()' bersifat case sensitif, dimana huruf besar dan kecil dianggap berbeda
+
+// Regular expression juga bisa digunakan untuk mencari pola tertentu yang tidak bisa kita buat
+// menggunakan pencarian string biasa, seperti contoh berikut:
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.search(/..ri/) ); // 12
+
+// ====================== String.prototype.match() ================================
+// Method match() juga digunakan untuk pencarian regular expression. Tapi hasil akhir dari
+// method ini berupa array. Pola regular expression juga diiput sebagai argumen pertama method
+// ini. Jika tidak terdapat pola yang cocok, method match() akan mengembalikan nilai null
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+console.log ( foo.match('JavaScript') ); // Array [ "JavaScript" ]
+console.log ( foo.match('a') ); // Array [ "a" ]
+console.log ( foo.match('Tidak ada') ); // null
+// Disini saya mencoba memanggil method match() menggunakan string biasa (bukan regular
+// expression). Terlihat array yang dihasilkan hanya 1 element
+
+var foo = "1 jam sama dengan 60 menit. Juga sama dengan 3600 detik";
+
+console.log ( foo.match(/\d+/g) ); // Array [ "1", "60", "3600" ]
+// artinya, cari seluruh angka yang terdapat di variabel foo, kemudian
+// simpan tiap angka ini ke dalam array
+console.log ( foo.match(/\w*e\w*/g) ); // Array [ "dengan", "menit", "dengan", "detik" ]
+// Perintah foo.match(/\w*e\w*/g) artinya cari suatu kata
+// di dalam variabel foo yang memiliki setidaknya 1 huruf e. Kata yang cocok dengan pola ini
+// adalah: "dengan", "menit" dan "detik
+
+// ================== Method String.prototype.replace() =======================
+// Method replace() digunakan untuk proses pergantian string dengan string lain. Method ini
+// harus dipanggil dengan 2 argumen:
+// • Argumen pertama berupa pola regular expression yang ingin dicari.
+// • Argumen kedua adalah string pengganti seandainya ditemukan pola yang cocok.
+// Berikut contoh penggunaannya:
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+
+console.log ( foo.replace("JavaScript","PHP") );  // Belajar PHP dari buku JavaScript Uncover
+// Hasil dari perintah foo.replace("JavaScript","PHP") adalah "Belajar PHP dari buku JavaScript
+// Uncover". Di dalam variabel foo, sebenarnya terdapat 2 kali kata "JavaScript". Namun yang
+// diganti hanya kata pertama saja.
+
+// Bagaimana jika kita ingin mengganti seluruh kata "JavaScript" menjadi "PHP"? Caranya,
+// gunakan regular expression:
+
+var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+
+console.log ( foo.replace(/JavaScript/g,"PHP") ); // Belajar PHP dari buku JavaScript Uncover
+
+console.log ( foo.replace(/a/g,"u") ); // Belujur JuvuScript duri buku JuvuScript Uncover
+
+// Perintah foo.replace(/JavaScript/g,"PHP") artinya ganti seluruh string yang cocok dengan
+// pola /JavaScript/ di dalam variabel foo menjadi string "PHP".
+// Sedangkan perintah foo.replace(/a/g,"u") artinya cari seluruh huruf a dari variabel foo,
+// kemudian ganti menjadi huruf e
+</script>
+</body>
+</html>
