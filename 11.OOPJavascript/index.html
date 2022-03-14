@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+// ==============  Pengertian OOP ======================
+// Misalkan object gelasKaca bisa memiliki property: tinggiGelas, volumeGelas, dan bentukGe-
+// las. Object gelasKaca juga bisa memiliki method: diisi(), dibersihkan() dan dilemparkan().
+// Contoh lain seperti object mobil yang bisa memiliki property: merk, warna, dan jenisMobil.
+// Dimana methodnya adalah: dihidupkan(), dimatikan(), dan jalanKeJakarta().
+
+var kalimat = "Hello Indonesia"
+var hasil = potongString(kalimat,6,14)
+// Variabel hasil akan berisi string "Indonesia", karena saya memotong string tersebut mulai dari
+// index karakter ke-6 hingga ke-14. Ini adalah cara penulisan kode program menggunakan metode
+// prosedural (berbasiskan function)
+
+// jika menggunakan object, saya bisa memasukkan fungsi potongString() menjadi method dari
+// object String, sehingga cara pemanggilannya sebagai berikut
+var kalimat = new String("Hello Indonesia")
+var hasil = kalimat.potongString(6,4)
+// variabel kalimat akan berisi
+// sebuah object string yang berisi “Hello Indonesia”. Di dalam object string ini terdapat method
+// potongString(), yang dipanggil menggunakan dot notation sebagaimana kita memanggil
+// method biasa.
+
+// ===================== Pengertian Class dan Object ===========================
+// Dalam teori OOP, Class adalah cetak biru dari sebuah object, atau dalam bahasa seder-
+// hananya, class merupakan kelompok umum dari sesuatu. Object adalah “sesuatu” tersebut. Class
+// dan object merupakan materi paling dasar dari pemrograman berbasis object.
+// Jika mobil adalah class, maka mobilAndi merupakan object dari class mobil. Jika binatang
+// adalah class, maka sapi merupakan object dari class binatang. Jika Gelas adalah class, maka
+// gelasKaca adalah object dari class gelas.
+
+// ======================== Membuat Class dan Object =============================
+// Disini saya membuat class Mobil yang belum berisi apa-apa. Salah satu kebiasaan programmer
+// JavaScript adalah, nama class ditulis dengan awalan huruf besar, bukan dengan huruf kecil
+// sebagaimana layaknya variabel. Walaupun tentu saja kita juga bisa menggunakan awalan huruf
+// kecil, seperti
+
+class Mobil{
+
+}
+
+// Dalam konsep OOP, class hanya berperan sebagai cetak biru (blue print) dari object. Di dalam
+// object lah pemrosesan dilakukan. Untuk membuat object dari suatu class, digunakan keyword
+// new, kemudian diikuti dengan nama class tersebut
+var mobilIpan = new Mobil();
+var mobilAlni = new Mobil();
+// Proses pembuatan object dari class ini dikenal dengan sebutan instantiation. Bahasa inggris
+// instantiation sendiri berarti: membuat sesuatu yang berwujud dari yang abstrak. Dalam contoh
+// ini, class Mobil merupakan suatu hal yang abstract, wujudnya ada di object mobilAndi dan
+// mobilJoko.
+
+// JavaScript juga memiliki operator instanceof yang bisa digunakan untuk mengecek apakah
+// suatu object merupakan instance dari sebuah class
+console.log(mobilAlni instanceof Mobil) // True
+console.log(mobilAlni instanceof String) // False
+// Disini mobilAndi instanceof Mobil dan mobilJoko instanceof Mobil akan menghasilkan
+// true, karena object mobilAndi memang berasal dari class Mobil.
+
+
+// ============== Class Sebagai “Object Induk” ===================================
+// Pertanyaan yang cukup mendasar ketika belajar OOP adalah, untuk apa kita repot-repot
+// membuat class? Kenapa tidak langsung membuat object saja
+// Class berperan sebagai wadah yang menyediakan semua hal yang dibutuhkan oleh object.
+
+// Disini saya membuat 2 buah object: mobilAndi dan mobilJoko. Keduanya memiliki 3 property
+// yang sama: merk, tipe, dan harga, dengan isi data yang berlainan.
+var mobilAndi = {
+    merk : "Toyota Pajero",
+    tipe : "MPV",
+    harga : 150000000,
+    hidupkan : function () { return "Mesin Hidupkan"},
+    pergi : function (tempat) {return  "Pergi ke " + tempat}
+}
+// Dapat dilihat bahwa kedua object ini sebenarnya masuk ke golongan “mobil”. Jika saya membuat
+// object baru dengan nama mobilAlex, tentunya anda bisa menebak bahwa object mobilAlex ini
+// seharusnya juga memiliki property dan method yang sama.
+// Bagaimana jika saya butuh membuat 100 object mobil? Akan lebih efisien jika terdapat sebuah
+// “object induk” bernama Mobil.
+// Ketika sebuah object dinyatakan sebagai bagian dari “Mobil”, otomatis ia sudah memiliki 3
+// property: merk, tipe, dan harga. Serta memiliki 2 buah method: hidupkan() dan pergi().
+// Untuk membuat object mobilTono, mobilRudi, atau mobilAnton, saya cukup memasukkannya
+// sebagai anggota dari “object induk” Mobil. Dengan demikian saya bisa langsung mengakses
+// mobilRudi.merk, atau mobilAnton.hidupkan()
+
+class Mobil {
+
+}
+var mobilAndi = new Mobil();
+var mobilIpan = new Mobil();
+// Saya bisa menambahkan “sesuatu” di dalam class Mobil ini, entah itu berupa property atau
+// method. Dengan demikian, object mobilAndi dan mobilJoko otomatis juga memiliki property
+// dan method yang sama. Termasuk seluruh object lain yang nantinya dibuat menggunakan
+// perintah new Mobil()
+
+// ============================== Class Property =========================
+// Untuk bisa menambahkan property ke dalam Class, kita harus menggunakan method khusus
+// bernama constructor(). Method constructor ini otomatis akan berjalan saat proses pembuatan
+// object (saat proses instantiation).
+
+// Di dalam JavaScript, semua property untuk Class harus ditulis di dalam method constructor().
+// Bagaimana cara menulis property untuk class ini? Kita tidak bisa langsung membuat property
+// seperti biasa, tapi harus menggunakan object khusus bernama this:
+class Mobil {
+    constructor() {
+        this.merk = "Honda CRV";
+        this.tipe = "MPV";
+        this.harga = "150000000";
+    }
+}
+// This adalah object khusus sebagai pengganti object yang nantinya di buat dari class Mobil.
+// Penjelasan tentang this memang sedikit rumit, untuk sementara mari kita anggap bahwa dalam
+// membuat property class, harus menggunakan perintah this.namaProperty.
+
+var mobilIpan = new Mobil();
+console.log(mobilIpan.merk) // Honda CRV
+
+var mobilAlni = new Mobil();
+console.log(mobilAlni.harga) // 150000000
+// Di dalam class Mobil saya membuat 3 property: this.merk, this.tipe, dan this.harga. Ketika
+// class Mobil dijadikan object, property ini sudah langsung ‘melekat’ ke setiap object.
+
+// ====================== Pengertian THIS =============================
+// Ketika object mobilAndi dibuat dengan perintah:
+var mobilAndi = new Mobil()
+// JavaScript akan menjalankan method constructor() dari class Mobil. Jika di dalamnya terdapat
+// keyword this, itu akan diganti menjadi mobilAndi. Artinya yang dijalankan secara internal oleh
+// JavaScript adalah sebagai berikut:
+class Mobil {
+    constructor(){
+        mobilAndi.merk = "Honda CRV";
+        mobilAndi.tipe = "MPV";
+        mobilAndi.harga = "150000000"
+    }
+}
+// Terlihat, inilah fungsi dari penulisan this di dalam pembuatan class. This berfungsi sebagai
+// pengganti object yang nantinya di buat dari class Mobil.
+
+// ===========================  Argument Constructor =======================
+// Sekarang, bagaimana caranya agar setiap object punya isi property yang berbeda? Solusinya,
+// kita bisa menambahkan argument ke dalam constructor. Argumen ini diinput pada saat proses
+// pembuatan object
+// Sebagai contoh, untuk mobilAndi, saya bisa menulis sebagai berikut:
+var mobilAndi = new Mobil("Daihatsu Xenia","MPV",150000000);
+// Sedangkan untuk mobilJoko saya bisa menulis seperti ini:
+var mobilJoko = new Mobil("Toyota Camry","Sedan",350000000)
+
+// Karena kita mengirim “sesuatu” saat class Mobil dipanggil, maka kita butuh “menangkapnya”
+// di class constructor(). Berikut kode program penambahan argument constructor untuk class
+// Mobil
+class Mobil {
+    constructor(merkArg,tipeArg,hargaArg){
+        this.merk = merkArg;
+        this.tipe = tipeArg;
+        this.harga = hargaArg;
+    }
+}
+// Saya sengaja membuat argument dengan nama merkArg, tipeArg dan hargaArg, agar mudah
+// dibedakan.
+var mobilAlni = new Mobil("Toyota Pajero","SUV",200000000)
+console.log(mobilAlni.merk) // Toyota Pajero
+
+var mobilIpan = new Mobil("Honda Supra","Sedan",200000000)
+console.log(mobilAlni.tipe) // Sedan
+
+// ===================== Class Method ====================
+// Selanjutnya adalah membuat method agar
+// bisa mengakses mobilAndi.hidupkan() dan mobilAndi.pergi("Jakarta").
+
+
+class Mobil {
+    constructor(merkArg,tipeArg,hargaArg){
+        this.merk = merkArg;
+        this.tipe = tipeArg;
+        this.harga = hargaArg;
+    }
+
+    hidupkan(){
+        return "Hidupkan Mobil " + this.merk;
+    }
+
+    pergi(tempat) {
+        return "Bawa Mobil" + this.merk + " ke " + tempat;
+    }
+}
+// Saya sengaja membuat argument dengan nama merkArg, tipeArg dan hargaArg, agar mudah
+// dibedakan.
+var mobilAlni = new Mobil("Toyota Pajero","SUV",200000000)
+
+console.log(mobilAlni.merk) // Toyota Pajero
+console.log(mobilAlni.hidupkan()) // Hidupkan Mobil Toyota Pajero
+
+var mobilIpan = new Mobil("Honda Supra","Sedan",200000000)
+console.log(mobilIpan.pergi("Pangandaran")) // Bawa Mobil Honda Supra ke Pangandaran
+// Artinya, ketika saya menjalankan mobilAndi.pergi("Jakarta"), variabel tempat akan diganti
+// menjadi string "Jakarta", sedangkan variabel this.merk akan diambil dari constuctor(),
+// dimana dalam contoh ini berisi string Daihatsu Xenia. Hasilnya adalah text "Pergi ke Jakarta
+// dengan Daihatsu Xenia"
+
+// ======================= Javascript: Prototype Based Language ========================
+// OOP di dalam JavaScript dibuat melalui mekanisme yang dinamakan prototype. Karena itulah
+// JavaScript disebut sebagai Prototype Based Language.
+// Prototype based language berbeda dengan konsep OOP di bahasa pemrograman lain seperti
+// JAVA, C++ maupun PHP. JavaScript bisa dibilang sebagai satu-satunya bahasa pemrograman
+// populer yang menggunakan konsep ini. Bahasa pemrograman lain menggunakan konsep “OOP
+// classic” yang menggunakan class (mirip seperti materi yang kita pelajari sebelumnya).
+// Mayoritas “protes” karena susahnya dalam memahami OOP di JavaScript. Fitur standar OOP
+// seperti konsep property yang bisa di set sebagai private, protected dan public juga tidak ada di
+// JavaScript.
+
+// ====================  Membuat Object dengan Constructor Functions ====================== 
+// Untuk membuat “class” tanpa keyword class (semoga anda paham apa yang saya maksud),
+// JavaScript menyediakan constructor functions. Constructor functions adalah function khusus
+// yang digunakan untuk membuat “kelompok object”, yang tidak lain adalah sebutan untuk class
+// di dalam OOP biasa
+
+
+function Mobil(merkArg,tipeArg,hargaArg){
+    this.merk = merkArg;
+    this.tipe = tipeArg;
+    this.harga = hargaArg;
+    this.hidupkan = function() {return "Mesin dihidupkan"};
+    this.pergi = function(tempat){return "Pergi ke " + tempat + " dengan " + this.merk}
+     
+}
+// Keyword this-lah yang membedakan sebuah function “biasa” dengan constructor functions. Cara
+// penulisannya sama persis seperti method constructor yang kita gunakan ketika membuat class
+// Mobil di ECMAScript 6
+var mobilAlni = new Mobil("Toyota Pajero","SUV",200000000)
+var mobilIpan = new Mobil("Toyota Camri","Sedan",200000000)
+
+console.log(mobilAlni.merk) // Toyota Pajero
+console.log(mobilIpan.merk) // Toyota Camri
+
+console.log(mobilAlni instanceof Mobil) // true
+console.log(mobilIpan instanceof Mobil) // true
+// Di dalam function Mobil, ketiga argumen diinput ke 3 property: this.merk, this.tipe, dan this.harga. Ketiganya
+// membentuk sebuah “kelompok object” yang bernama Mobil (ingat, kita tidak menggunakan
+// istilah “class”).
+
+console.log(mobilAlni.hidupkan()) // Mesin dihidukan
+console.log(mobilAlni.hidupkan()) // Mesin dihidukan
+
+
+console.log(mobilAlni.pergi("Jakarta")) // Pergi ke Jakarta dengan Toyota Pajero
+console.log(mobilAlni.pergi("Jakarta")) // Pergi ke Jakarta dengan Toyota Camri
+
+
+// ============= Membuat Class Method Dengan Object Prototype ==============
+// Selain membuat “kelompok object” menggunakan constructor functions, kita juga bisa membu-
+// atnya menggunakan object khusus yang bernama prototype. Dengan menggunakan prototype,
+// property dan method bisa ditambahkan kapan saja
+
+// Karena kelompok object Mobil memiliki argument, maka saya harus membuatnya menggu-
+// nakan constructor functions.
+function Mobil(merkArg,tipeArg,hargaArg){
+    this.merk = merkArg;
+    this.tipe = tipeArg;
+    this.harga = hargaArg;    
+}
+
+// Inilah cara menambahkan property menggunakan prototype object. Karena perintah ini,
+// seluruh object Mobil akan memiliki property jumlahRoda.
+Mobil.prototype.jumlahRoda = 4;
+Mobil.prototype.hidupkan = function(){return "Mesin dihidupkan"};
+Mobil.prototype.pergi = function(tempatArg) {
+    return "Bawa Mobil " + this.merk + " ke " + tempatArg; 
+};
+// Hasilnya, seluruh object Mobil akan memiliki method hidupkan() dan pergi().
+
+var mobilAlni = new Mobil("Toyota Pajero","SUV",200000000)
+var mobilIpan = new Mobil("Toyota Camri","Sedan",200000000)
+
+console.log(mobilAlni.jumlahRoda) // 4
+console.log(mobilJoko.jumlahRoda) // 4
+
+console.log(mobilAlni.pergi("Lombok")) // Bawa mobil Toyota Pajero ke Lombok
+console.log(mobilAlni.pergi("Lembang")) // Bawa mobil Toyota Camri ke Lembang
+
+// // ======================  Object Bawaan JavaScrip ====================
+// Tunggu dulu, dari daftar diatas, terdapat object Number, String, dan Boolean. Bukankah ini
+// tipe data primitif? Lalu ada juga Function, kenapa ini semua termasuk disebut object? Inilah
+// satu lagi fitur unik di dalam JavaScript.
+
+// Jika saya meminta anda untuk membuat angka 52, lalu angka ini disimpan ke dalam variabel
+// foo, tentu kode programnya adalah sebagai berikut:
+
+var foo = 52;
+
+// Ini adalah cara membuat tipe data primitif number, menggunakan number literal. Tapi terdapat
+// cara lain:
+
+var foo = new Number(52);
+
+// Cara kedua ini menggunakan apa yang disebut sebagai Object Constructor. Perintah new
+// Number() digunakan untuk membuat object Number.
+// Ini juga berlaku untuk tipe data string. Jika menggunakan tipe data primitif, saya bisa menulis
+// sebagai berikut:
+var foo = "Belajar JavaScript";
+
+// Dengan Object Constructor, penulisannya seperti ini:
+
+var foo = new String("Belajar JavaScript");
+// Variabel foo pertama berisi string "Belajar JavaScript" sebagai tipe data primitif (string
+// literal), sedangkan variabel foo kedua berisi Object string "Belajar JavaScript".
+
+
+// Jadi, apa bedanya mengisi variabel dengan tipe data primitif dan object constructor?
+// Jika menggunakan object constructor, kita bisa mengakses puluhan method yang tersedia untuk
+// object tersebut. Berikut contohnya:
+
+var foo = new Number('52');
+console.log(foo.toString(16)) // 34
+console.log(foo.toExponential(2)) // 5.20e+1
+
+var bar = new String("Belajar Javascript");
+console.log(bar.toLocaleLowerCase()) // belajar javascript
+console.log(bar.toLocaleUpperCase()) // BELAJAR JAVASCRIPT
+console.log(bar.substr(3,9))  // ajar Java
+// Seperti yang terlihat, dengan menggunakan object constructor kita bisa mengakses berbagai
+// method untuk object foo dan bar. Method toString() dan toExponential() “melekat” ke
+// Object Number. Sedangkan method toUpperCase(), toLowerCase(), dan substr() merupakan
+// kepunyaan dari Object String.
+
+// Begitu juga halnya dengan object lain, punya method dan juga property yang bisa kita akses.
+// Bahkan function juga memiliki object constructor sendiri,
+
+var tambah = new Function('a','b','return a + b');
+
+console.log(tambah(3,5))
+console.log(tambah.length); // 2
+// Untuk membuat function tambah() menggunakan object constructor, argument pertama dan
+// kedua diisi dengan argument untuk function tambah itu sendiri, yakni a dan b. Argument
+// terakhir diisi string sebagai hasil akhir fungsi tambah, yakni return a + b.
+// Dengan menggunakan object constructor dalam membuat function, kita bisa mengakses property
+// length, yang berisi banyaknya argument dari sebuah function. Karena fungsi tambah() memiliki
+// 2 argumen, maka hasil dari tambah.length adalah 2
+
+// ================= Selalu Pakai Tipe Data Primitif! ======================
+var foo = 52;
+console.log(foo.toString(16)) // 34
+console.log(foo.toExponential(2)) // 5.20e+1
+
+var bar = "Belajar Javascript";
+console.log(bar.toLocaleLowerCase()) // belajar javascript
+console.log(bar.toLocaleUpperCase()) // BELAJAR JAVASCRIPT
+console.log(bar.substr(3,9))  // ajar Java
+///////////////////////////////////////////////
+// Disini saya mengisi variabel foo dan bar menggunakan tipe data primitif, yakni number dan
+// string. Ternyata kita tetap bisa mengakses method dan property yang seharusnya “kepunyaan”
+// object constructor.
+// Secara internal, ketika kita memanggil method atau property dari tipe data primitif, JavaScript
+// akan mengkonversinya menjadi Object untuk sementara, kemudian mengembalikannya kembali
+// menjadi tipe data primitif.
+// Proses ini dilakukan dengan sangat cepat sehingga tidak akan terdeteksi. Tapi inilah penjelasan
+// kenapa kita bisa memanggil method dan property Object dari tipe data primitif.
+// Jadi jika hasilnya sama saja, mana yang lebih baik? Membuat variabel menggunakan tipe data
+// primitif atau menggunakan object constructor?
+// Jawabannya: lebih baik menggunakan tipe data primitif. Karena object constructor butuh
+// alokasi memory komputer yang lebih banyak dan waktu proses yang sedikit lebih lama.
+////////////////////////////////////////////////////
+
+
+</script>
+</body>
+</html>
