@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script>
+// ====================== Global Property dan Global Function ======================
+// Global property dan global function adalah property dan function JavaScript yang tidak
+// “melekat” ke object apapun, dan bisa diakses dari mana saja
+
+// ======================== Global Property ======================================
+// Global property bisa dikatakan sebagai konstanta spesial JavaScript, dimana ia berfungsi untuk
+// menyimpan nilai khusus, yakni:
+// • Infinity
+// • NaN
+// • undefined
+// • nul
+
+var foo = Infinity;
+console.log(foo); // Infinity
+
+var bar = undefined;
+console.log(bar); // undefined
+
+var baz = null;
+console.log(baz); // null
+
+var foo = Infinity;
+console.log(foo); // ReferenceError: infinity is not defined
+
+var bar = NAN;
+console.log(bar); // ReferenceError: NAN is not defined
+
+var baz = Undefined;
+console.log(baz); // ReferenceError: Undefined is not defined
+
+var qux = Null;
+console.log(qux); // ReferenceError: Null is not defined
+
+// =================================== Global Function =========================================
+// Global Function adalah function JavaScript yang bisa diakses dari mana saja dan tidak terikat
+// dengan object apapun. Berikut daftar function tersebut:
+// • eval()
+// • isFinite()
+// • isNaN()
+// • parseFloat()
+// • parseInt()
+// • decodeURI()
+// • decodeURIComponent()
+// • encodeURI()
+// • encodeURIComponent()
+
+// ================================== Function eval() ======================================
+// Function eval() digunakan untuk memproses string menjadi perintah JavaScript. Fungsi ini
+// membuat string menjadi bagian dari kode program, termasuk mengakses variabel dan function
+// JavaScript
+
+var foo = "10 + 30";
+console.log(foo) // 100 + 30
+
+var bar = foo
+console.log(eval(bar)) // 130
+// jika diinput kedalam fungsi eval(), string akan dieksekusi dan menghasilkan nilai
+// 130 (di dapat dari 100+30).
+// Termasuk apabila di dalam string tersebut di defenisikan sebuah variabel
+
+var foo = "var bar = 500 + 3";
+eval(foo);
+console.log(foo) // 1500
+
+// Biasanya fungsi eval() dipakai untuk menjalankan kode JavaScript yang berasal dari situs
+// lain, seperti penggunaan API (Application Programming Interface). Sedapat mungkin hindari
+// penggunaan fungsi eval() jika tidak sangat terpaksa
+
+// ============================ Function isFinite() =======================================
+// Function isFinite() sebenarnya sama persis seperti method Number.isFinite(). Fungsi ini
+// digunakan untuk untuk mengecek apakah sebuah nilai/variabel berisi angka yang bisa dihitung.
+// Fungsi isFinite() mengembalikan boolean true jika nilai tersebut bisa dihitung (berupa angka
+// biasa), dan mengembalikan nilai false jika berupa infinity, NaN, atau bukan tipe data Number.
+
+var foo;
+
+foo = 6;
+console.log(isFinite(foo)) // true
+
+foo = 3.21456 ;
+console.log( isFinite(foo) ); // true
+
+foo = 'a';
+console.log( isFinite(foo) ); // false
+
+foo = 1/0 ;
+console.log( isFinite(foo) ); // false
+
+foo = Number.NEGATIVE_INFINITY ;
+console.log( isFinite(foo) ); // false
+
+foo = NaN;
+console.log( isFinite(foo) ); // false
+
+// =============================== Function isNaN() ======================================
+// Function isNaN() juga merupakan penulisan singkat dari method Number.isNaN(). Fungsi ini
+// digunakan untuk mengecek apakah hasil operasi / suatu variabel berisi NaN atau bukan. Hasilnya
+// true jika itu NaN, dan false jika bukan NaN:
+
+var foo;
+
+foo = 5 ;
+console.log( isNaN(foo) ); // false
+
+foo = 5/'a' ;
+console.log( isNaN(foo) ); // true
+
+foo = NaN ;
+console.log( isNaN(foo) ); // true
+
+// ==================================== Function parseInt() ======================================
+// Function parseInt() sama fungsinya dengan method Number.parseInt(), yakni digunakan
+// untuk mengkonversi nilai atau variabel menjadi angka integer (angka bulat). Jika di dalam string
+// asal terdapat nilai pecahan, bagian pecahan akan dibuang. Jika tidak bisa dikonversi menjadi
+// number, method ini mengembalikan nilai NaN.
+
+// Sama seperti method Number.parseInt() fungsi parseInt() juga memiliki argumen kedua yang
+// bersifat opsional. Argumen kedua ini bisa diisi dengan radix, yakni basis bilangan
+
+var foo = "1234.567";
+console.log( parseInt(foo) );           // 1234
+console.log( parseInt(99.99) );         // 99
+
+console.log( parseInt("1100011",2) );   // 99
+console.log( parseInt("143",8) );       // 99
+console.log( parseInt("63",16) );       // 9
+
+// ==============================  Function parseFloat() ====================================
+// Function parseFloat() adalah penulisan singkat dari method Number.parseFloat(). Fungsi ini
+// dipakai untuk mengkonversi nilai atau variabel ke bentuk angka float. Float adalah angka yang
+// memiliki nilai pecahan, serta juga termasuk angka bulat (integer). Jika string tersebut tidak bisa
+// dikonversi menjadi number, method ini akan mengembalikan nilai NaN.
+
+var foo = "12345";
+console.log(typeof foo); // string
+
+foo = parseFloat(foo);
+console.log(typeof foo); //12345
+console.log(foo); // number
+
+var bar = "-1234.5678";
+console.log( typeof bar ); // string
+bar = parseFloat(bar) ;
+
+console.log( bar ); // -1234.5678
+console.log( typeof bar ); // number
+
+console.log( parseFloat("12.045 potong ayam") ); // 12.045
+console.log( parseFloat("Ada 12.045 potong ayam") ); // NaN
+
+// ===================== Function encodeURI() dan encodeURIComponent() =================
+// Kedua fungsi ini digunakan untuk meng-encode atau mengkodekan beberapa karakter khusus
+// yang biasanya ada di alamat URI
+
+var foo = "http://www.duniailkom.com/Belajar #JavaScript";
+var bar = encodeURI(foo);
+var baz = encodeURIComponent(foo);
+
+ console.log(bar); // "http://www.duniailkom.com/Belajar%20#JavaScript"
+console.log(baz); // http%3A%2F%2Fwww.duniailkom.com%2FBelajar%20%23JavaScript
+// Perhatikan bahwa alamat ini memiliki sebuah spasi. Spasi ini dikodekan menjadi %20
+// oleh fungsi encodeURI(). Sedangkan untuk fungsi encodeURIComponent() mengkodekan lebih
+// banyak karakter, termasuk , / dan #.
+
+// =====================  Function decodeURI() dan decodeURIComponent() ====================
+// Function decodeURI() dan decodeURIComponent() merupakan kebalikan dari fungsi encodeURI()
+// dan encodeURIComponent(). Fungsi decodeURI() dan decodeURIComponent() digunakan untuk
+// membalik string yang telah dikodekan oleh fungsi encodeURI() dan encodeURIComponent().
+
+var foo = "http://www.duniailkom.com/Belajar #JavaScript";
+var bar = encodeURI(foo);
+var baz = encodeURIComponent(foo);
+
+ console.log(bar);  // "http://www.duniailkom.com/Belajar%20#JavaScript"
+ console.log(baz); // http%3A%2F%2Fwww.duniailkom.com%2FBelajar%20%23JavaScript
+
+ console.log( decodeURI(bar) ); // "http://www.duniailkom.com/Belajar #JavaScript"
+ console.log( decodeURIComponent(bar) ); // "http://www.duniailkom.com/Belajar #JavaScript"
+
+ console.log( decodeURI(baz) );          // http%3A%2F%2Fwww.duniailkom.com%2FBelajar %23JavaScript
+ console.log( decodeURIComponent(baz) ); // "http://www.duniailkom.com/Belajar #JavaScript
+</script>
+</body>
+</html>
