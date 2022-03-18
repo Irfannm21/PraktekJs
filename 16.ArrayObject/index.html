@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script>
+// ============================== Array Object =========================================
+// Array merupakan tipe data bentukan yang berisi banyak data. Di dalam JavaScript, array juga
+// termasuk ke dalam Object yang memiliki berbagai property dan method. Dalam bab ini kita
+// akan fokus membahas tentang Array Object JavaScript.
+
+// Array bisa ditulis menggunakan object constructor dengan perintah new Array(), maupun
+// dengan penulisan array literal menggunakan tanda kurung siku [ ]. 
+
+var foo = new Array["a","b","c","d","e"];
+console.log(typeof foo) // Object
+console.log(foo) // Array["a","b","c","d","e"];
+
+// ara pembuatan array yang lebih disarankan adalah menggu-
+// nakan array literal
+var foo = ["a","b","c","d","e"];
+console.log(typeof foo) // Object
+console.log(foo) // Array["a","b","c","d","e"];
+
+// ======================== Array Object Method =========================================
+// Array Object Method adalah method yang melekat ke Array Object, bukan hasil instance-nya.
+// Dari web Mozilla Developer Network terdapat 3 method dari Array Object:
+// • Array.from()
+// • Array.isArray()
+// • Array.of()
+// Kita hanya akan membahas method Array.isArray(), karena method yang lain cukup jarang
+// dipakai
+
+// ===========================  Method Array.isArray() =====================================
+// Method isArray() digunakan untuk mengecek apakah isi dari suatu variabel berupa array atau
+// tidak. Jika berupa array, hasil method ini adalah boolean true. Jika bukan array, hasilnya boolean
+// false:
+
+var a = new Array("a","b","c","d","e");
+ var b = ["a","b","c","d","e"];
+ var c = "aiueo";
+ var d = 123456;
+ var e = true;
+
+console.log ( Array.isArray(a) ); // true
+console.log ( Array.isArray(b) ); // true
+console.log ( Array.isArray(c) ); // false
+console.log ( Array.isArray(d) ); // false
+console.log ( Array.isArray(e) ); // false
+console.log ( Array.isArray([1,2,3]) ); // true
+
+// ================================  Array Instance Property =============================
+// Array instance property adalah property yang melekat ke object hasil instance dari array. Di
+// dalam JavaScript, hanya terdapat 1 array instance property: Array.prototype.length
+
+// =============================  Property Array.prototype.length ========================
+// Property length berisi informasi mengenai jumlah element dari sebuah array.
+
+var foo = ["a","b","c","d","e"];
+console.log ( foo.length ); // 5
+
+var bar = ["apel","pisang","anggur","jambu"];
+console.log ( bar.length ); // 4
+
+console.log ( ["x","y","z"].length ); // 3
+
+var bar = ["apel","pisang","anggur","jambu"];
+for($i = 0; $i < bar.length; $I++){
+    console.log(bar[i]) // "apel","pisang","anggur","jambu"
+}
+
+// agar lebih efisien
+var bar = ["apel","pisang","anggur","jambu"];
+var panjangArray = bar.length;
+
+for($i = 0; $i < panjangArray ; $i++){
+    console.log(bar[i])
+}
+
+// Property length array tidak hanya berisi informasi, tapi juga bisa diubah:
+bar.length = 3;
+console.log ( bar.length ); // 3
+console.log ( bar ); // Array [ "a", "b", "c" ]
+
+// Saya mendefenisikan array foo berisi 5 element. Kemudian mengubah nilai foo.length menjadi
+// 3. Akibatnya, isi array foo juga berkurang menjadi 3 element
+
+var foo = ["a","b","c","d","e"];
+foo.length = 7
+
+console.log ( foo.length ); // 6
+console.log ( foo ); // Array [ "a", "b", "c","d","e", 2 <Empty Slots> ]
+
+console.log(foo[5]) // e
+console.log(foo[6]) // undinfined
+console.log(foo[7]) // undinfined
+
+// ===================== Array Instance Method ================
+// Tipe data array JavaScript memiliki banyak method, mengutip situs Mozilla Developer Net-
+// work, terdapat setidaknya 30 array instance method:
+// • Array.prototype.copyWithin()
+// • Array.prototype.fill()
+// • Array.prototype.pop()
+// • Array.prototype.push()
+// • Array.prototype.reverse()
+// • Array.prototype.shift()
+// • Array.prototype.sort()
+// • Array.prototype.splice()
+// • Array.prototype.unshift()
+// • Array.prototype.concat()
+// • Array.prototype.includes()
+// • Array.prototype.indexOf()
+// • Array.prototype.join()
+// • Array.prototype.lastIndexOf()
+// • Array.prototype.slice()
+// • Array.prototype.toSource()
+// • Array.prototype.toString()
+// • Array.prototype.toLocaleString()
+// • Array.prototype.entries()
+// • Array.prototype.every()
+// • Array.prototype.filter()
+// • Array.prototype.find()
+// • Array.prototype.findIndex()
+// • Array.prototype.forEach()
+// • Array.prototype.keys()
+// • Array.prototype.map()
+// • Array.prototype.reduce()
+// • Array.prototype.reduceRight()
+// • Array.prototype.some()
+// • Array.prototype.values()
+
+// =============  Method Array.prototype.reverse() =================
+// Method reverse() digunakan untuk membalik urutan element dari sebuah array. Berikut contoh
+// penggunaannya:
+var foo = ["a","b","c","d","e"];
+console.log ( foo ); // Array [ "a", "b", "c", "d", "e" ]
+
+var bar = foo.reverse();
+console.log ( bar ); // Array [ "e", "d", "c", "b", "a" ]
+console.log ( foo ); // Array [ "e", "d", "c", "b", "a" ]
+
+// =========================== Method Array.prototype.concat() ==================
+// Method concat() digunakan untuk proses penggabungan array. Argumen dari method ini bisa
+// diisi dengan variabel array, maupun array literal (array yang biasanya kita buat menggunakan
+// tanda kurung siku).
+
+var foo = ["a","b","c","d","e"];
+var bar = [1,2,3,4,5];
+
+var barFoo = bar.concat(foo);
+
+console.log(bar); // 1,2,3,4,5ss
+console.log(barFoo); // 1,2,3,4,5,"a","b","c","d"."e"
+
+// Bagaimana jika array yang ingin disambung merupakan array literal? 
+
+var fooBar = foo.concat([1,2,3,4])
+console.log(fooBar) // "a","b","c","d","e",1,2,3,4
+
+// ==================== Method Array.prototype.slice() ===============
+// Method slice() digunakan untuk mengambil / men-copy sebagian element array. Method ini
+// memiliki 2 argumen opsional, dengan ketentuan sebagai berikut:
+// • Argumen pertama (opsional) merupakan index awal pengambilan. Jika diisi angka positif,
+// ambil element array mulai dari index tersebut. Jika diisi angka negatif, perhitungan di
+// mulai dari akhir element.
+// • Argumen kedua (opsional) merupakan index akhir pengambilan. Jika diisi angka positif,
+// ambil element array sampai index tersebut (tapi tidak termasuk index itu sendiri). Jika
+// diisi angka negatif, perhitungan di mulai dari element terakhir. Apabila index ini tidak
+// ditulis, ambil seluruh element hingga element terakhir.
+// • Jika method slice() dipanggil tanpa argument, seluruh element array akan diambil (di
+// copy).
+
+
+var foo = ["a","b","c","d","e"];
+var bar = [1,2,3,4,5];
+
+var slice1 = foo.slice(3);
+var slice2 = foo.slice(2,3);
+// ika diisi angka negatif, perhitungan di mulai dari akhir element
+var slice2 = foo.slice(-2);
+var slice2 = foo.slice(-3,-1);
+
+console.log(slice1) // "a","b","c","d"
+console.log(slice2) // "c","d"
+console.log(slice3) // "a","b"
+console.log(slice4) // "b","c","d"
+
+
+// =======================  Method Array.prototype.splice() ========================
+// Method splice() digunakan untuk menambah atau mengurangi element array. Method ini bisa
+// diinput dengan beberapa argumen
+
+// • Argumen pertama merupakan index awal penambahan / pengurangan. Jika diinput
+// angka negatif, perhitungan dimulai dari element terakhir.
+// • Argumen kedua (opsional) bisa diinput dengan jumlah element yang akan dihapus. Jika
+// diisi 0, artinya tidak ada element yang dihapus. Apabila tidak ditulis, seluruh sisa element
+// akan dihapus (mulai dari index yang diinput pada argumen pertama).
+// • Argument ketiga dan seterusnya (opsional) bisa diinput dengan array baru yang ingin
+// ditambahan.
+
+var foo = ["a","b","c","d","e","f","g"];
+foo.splice(3)
+console.log(foo) //"a","b","c","d"
+
+// Argumen kedua array mana yang akan dihapus setelahnya
+foo.splice(3,2)
+console.log(foo) // "a","b","c","d","g"
+
+// Argument ketiga menambah array
+foo.splice(3,2,"h","i","j")
+console.log(foo) // "a","b","c","d","g"
+
+// =======================  Method Array.prototype.join() ===============================
+// Method join() berfungsi untuk menggabungkan element array menjadi string. Method ini
+// memiliki 1 argumen, yakni karakter pembatas sebagai pemisah antar element. Method join()
+// merupakan kebalikan dari method split()
+var foo = ["a","b","c","d","e","f","g"];
+foo.join()
+console.log(foo) // a,b,c,d,e,f,g,h
+foo.join('-')
+console.log(foo) // a-b-c-d-e-f-g-h 
+
+// ================ Method Array.prototype.push() dan Array.prototype.pop() ============
+// Method push() dan pop() digunakan untuk menambah dan mengurangi element array dari
+// posisi terakhir. Dimana method push() untuk menambah element baru, sedangkan method
+// pop() untuk mengeluarkan (dan menghapus) 1 element
+
+var foo = ["a","b","c","d","e","f","g"];
+foo.push('x')
+console.log(foo) // "a","b","c","d","e","f","g","x"
+foo.join('-')
+console.log(foo) // a-b-c-d-e-f-g-h 
+
+var foo = ["a","b","c","d","e","f","g"];
+foo.pop(); // g
+console.log(foo) // "a","b","c","d","e","f"
+
+foo.pop(); // f
+console.log(foo) // "a","b","c","d","e"
+// Method push() dan pop() ini sering digunakan dalam pemrosesan array sebagai tumpukan
+// (stack), atau dalam sistem antrian.
+
+// =======  Method Array.prototype.unshift() dan Array.prototype.shift() ==================
+// Method unshift() dan shift() sangat mirip seperti method push() dan pop(), bedanya element
+// yang ditambah atau diambil akan diproses dari awal array.
+// Method unshift() digunakan untuk menambah element baru di awal array, sedangkan method
+// shift() untuk mengambil 1 element dari awal array.
+var foo = ["a","b","c","d","e","f","g"];
+console.log(unshift('x','w')); // 'x','w',"a","b","c","d","e","f","g"
+
+var foo = ["a","b","c","d","e","f","g"];
+console.log(shift()); // "b","c","d","e","f","g"
+
+============== Method Array.prototype.includes() =============================
+Method includes() digunakan untuk mengecek apakah sebuah nilai ada di dalam array. Jika ada,
+method ini mengembalikan nilai true, namun jika nilai yang dicari tidak ditemukan, merhod ini
+mengembalikan nilai false.
+Method includes() bisa diisi dengan 2 argument:
+• Argumen pertama berupa element yang akan dicari.
+• Argumen kedua (opsional) berupa nomor index awal pencarian. Jika tidak ditulis akan
+dianggap 0, yakni pencarian dimulai dari index paling awal.
+var foo = ["a","b","c","d","e","f","g"];
+console.log(includes("a")); // true
+console.log(includes("e")); // true 
+console.log(includes("h")); // false
+console.log(includes("a",1)); // true
+console.log(includes("a",2)); // false
+
+// ====================  Method Array.prototype.indexOf() =====================
+// Method indexOf() mirip seperti method includes(), yakni sama-sama digunakan untuk
+// mencari sebuah element di dalam array. Bedanya, hasil dari method indexOf() berupa posisi
+// index dari element yang dicari. Apabila tidak ditemukan, method ini mengembalikan nilai -1.
+// Method indexOf() memiliki 2 argument:
+// • Argumen pertama diisi dengan element yang akan dicari.
+// • Argumen kedua (opsional) diisi dengan index awal pencarian. Jika tidak ditulis akan
+// dianggap 0, yakni pencarian dimulai dari index paling awal.
+
+var foo = ["a","b","c","d","e","f","g"];
+console.log(indexOf("a")); // 0
+console.log(indexOf("e")); // 4 
+console.log(indexOf("h")); // -1
+console.log(indexOf("a",1)); // 1
+console.log(indexOf("a",2)); // -1
+
+// ========================== Method Array.prototype.forEach() ==========================
+// Dari semua method bawaan JavaScript yang telah kita pelajari hingga saat ini, seluruh argumen
+// dari method tersebut berupa tipe data primitif, seperti string, angka, atau array. Sekarang, kita
+// akan membahas method yang argumennya tidak lagi diisi dengan tipe data sederhana seperti
+// itu, melainkan sebuah function
+
+// Method forEach() mirip seperti perulangan for of, yakni akan dijalankan sebanyak jumlah
+// element dari arra
+
+var foo = ["a","b","c","d"]
+foo.forEach( function() {console.log("Javascript")}) // JavaScript 4x
+
+// Kode diatas sama persis seperti sebelumnya. Hanya saja saya memisahkan penulisan function
+// ke baris tersendiri.
+// Ketika JavaScript menjalankan function Callback, method forEach() sebenarnya mengirim 3
+// argumen, yakni:
+// • Argumen pertama berupa nilai element yang sedang di proses (atau value array).
+// • Argumen kedua berupa index element yang sedang di proses (atau key array).
+// • Argumen ketiga berisi seluruh array asal.
+// Ketiga argumen ini tidak harus ditulis, hanya jika dibutuhkan saja. Mari kita lihat cara
+// penggunaan argumen ini
+
+var foo = ["a","b","c","d"]
+
+foo.forEach(
+    function(element){
+        console.log(element) // a,b,c,d
+    }
+)
+// Seperti yang terlihat, argument element di dalam callback berisi element array yang saat ini
+// sedang di proses. Dan nama argumen ini sebenarnya bisa menggunakan nama variabel apa saja,
+foo.forEach(
+    function(a){
+        console.log(a) // a,b,c,d
+    }
+)
+// Kali ini saya membuat argumen a sebagai input untuk callback, dan tidak ada masalah. Yang
+// terpenting adalah, argumen pertama berfungsi untuk mengakses element dari array foo.
+
+var foo = ["a","b","c","d"]
+
+foo.forEach(
+    function(index,elemet){
+    console.log("Index ke : " + index + " = " + element); // Index ke 1 = a DLL
+});
+// Argumen kedua dari callback diisi JavaScript dengan nomor index dari array asal (dalam
+// contoh diatas, array foo). Argumen ini kemudian saya tampilkan menggunakan perintah
+// console.log(). Sehingga kita bisa melihat index dan isi dari setiap element array foo.
+
+var foo = ["a","b","c","d"]
+
+foo.forEach(
+    function(index,element,array){
+        console.log("Index ke " + index + " = " + element) // array ["a","b","c","d"] \n Index ke 1 = a
+        console.log(array)
+    }
+)
+
+// Dalam contoh diatas, saya membuat function callback secara langsung di dalam argumen
+// forEach(). Function ini sebenarnya bisa dipisah menjadi fungsi tersendiri
+
+function tampil(index,element){
+    console.log("Index ke " + index + ' = ' + element)
+}
+
+var foo = ["a","b","c","d"]
+foo.Foreach(tampil);
+
+var foo = ["Irfan","Nur","Muhammad"];
+foo.forEach(tampil);
+
+// Yang juga dapat dilihat, untuk memanggil function tampil() dari method forEach(), kita
+// tidak perlu menambahkan argumen apa-apa, cukup nama fungsinya saja: foo.forEach(tampil).
+// JavaScript secara otomatis akan mengirim 3 argumen callback yang sudah kita bahas sebelum
+// ini : nilai element, index element, dan isi seluruh array.
+
+// Konsep callback memang agak rumit, tapi sangat penting untuk dipahami. Jika anda masih
+// kurang paham, saya sarankan untuk kembali mempelajari penjabaran diatas, karena sisa method
+// dari Array Object yang akan kita pelajari dalam bab ini, semuanya menggunakan callback function
+
+// ====================  Method Array.prototype.map() ================================
+// Method map() mirip seperti forEach(), dalam artian method ini juga menjalankan sebuah
+// function callback sebagai argument. Bedanya, method map() akan mengembalikan sebuah array
+// baru sebagai hasil callback.
+
+var foo = [2,4,6,7,8]
+// Dalam function callback, setiap element dari array foo akan dikali 2, kemudian dikembalikan
+// dengan perintah return, inilah maksud dari return element * 2. Hasil akhirnya, variabel bar
+// akan berisi seluruh array foo yang telah dikali dua.
+var bar = foo.map(
+    function(index,element,array){
+        return element * 2;
+    }
+)
+console.log(bar); // Array [4,8,12,14,16]
+
+// Dengan memisahkan penulisan fungsi callback, kode program menjadi lebih rapi. Disini saya
+// membuat function kaliDua() yang isinya akan mengali seluruh element array dengan angka 2
+function kaliDua(element){
+    return element * 2;
+}
+
+var foo = [2,8,5,1,9]
+var bar = foo.map(kaliDua);
+console.log(bar) // Array [4 16 10 2 18] 
+
+// Latihan CallBack
+
+function quadrat(element){
+    reutrn Math.sqrt(elemet)
+}
+
+var foo = [49,81,4,9,36,121];
+var bar = foo.map(quadrat)
+
+console.log(bar) // Array [ 7, 9, 2, 3, 6, 11 ]
+
+// Latihan Callback
+function pangkat(element){
+    return Math.pow(element,3)
+}
+
+var foo = 8,4,7,9,3,2];
+var bar = foo.map(quadrat)
+
+console.log(bar)// Array [ 512, 64, 343, 729, 27, 8 ]
+
+function genap(element){
+    if(element % 2 === 0){
+        return element;
+    } else {
+        return 0;
+    }
+}
+
+var foo = [8,4,7,9,3,2];
+var bar = foo.map(genap)
+console.log(bar) //  Array [ 8, 4, 0, 0, 0, 2 ]
+
+// ==============  Method Array.prototype.filter() ==============================
+// Method filter() juga mirip seperti map(), yakni sama-sama menjalankan sebuah function
+// callback. Bedanya pada method filter() hasil pemanggilan callback hanya bisa true atau false.
+// Jika hasilnya true, pertahankan element array. Jika hasilnya false, hapus element tersebu
+
+// Sebagai contoh, mari kita pakai studi kasus bilangan genap dari pembahasan method map()
+// sebelum ini. Sekarang, hasil return dari function callback diganti menjadi true atau false:
+function besar30(element){
+    if(element% 2 === 0){
+        return element
+    } else {
+        return 0
+    }
+}
+
+var foo = [8,4,7,9,3,2];
+var bar = foo.filter(besar30)
+console.log(bar);
+
+// ================================ Method Array.prototype.every() ===============================
+// Method every() digunakan untuk mengecek apakah setiap element array memenuhi syarat
+// tertentu. “Syarat” ini harus kita buat sendiri menggunakan function callback.
+// Jika seluruh element lolos pemeriksaan callback (hasilnya true semua), maka method every()
+// akan mengembalikan nilai true. Jika ada salah satu saja nilai element yang false, method every()
+// akan mengembalikan nilai false.
+// Sebagai contoh kasus, saya memiliki sebuah array foo. Saya ingin memastikan seluruh element
+// di dalamnya genap.
+
+function genap(element){
+    if(element% 2 === 0){
+        return element
+    } else {
+        return 0
+    }
+}
+
+var foo = [6,8,10,12,16];
+console.log ( foo.every(genap) ); // true
+
+var bar = [3,8,10,12,16];
+console.log ( bar.every(genap) ); // falses 
+// Array bar tidak lolos seleksi karena terdapat angka 3. Angka 3 ini akan menghasilkan nilai false
+// dari callback, itulah sebabnya hasil dari bar.every(genap) juga false
+
+function besar10(element){
+  return element >= 10;
+}
+
+var foo = [10, 12, 24, 26, 30] // true
+console.log(foo)
+
+var bar = [10, 12, 24, 26, 30] // true
+console.log(bar)
+
+// ============================= Method Array.prototype.some() =================================
+// Method some() mirip seperti every(), tapi syaratnya terbalik. Method some() akan mengemba-
+// likan nilai true jika salah satu element saja memenuhi syarat. Dan akan mengembalikan nilai
+// false hanya ketika seluruh element tidak memenuhi syarat.
+
+function genap(element){
+    return (element % 2 === 0)
+}
+
+var foo = [6,8,10,12,16]
+console.log(foo.some(genap)); // true
+
+var foo = [3,7,9,99,42]
+console.log(foo.some(genap)); // true 
+
+var foo = [3,7,9,99,41]
+console.log(foo.some(genap)); // false
+
+
+function besarDari10(element) {
+    return element >= 10;
+}
+
+var foo = [23,60,44,12,34];
+console.log ( foo.some(besarDari10) ); // true
+
+var bar = [2,60,44,12,34];
+console.log ( bar.some(besarDari10) ); // true
+
+// ====================  Method Array.prototype.find() dan Array.prototype.findIndex() ========================
+// Method find() dan findIndex() digunakan untuk mencari suatu nilai di dalam array berdasarkan
+// syarat tertentu. Sama seperti method-method sebelumnya, syarat ini dibuat menggunakan
+// callback.
+// Kedua method ini akan langsung berhenti dan mengembalikan nilai yang ditemukan pertama
+// kali (jika element yang memenuhi syarat lebih dari 1). Method find() akan mengembalikan nilai
+// element array tersebut, sedangkan method findIndex() akan mengembalikan index dimana
+// element tersebut ditemukan
+
+function genap(element){
+    return (element % 2 === 0)
+}
+
+var foo = [6,8,10,12,16]
+console.log(foo.find(genap)); // 6
+
+var foo = [3,7,9,99,42]
+console.log(foo.findIndex(genap)); // 4 
+
+var foo = [3,7,9,99,41]
+console.log(foo.find(genap)); // undinfined
+
+// ============ Method Array.prototype.reduce() dan Array.prototype.reduceRight() ============
+// Kedua method ini digunakan untuk memproses total seluruh element array dan menghasilkan
+// 1 nilai akhir. Sebagai contoh, saya ingin menambahkan semua isi array foo, atau ingin mengu-
+// rangkan hasil pangkat dua dari seluruh isi array foo. Inilah yang bisa diproses menggunakan
+// method reduce() dan reduceRight().
+// Bedanya, pada method reduce() proses akan dimulai dari awal array, sedangkan method
+// reduceRight() di proses dari akhir element array. Hasil kedua method ini hanya 1 nilai akhir.
+// Proses untuk method reduce() dan reduceRight() melibatkan sebuah function callback, dan
+// satu nilai awal (opsional).
+// Sebagai argumen ke dalam function callback, bisa diisi dengan 4 nilai:
+// • Argumen pertama: sebagai accumulator, atau variabel penampung total.
+// • Argumen kedua: nilai array yang saat ini sedang di proses.
+// • Argumen ketiga (opsional): index array yang saat ini sedang di proses.
+// • Argumen keempat (opsional): berisi seluruh element array.
+
+unction tambah(total,angka) {
+    return total + angka;
+}
+
+var foo = [5,7,14,12,16];
+console.log ( foo.reduce(tambah) ); // 54
+console.log ( foo.reduce(tambah,10) ); // 64
+
+console.log ( foo.reduceRight(tambah) ); // 54
+console.log ( foo.reduceRight(tambah,10) ); // 64
+
+// Dalam contoh ini, saya hanya menggunakan 2 buah argumen untuk function callback tambah().
+// Argumen pertama (total) sebagai penampung nilai akumulasi, dan argumen kedua (angka)
+// sebagai penampung element array yang saat ini sedang diproses.
+// Ketika perintah foo.reduce(tambah) mulai diproses, nilai 5 akan masuk ke dalam argumen
+// total, dan nilai 7 ke dalam argumen angka. Fungsi tambah() akan mengembalikan nilai 5+7
+// = 12.
+// Selanjutnya nilai 12 ini akan dipindahkan ke dalam argumen total, dan argumen angka akan
+// berisi element selanjutnya dari array foo, yakni 14. Fungsi tambah() akan mengembalikan nilai
+// 12+14 = 26. Proses seperti ini berlangsung hingga element terakhir dari array foo, dan hasilnya
+// adalah 54. Ini didapat dari 5 + 7 + 14 + 12 + 16 = 54
+
+// Untuk perintah foo.reduce(tambah,10), disini saya membuat angka 10 sebagai nilai awal.
+// Akibatnya, pada saat diproses pertama kali, nilai 10 masuk ke argumen total, dan element
+// pertama dari array foo (nilai 5) masuk ke dalam argumen angka. Proses penambahan yang sama
+// juga akan berlangsung. Hasilnya adalah 64, yang didapat dari 10 + 5 + 7 + 14 + 12 + 16 = 64.
+
+// Untuk method reduceRight, proses yang sama juga berlangsung. Hanya saja akan dimulai dari
+// sisi kanan, atau dari element terakhir array foo. Dengan kata lain, perintah foo.reduceRight(tambah)
+// akan memproses: 16 + 12 + 14 + 7 + 5. Sedangkan perintah foo.reduceRight(tambah,10) akan
+// memproses 10 + 16 + 12 + 14 + 7 + 5
+
+// ======================== Mehtod Array.prototype.sort() ========================
+// Sesuai dengan namanya, method sort() digunakan untuk proses pengurutan element array.
+// Method ini memiliki 1 argumen opsional yang bisa diisi dengan sebuah function callback yang
+// berfungsi untuk mengatur proses pengurutan.
+// Jika function callback tidak disertakan, proses pengurutan akan menggunakan nomor urut kode
+// Unicode
+
+var foo = ["zulkifli","andi","erik","joko","dina"];
+foo.sort();
+console.log ( foo ); // Array [ "andi", "dina", "erik", "joko", "zulkifli" ]
+
+// Variabel foo saya isi dengan 5 string yang tidak tersusun. Dengan memanggil method sort(),
+// semua string ini akan diurutkan berdasarkan abjad
+
+var foo = [3,5,2,8,1,31,22,44,33,11];
+foo.sort();
+console.log ( foo ); // Array [ 1, 11, 2, 22, 3, 31, 33, 44, 5, 8 ]
+
+// Untuk mengatasi masalah diatas, kita harus membuat sebuah function callback sebagai pengatur
+// urutan.
+// Function callback untuk method sort() menerima 2 input argumen, yakni 2 nilai yang saat ini
+// sedang dibandingkan, misalnya a dan b. Untuk menentukan nilai mana yang harus di dahulukan,
+// dilihat dari nilai kembalian function:
+// • Jika kembalian function callback kurang dari 0, nilai a dianggap lebih kecil. a diurutkan
+// sebelum b.
+// • Jika kembalian function callback sama dengan 0, nilai a dan b dianggap sama dan
+// urutannya tidak diubah.
+// • Jika kembalian function callback besar dari 0, nilai b dianggap lebih kecil. a diurutkan
+// setelah b.
+
+function bandingkan(a, b) {
+if (a < b) {
+    return -1; // a lebih kecil
+}
+if (a > b ) {
+    return 1; // b lebih kecil
+}
+    return 0; // sama besar
+}
+
+var foo = [3,5,2,8,1,31,22,44,33,11];
+foo.sort(bandingkan);
+console.log ( foo ); // Array [ 1, 2, 3, 5, 8, 11, 22, 31, 33, 44 ]
+// Saya membuat sebuah function callback bandingkan(). Function ini memiliki 2 argumen, yakni
+// a dan b. Kedua argumen akan diisi oleh setiap element dari array foo:
+// • Jika a < b, return -1.
+// • Jika a > b, return 1.
+// • Selain keduanya (berarti a sama dengan b), return 0.
+
+
+</script>
+</body>
+</html>

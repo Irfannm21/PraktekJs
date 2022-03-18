@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script>
+
+var foo         = new Date()
+var hari        = foo.getDay();
+var namaHari;
+
+
+switch(hari){
+    case 0 : var namaHari = "Minggu"; break;
+    case 1 : var namaHari = "Senin"; break;
+    case 2 : var namaHari = "Selasa"; break;    
+    case 3 : var namaHari = "Rabu"; break;
+    case 4 : var namaHari = "Kamis"; break;
+    case 5 : var namaHari = "Jum'at"; break;
+    case 6 : var namaHari = "Sabtu"; break;
+}
+
+console.log(namaHari);
+
+
+var bar     = new Date();
+var bulan   = bar.getMonth();
+var namaBulan;
+
+switch(bulan){
+    case 0 : var namaBulan = "Januari"; break;
+    case 1 : var namaBulan = "Febuari"; break;
+    case 2 : var namaBulan = "Maret"; break;    
+    case 3 : var namaBulan = "April"; break;
+    case 4 : var namaBulan = "Mei"; break;
+    case 5 : var namaBulan = "Juni"; break;
+    case 6 : var namaBulan = "Juli"; break;
+    case 7 : var namaBulan = "Agustus"; break;
+    case 8 : var namaBulan = "September"; break;
+    case 9 : var namaBulan = "Oktober"; break;
+    case 10 : var namaBulan = "November"; break;
+    case 11 : var namaBulan = "Desember"; break;
+}
+
+console.log(namaBulan);
+
+var foo2 = new Date();
+var tahun = foo.getFullYear()
+var bulan = foo.getMonth()
+var tanggal = foo.getDate()
+var hari = foo.getDay();
+var jam = foo.getHours()
+var menit = foo.getMinutes();
+var detik = foo.getMilliseconds()
+var namaHari;
+var namaBulan;
+
+switch(hari){
+    case 0 : var namaHari = "Minggu"; break;
+    case 1 : var namaHari = "Senin"; break;
+    case 2 : var namaHari = "Selasa"; break;    
+    case 3 : var namaHari = "Rabu"; break;
+    case 4 : var namaHari = "Kamis"; break;
+    case 5 : var namaHari = "Jum'at"; break;
+    case 6 : var namaHari = "Sabtu"; break;
+}
+
+switch(bulan){
+    case 0 : var namaBulan = "Januari"; break;
+    case 1 : var namaBulan = "Febuari"; break;
+    case 2 : var namaBulan = "Maret"; break;    
+    case 3 : var namaBulan = "April"; break;
+    case 4 : var namaBulan = "Mei"; break;
+    case 5 : var namaBulan = "Juni"; break;
+    case 6 : var namaBulan = "Juli"; break;
+    case 7 : var namaBulan = "Agustus"; break;
+    case 8 : var namaBulan = "September"; break;
+    case 9 : var namaBulan = "Oktober"; break;
+    case 10 : var namaBulan = "November"; break;
+    case 11 : var namaBulan = "Desember"; break;
+}
+
+var DetailWaktu = namaHari + ", " + tanggal + " " + namaBulan + " " + tahun + " " + jam + ":" + menit + ":" + detik;  
+console.log(DetailWaktu); // Kamis, 17 Maret 2022 8:50:914
+
+var tanggalAwal = new Date('11/30/2018');
+var tanggalAkhir = new Date('03/15/2022')
+
+var selisihTanggal = tanggalAkhir - tanggalAwal;
+console.log(selisihTanggal);
+
+// Mencari Selisih Hari
+// Untuk mendapatkan hasil tersebut, kita harus menggunakan sedikit analisis matematika seder-
+// hana, yakni mencari apakah hasilnya cukup dikurangi 365 (untuk menjadi 1 tahun) dan sisanya
+// dibagi 30 (untuk menjadi 1 bulan)
+
+// Sebagai contoh, 500 hari itu berapa tahun, berapa bulan dan berapa hari?
+// Pertama, bagi 500 dengan 365, 500/365 = 1.37. Artinya 500 hari sama dengan 1.37 tahun. Simpan
+// angka 1 tahun, dan kita akan konversi kelebihan 0.37 tahun menjadi bulan dan hari.
+// Karena 500 hari terdiri dari 1 tahun lebih, sisa hari bisa didapat dengan rumus 500 - (1 * 365) =
+// 135. Dengan mengasumsikan 1 bulan = 30 hari, maka 135 hari sama dengan 135/30 = 4.5 bulan.
+// Simpan angka 4 bulan, dan kita akan konversi kelebihan 0.5 bulan ini menjadi hari.
+// Caranya juga sama. Sisa hari didapat dari pengurangan jumlah tahun dan jumlah bulan. Ini bisa
+// dicari dengan rumus 500 - (1*365) - (4*30) = 15 hari. Akhirnya didapat bahwa 500 hari = 1 tahun,
+// 4 bulan, 15 hari.
+// Sekarang, bagaimana dengan 198 hari? Mari kita hitung.
+// • Jumlah tahun = 198/ 365 = 0.54. Artinya tidak cukup 1 tahun. Simpan 0.
+// • Jumlah bulan = 198 - (0*365 ) / 30 = 6.6. Artinya terdapat 6 bulan lebih. Simpan 6, dan kita akan cari berapa hari lebihnya.
+// • Jumlah hari = 198 - (0365 ) - (630) = 18.
+// Didapat bahwa 198 hari terdiri dari 0 tahun 6 bulan dan 18 hari.
+
+// Latihan 1
+var tanggalAwal = new Date('11/30/2018');
+var tanggalAkhir = new Date('03/15/2022');
+
+var selisihTanggal = tanggalAkhir - tanggalAwal;
+var satuHari = 1000*60*60*24
+var selisihHari = selisihTanggal / satuHari;
+
+console.log("selisihTanggal : " + selisihHari + " Hari") // 1201 Hari
+
+// Latihan Mencari selisih Tahun
+var selisihTahun = selisihHari / 365;
+console.log("Sudah Bekerja Selama " + Math.floor(selisihTahun) + " Tahun"); // 3,27
+
+// Mencari Mencari Hari
+// karena 1200 teridiri dari 3 tahun maka hari dapat di dapat dengan rumus
+var totalHari = selisihHari - (3*365);
+console.log(totalHari); // 101 hari
+
+// dengan mengasumsikan 1 bulan = 30 hari  maka 105 hari / 30
+
+var selisihBulan = totalHari / 30;
+console.log(Math.floor(selisihBulan) + " Bulan");  // 3,36 bulan
+
+// simpan angka 3 dan kitan akan merubah 0,5 menjadi hari
+var selisihHari2 = selisihHari - (3*365) - (3*30);
+console.log("Lebih " + selisihHari2 + " Hari");
+
+
+// Latihan 2
+var tanggalAwal = new Date("06/05/2016")
+var tanggalAkhir = new Date('12/20/2016');
+
+var satuHari    = 1000*60*60*24;   // 1 Milliar Detik dalam 1 Hari
+var satuBulan   = 1000*60*60*24*30;   // 1 Milliar detik dalam 1 Bulan 
+var satuTahun   = 1000*60*60*24*30*12; // 1 Milliar Detik dalam 1 Tahun
+
+var selisihTanggal = tanggalAkhir - tanggalAwal;
+
+var selisihTahun = Math.floor(selisihTanggal / satuTahun);
+var selisihBulan = Math.floor((selisihTanggal - (selisihTahun * satuTahun)) /  satuBulan);
+var selisihHari =  Math.floor((selisihTanggal - (selisihTahun * satuTahun) - (selisihBulan * satuBulan)) / satuHari)
+
+console.log("Selisih Tahunnya Adalah " + selisihTahun + " Tahun"); // Selisih Tahunnya Adalah 0 Tahun
+console.log("Selisih Bulannya Adalah " + selisihBulan + " Bulan"); // Selisih Bulannya Adalah 6 Bulan
+console.log("Selisih Harinya Adalah " + selisihHari + " Hari"); // Selisih Harinya Adalah 18 Hari
+
+
+// Latihan 3
+// Latihan 2
+var tanggalAwal = new Date("11/28/2018")
+var tanggalAkhir = new Date();
+
+var satuHari    = 1000*60*60*24;   // 1 Milliar Detik dalam 1 Hari
+var satuBulan   = 1000*60*60*24*30;   // 1 Milliar detik dalam 1 Bulan 
+var satuTahun   = 1000*60*60*24*30*12; // 1 Milliar Detik dalam 1 Tahun
+
+var selisihTanggal = tanggalAkhir - tanggalAwal;
+
+var selisihTahun = Math.floor(selisihTanggal / satuTahun);
+var selisihBulan = Math.floor((selisihTanggal - (selisihTahun * satuTahun)) /  satuBulan);
+var selisihHari =  Math.floor((selisihTanggal - (selisihTahun * satuTahun) - (selisihBulan * satuBulan)) / satuHari)
+
+console.log("Selisih Tahunnya Adalah " + selisihTahun + " Tahun"); // Selisih Tahunnya Adalah 0 Tahun
+console.log("Selisih Bulannya Adalah " + selisihBulan + " Bulan"); // Selisih Bulannya Adalah 6 Bulan
+console.log("Selisih Harinya Adalah " + selisihHari + " Hari"); // Selisih Harinya Adalah 18 Hari
+
+
+</script>
+</body>
+</html>

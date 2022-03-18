@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script>
+
+class selisih {
+    constructor(awalArg,akhirArg) {
+
+        this.tanggalAwal = new Date(awalArg)
+        this.tanggalAkhir = new Date(akhirArg);
+        
+        this.satuHari    = 1000*60*60*24;   // 1 Milliar Detik dalam 1 Hari
+        this.satuBulan   = 1000*60*60*24*30;   // 1 Milliar detik dalam 1 Bulan 
+        this.satuTahun   = 1000*60*60*24*30*12; // 1 Milliar Detik dalam 1 Tahun
+        
+        this.selisihTanggal = this.tanggalAkhir - this.tanggalAwal;
+
+    }
+    
+    cariTahun(){
+        var selisihTahun = Math.floor(this.selisihTanggal / this.satuTahun);    
+        return selisihTahun;
+    }
+
+    cariBulan(){
+        var cariBulan = Math.floor((this.selisihTanggal - (this.selisihTahun * this.satuTahun)) /  this.satuBulan);
+        return cariBulan;
+    }
+
+    
+}
+
+// var selisihTahun = Math.floor(selisihTanggal / satuTahun);
+// var selisihBulan = Math.floor((selisihTanggal - (selisihTahun * satuTahun)) /  satuBulan);
+// var selisihHari =  Math.floor((selisihTanggal - (selisihTahun * satuTahun) - (selisihBulan * satuBulan)) / satuHari)
+var foo = new selisih('10/10/2000',"10/12/2022");
+console.log("Selisih Tahunnya Adalah " + foo.cariTahun() + " Tahun"); // Selisih Tahunnya Adalah 0 Tahun
+
+var foo = new selisih('10/10/2022',"10/12/2022");
+console.log(foo.cariBulan());
+</script>
+</body>
+</html>

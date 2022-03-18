@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+// =============== Date Object ===================================
+// Date object merupakan object khusus di dalam JavaScript untuk memproses tanggal (dan
+// waktu). Object ini memiliki berbagai method yang bisa kita gunakan  Masalah ini semakin rumit karena
+// JavaScript dengan membagi 2 method untuk Date object: Locale Time dan UTC Time. Ini semua
+// akan kita bahas dengan detail nantinya.
+
+// ===================== Cara Membuat Date Object =============================
+// Untuk membuat Date Object, kita harus menggunakan cara penulisan object constructor, yakni
+// menggunakan perintah new. Ini karena Date object tidak memiliki cara penulisan literal.
+
+var foo = new Date();
+console.log( foo );        // Date 2016-12-04T11:24:53.053Z
+console.log( typeof foo ); // object
+// Jika date constructor dipanggil tanpa argumen seperti contoh diatas, yakni dengan perintah new
+// Date(), tanggal yang disimpan adalah tanggal sekarang, atau lebih tepatnya tanggal ketika
+// kode tersebut diproses.
+
+// Seperti yang telah kita lihat, jika dipanggil tanpa argument, Date constructor akan menyimpan
+// tanggal saat ini. Bagaimana cara membuat tanggal lain? Kita bisa menginput argumen tamba-
+// han ke dalam perintah new Date().
+// Terdapat 3 cara untuk membuat tanggal tertentu ke dalam Date constructor
+// • new Date(year, month, day, hours, minutes, seconds, milliseconds).
+// • new Date(dateString).
+// • new Date(milliseconds).
+
+// Cara pertama adalah menginput 7 argumen yang masing-masingnya untuk men-set: tahun
+// (year), bulan (month), hari (day), jam (hours), menit (minutes), detik (seconds), dan milidetik
+// (milliseconds)
+
+var foo = new Date(2016,11,2,9,30,15,125)
+console.log(foo) // Date 2016-12-02T02:30:15.125Z
+// Jika anda teliti, ada yang salah dari cara saya menginput bagian bulan (month). Bukankah bulan
+// desember itu bulan ke 12? kenapa di input 11?
+// Di dalam object Date JavaScript, bulan ditulis menggunakan index 0 - 11. Artinya bulan Januari
+// = 0, Februari = 1, Maret = 2, dst hingga Desember = 11.
+
+// Betul, disana yang tertulis adalah 02:30:15.125. Kenapa menjadi jam 2? bukankah jam yang saya
+// input adalah 9:30:15.125? Perbedaan ini terjadi karena perintah console.log() menampilkan
+// object Date dalam format waktu UTC.
+
+var foo;
+
+foo = new Date(2016);
+// Pertama, hasil dari foo = new Date(2016)
+// adalah Date 1970-01-01T00:00:02.016Z. Artinya nilai 2016 masuk ke bagian milidetik, bukan
+// tahun. Ini memang sudah bawaan JavaScript
+console.log( foo ); // Date 1970-01-01T00:00:02.016Z
+
+foo = new Date(2016,11);
+// Kedua, foo = new Date(2016,11) hasilnya Date 2016-11-30T17:00:00.000Z Perhatikan bagian
+// tanggal, yakni 2016-11-30. Kenapa tanggalnya mundur? Ini terjadi karena perbedaan UTC
+// dengan WIB, dimana tanggal 2016-12-01 00:00:00 mundur 7 jam menjadi 2016-11-30 17:00:00.
+console.log( foo ); // Date 2016-11-30T17:00:00.000Z
+
+foo = new Date(2016,11,2);
+// Waktu yang mundur 7 jam ini juga tampak dari perintah berikutnya. Sekali lagi, ini terjadi
+// karena perintah console.log() menampilkan Date Object menggunakan standar waktu UTC
+console.log( foo); // Date 2016-12-01T17:00:00.000Z
+
+foo = new Date(2016,11,2,9);
+console.log( foo ); // Date 2016-12-02T02:00:00.000Z
+
+foo = new Date(2016,11,2,9,30);
+console.log( foo ); // Date 2016-12-02T02:30:00.000Z
+
+foo = new Date(2016,11,2,9,30,15);
+console.log( foo ); // Date 2016-12-02T02:30:15.000Z
+
+// Cara kedua untuk membuat object Date adalah menggunakan perintah new Date(dateString).
+// Argumen dateString ini adalah sebuah string yang berbentuk tanggal. JavaScript mendukung
+// berbagai string tanggal dan otomatis menkonversinya menjadi Date
+
+var foo;
+
+foo = new Date("12/20/2016");
+console.log( foo ); // Date 2016-12-19T17:00:00.000Z
+
+foo = new Date("12/20/2016 9:30");
+console.log( foo ); // Date 2016-12-20T02:30:00.000Z
+
+foo = new Date("12 20 2016 9:30:15");
+console.log( foo);
+
+// Date 2016-12-20T02:30:15.000Z
+
+foo = new Date("20 Dec 2016 9:30:15");
+console.log( foo ); // Date 2016-12-20T02:30:15.000Z
+
+foo = new Date("2016-12-20");
+console.log( foo ); // Date 2016-12-20T00:00:00.000Z
+
+foo = new Date("December 20, 2016 9:30:15");
+console.log( foo ); // Date 2016-12-20T02:30:15.000Z
+// Disini saya menginput setiap argumen dengan berbagai format penulisan string. Semuanya
+// untuk tanggal 20-12-2016 9:30:15. Seperti yang bisa kita tebak, perintah console.log() men-
+// guranginya dengan 7 jam, hasilnya menjadi Date 2016-12-20T02:30:15.000Z
+
+// Khusus untuk dateString, kita bisa menambahkan string UTC atau GMT di bagian akhir untuk
+// menegaskan kepada JavaScript bahwa tanggal yang diinput adalah tanggal UTC, bukan waktu
+// setempat (WIB)
+
+var foo;
+
+foo = new Date('12/20/2016 9:30:15');
+console.log(foo);
+
+foo = new Date('12/20/2016 9:30:15 UTC');
+console.log(foo)
+
+foo = new Date('12/20/2016 9:30:15 GMT');
+console.log(foo)
+
+// Terlihat ketika saya menambahkan string UTC atau GMT, jam yang ditampilkan oleh perintah
+// console.log() tetap 9:30:15. Tanpa tambahan string UTC atau GMT, waktu yang disimpan ke
+// dalam object Date dikurangi 7 jam, menjadi 02:30:15.
+// Cara terakhir untuk membuat object Date adalah dengan menginput angka milliseconds, seperti
+
+var foo = new Date(1482201015000);
+console.log( foo ); // Date 2016-12-20T02:30:15.000Z
+
+// ========================= Method Getter UTC ===============================
+// Method Getter UTC adalah kelompok method yang menampilkan tanggal dalam format UTC.
+// Diantaranya adalah sebagai berikut:
+// • Date.prototype.toISOString()
+// • Date.prototype.toJSON()
+// • Date.prototype.toUTCString()
+// • Date.prototype.toDateString()
+// • Date.prototype.toTimeString()
+// • Date.prototype.valueOf()
+// • Date.prototype.getTime()
+
+var foo = new Date();
+
+console.log( foo.toISOString() );  // 2016-12-04T09:41:34.309Z
+
+console.log( foo.toJSON() ); // 2016-12-04T09:41:34.309Z
+
+console.log( foo.toUTCString() );  // Sun, 04 Dec 2016 09:41:34 GMT
+
+console.log( foo.toDateString() );// Sun Dec 04 2016
+
+console.log( foo.toTimeString() ); // 16:41:34 GMT+0700 (SE Asia Standard Time)
+
+console.log( foo.valueOf() ); // 1460454094000
+
+console.log( foo.getTime() ); // 1460454094000
+
+// Selain menampilkan tanggal secara utuh, Date object juga memiliki method untuk menampilkan
+// tanggal per bagian saja, misalnya bulan, tahun, tanggal, jam, dst
+
+// • Date.prototype.getUTCFullYear()
+// • Date.prototype.getUTCMonth()
+// • Date.prototype.getUTCDate()
+// • Date.prototype.getUTCDay()
+// • Date.prototype.getUTCHours()
+// • Date.prototype.getUTCMinutes()
+// • Date.prototype.getUTCSeconds()
+// • Date.prototype.getUTCMilliseconds()
+
+var foo = new Date();
+console.log( foo.getUTCFullYear() ); // 2016
+// Method getUTCMonth() digunakan untuk mengambil nilai bulan. Dan seperti yang pernah saya
+// singgung sebelumnya, bulan disimpan dengan format angka 0 - 11. Bulan Januari = 0, Februari
+// = 1, Maret = 2, dst hingga Desember = 11
+console.log( foo.getUTCMonth() ); // 11
+// Method getUTCDay() digunakan untuk mengambil nilai hari. Angka 0 berarti hari minggu, angka
+// 1 untuk senin, angka 2 selasa dst hingga angka 6 untuk hari sabtu.
+console.log( foo.getUTCDate() ); // 4
+console.log( foo.getUTCDay() ); // 0
+console.log( foo.getUTCHours()); // 9
+console.log( foo.getUTCMinutes() ); // 35
+console.log( foo.getUTCSeconds() ); // 33
+console.log( foo.getUTCMilliseconds() ); // 772
+
+// ========================== Method Getter Locale ==================================
+// Method Getter Locale adalah method dari Date Object yang digunakan untuk menampilkan
+// tanggal dalam setingan sistem lokal.  Umumnya, tampilan seperti inilah yang akan kita pakai di website nanti.
+// Berikut method untuk menampilkan Date object ke dalam format lokal:
+// • Date.prototype.toLocaleDateString()
+// • Date.prototype.toLocaleTimeString()
+// • Date.prototype.toLocaleString()
+// • Date.prototype.toString()
+
+var foo = new Date();
+
+console.log( foo.toLocaleDateString() ); // 4/12/2016
+
+console.log( foo.toLocaleTimeString() ); // 16.41.34
+
+console.log( foo.toLocaleString() ); // 4/12/2016 16.41.34
+
+console.log( foo.toString() );  // Sun Dec 04 2016 16:41:34 GMT+0700 (SE Asia Standard Time)
+
+// Sama seperti versi UTC, Kita juga bisa mengambil bagian dari Date object, tapi untuk versi
+// locale. Ini semua bisa diakses dari method-method berikut:
+// • Date.prototype.getFullYear()
+// • Date.prototype.getMonth()
+// • Date.prototype.getDate()
+// • Date.prototype.getDay()
+// • Date.prototype.getHours()
+// • Date.prototype.getMinutes()
+// • Date.prototype.getSeconds()
+// • Date.prototype.getMilliseconds()
+// • Date.prototype.getTimezoneOffset()
+
+var foo = new Date();
+console.log( foo.getFullYear() ); // 2016
+console.log( foo.getMonth() ); // 11
+console.log( foo.getDate() ); // 4
+console.log( foo.getDay() ); // 0
+console.log( foo.getHours() ); // 16
+console.log( foo.getMinutes() ); // 35
+console.log( foo.getSeconds() ); // 33
+console.log( foo.getMilliseconds() ); // 772
+console.log( foo.getTimezoneOffset() ); // -420
+// Sebagai tambahan, terdapat method getTimezoneOffset() yang akan menghasilkan selisih
+// waktu antara UTC dengan waktu local. Hasilnya dalam satuan menit, sehingga -420/60 = -7.
+// Artinya waktu UTC lebih lambat 7 jam dibandingkan sistem local (WIB).
+
+// =============================== Method Setter UTC ==============================
+// Method Setter UTC adalah method Date object yang digunakan untuk men-set tanggal
+// berdasarkan waktu UTC. Jika method getter digunakan untuk mengambil data tanggal, method
+// setter digunakan untuk menginput data tanggal.
+// • Date.prototype.setUTCFullYear()
+// • Date.prototype.setUTCMonth()
+// • Date.prototype.setUTCDate()
+// • Date.prototype.setUTCHours()
+// • Date.prototype.setUTCMinutes()
+// • Date.prototype.setUTCSeconds()
+// • Date.prototype.setUTCMilliseconds()
+
+var foo = new Date(0);
+console.log( foo.toUTCString() ); // Thu, 01 Jan 1970 00:00:00 GMT
+
+foo.setUTCFullYear(2017);
+console.log( foo.toUTCString() ); // Sun, 01 Jan 2017 00:00:00 GMT
+
+foo.setUTCMonth(10);
+console.log( foo.toUTCString() ); // Wed, 01 Nov 2017 00:00:00 GMT
+
+foo.setUTCDate(20);
+console.log( foo.toUTCString() ); // Mon, 20 Nov 2017 00:00:00 GMT
+
+foo.setUTCHours(10);
+console.log( foo.toUTCString() ); // Mon, 20 Nov 2017 10:00:00 GMT
+
+foo.setUTCMinutes(30);
+console.log( foo.toUTCString() ); // Mon, 20 Nov 2017 10:30:00 GMT
+
+foo.setUTCSeconds(45);
+console.log( foo.toUTCString() ); // Mon, 20 Nov 2017 10:30:45 GMT
+
+foo.setUTCMilliseconds(125);
+console.log( foo.toISOString() ); // 2017-11-20T10:30:45.125Z
+
+// ===================== Method Setter Locale ============================
+// Mungkin sudah bisa anda tebak bahwa jika ada versi UTC, maka akan tersedia juga method
+// setter untuk versi locale. Berikut method yang tersedia:
+// • Date.prototype.setFullYear()
+// • Date.prototype.setMonth()
+// • Date.prototype.setDate()
+// • Date.prototype.setHours()
+// • Date.prototype.setMinutes()
+// • Date.prototype.setSeconds()
+// • Date.prototype.setMilliseconds()
+
+var foo = new Date(0);
+console.log(foo.setFullYear()) // 1/1/1970 07.00.00
+
+foo.setFullYear(2017);
+console.log( foo.toLocaleString() ); // 1/1/2017 07.00.00
+
+foo.setMonth(10);
+console.log( foo.toLocaleString() ); // 1/11/2017 07.00.00
+
+foo.setDate(20);
+console.log( foo.toLocaleString() ); // 20/11/2017 07.00.00
+
+foo.setHours(10);
+console.log( foo.toLocaleString() ); // 20/11/2017 10.00.00
+
+foo.setMinutes(30);
+console.log( foo.toLocaleString() ); // 20/11/2017 10.30.00
+
+foo.setSeconds(45);
+console.log( foo.toLocaleString() ); // 20/11/2017 10.30.45
+
+foo.setMilliseconds(125);
+console.log( foo.toISOString() ); // 2017-11-20T03:30:45.125Z
+
+// Caranya, kita bisa menggunakan struktur if else. Yakni jika 0, maka var namaHari = "Minggu",
+// jika 1 maka var namaHari = "Selasa", dst. Setidaknya kita butuh 7 kali struktur if else untuk
+// membuat kondisi 7 nama hari. Atau karena kondisi yang diperiksa cukup sederhana, bisa
+// menggunakan struktur switch-case
+var foo         = new Date()
+var hari        = foo.getDay();
+var namaHari;
+
+
+switch(hari){
+    case 0 : var namaHari = "Minggu"; break;
+    case 1 : var namaHari = "Senin"; break;
+    case 2 : var namaHari = "Selasa"; break;    
+    case 3 : var namaHari = "Rabu"; break;
+    case 4 : var namaHari = "Kamis"; break;
+    case 5 : var namaHari = "Jum'at"; break;
+    case 6 : var namaHari = "Sabtu"; break;
+}
+
+console.log(namaHari); // Nama Hari Ini
+
+// Perintah var bulan = foo.getMonth() akan mengembalikan digit bulan dengan nilai 0-11.
+// Menggunakan struktur switch, variabel namaBulan akan berisi nama bulan dalam bahasa
+// Indonesia.
+var bar     = new Date();
+var bulan   = bar.getMonth();
+var namaBulan;
+
+switch(bulan){
+    case 0 : var namaBulan = "Januari"; break;
+    case 1 : var namaBulan = "Febuari"; break;
+    case 2 : var namaBulan = "Maret"; break;    
+    case 3 : var namaBulan = "April"; break;
+    case 4 : var namaBulan = "Mei"; break;
+    case 5 : var namaBulan = "Juni"; break;
+    case 6 : var namaBulan = "Juli"; break;
+    case 7 : var namaBulan = "Agustus"; break;
+    case 8 : var namaBulan = "September"; break;
+    case 9 : var namaBulan = "Oktober"; break;
+    case 10 : var namaBulan = "November"; break;
+    case 11 : var namaBulan = "Desember"; break;
+}
+
+console.log(namaBulan); // Nama Bulan Ini
+
+// Untuk Mencari Detail Waktu dalam bahasa indonesia semua di gabungkan menggunakan date object
+
+var foo2 = new Date();
+var tahun = foo.getFullYear()
+var bulan = foo.getMonth()
+var tanggal = foo.getDate()
+var hari = foo.getDay();
+var jam = foo.getHours()
+var menit = foo.getMinutes();
+var detik = foo.getMilliseconds()
+var namaHari;
+var namaBulan;
+
+switch(hari){
+    case 0 : var namaHari = "Minggu"; break;
+    case 1 : var namaHari = "Senin"; break;
+    case 2 : var namaHari = "Selasa"; break;    
+    case 3 : var namaHari = "Rabu"; break;
+    case 4 : var namaHari = "Kamis"; break;
+    case 5 : var namaHari = "Jum'at"; break;
+    case 6 : var namaHari = "Sabtu"; break;
+}
+
+switch(bulan){
+    case 0 : var namaBulan = "Januari"; break;
+    case 1 : var namaBulan = "Febuari"; break;
+    case 2 : var namaBulan = "Maret"; break;    
+    case 3 : var namaBulan = "April"; break;
+    case 4 : var namaBulan = "Mei"; break;
+    case 5 : var namaBulan = "Juni"; break;
+    case 6 : var namaBulan = "Juli"; break;
+    case 7 : var namaBulan = "Agustus"; break;
+    case 8 : var namaBulan = "September"; break;
+    case 9 : var namaBulan = "Oktober"; break;
+    case 10 : var namaBulan = "November"; break;
+    case 11 : var namaBulan = "Desember"; break;
+}
+
+var DetailWaktu = namaHari + ", " + tanggal + " " + namaBulan + " " + tahun + " " + jam + ":" + menit + ":" + detik;  
+console.log(DetailWaktu); // Kamis, 17 Maret 2022 8:50:914
+
+// ================================== Menghitung Selisih Tanggal ===============================
+// Salah satu operasi yang paling sering dipakai untuk tipe data Date adalah menghitung selisih
+// waktu dari 2 tanggal. Untuk membuat kode program seperti ini, cari selisih nilai Unix Epoch
+// dari kedua tanggal, lalu format sesuai keinginan.
+
+// Perhatikan bahwa urutan tanggal dan bulan
+// terbalik. Ini merupakan salah satu kelemahan jika membuat tanggal menggunakan format
+// dateString. Perintah new Date("06/05/2016") digunakan untuk membuat tanggal 05 Juni 2016,
+// bukan 06 Mei 2016.
+var tanggalAwal = new Date('11/28/2018');
+var tanggalAkhir = new Date('03/12/2022')
+
+var selisihTanggal = tanggalAkhir - tanggalAwal;
+console.log(selisihTanggal); // 17107200000
+// Pertanyaannya, dari mana angka 17107200000 muncul? Angka tersebut merupakan selisih
+// waktu dalam satuan milidetik
+
+var waktulAwal = tanggalAwal.getTime();
+var waktuAkhir = tanggalAkhir.getTime();
+
+var selisihTanggal = waktuAkhir - waktulAwal;
+console.log(selisihTanggal) // 17107200000
+// Method getTime() digunakan untuk mengambil nilai Unix Epoch dari object Date. Artinya
+// angka 17107200000 adalah selisih antara tanggalAkhir dengan tanggalAwal dalam satuan
+// milidetik
+
+// Bagaimana mengubahnya menjadi hari? Tinggal dibagi dengan banyak milidetik dalam 1 hari
+// Untuk mendapatkan hasil tersebut, kita harus menggunakan sedikit analisis matematika seder-
+// hana, yakni mencari apakah hasilnya cukup dikurangi 365 (untuk menjadi 1 tahun) dan sisanya
+// dibagi 30 (untuk menjadi 1 bulan)
+
+var satuHari = 1000*60*60*24
+var selisihHari = selisihTanggal / satuHari;
+
+console.log("selisihTanggal : " + selisihHari + " Hari") // 1200 Hari
+
+// Sebagai contoh, 500 hari itu berapa tahun, berapa bulan dan berapa hari?60
+// Pertama, bagi 500 dengan 365, 500/365 = 1.37. Artinya 500 hari sama dengan 1.37 tahun. Simpan
+// angka 1 tahun, dan kita akan konversi kelebihan 0.37 tahun menjadi bulan dan hari.
+// Karena 500 hari terdiri dari 1 tahun lebih, sisa hari bisa didapat dengan rumus 500 - (1 * 365) =
+// 135. Dengan mengasumsikan 1 bulan = 30 hari, maka 135 hari sama dengan 135/30 = 4.5 bulan.
+// Simpan angka 4 bulan, dan kita akan konversi kelebihan 0.5 bulan ini menjadi hari.
+// Caranya juga sama. Sisa hari didapat dari pengurangan jumlah tahun dan jumlah bulan. Ini bisa
+// dicari dengan rumus 500 - (1*365) - (4*30) = 15 hari. Akhirnya didapat bahwa 500 hari = 1 tahun,
+// 4 bulan, 15 hari.
+// Sekarang, bagaimana dengan 198 hari? Mari kita hitung.
+// • Jumlah tahun = 198/ 365 = 0.54. Artinya tidak cukup 1 tahun. Simpan 0.
+// • Jumlah bulan = 198 - (0*365 ) / 30 = 6.6. Artinya terdapat 6 bulan lebih. Simpan 6, dan kita
+// akan cari berapa hari lebihnya.
+// • Jumlah hari = 198 - (0365 ) - (630) = 18.
+// Didapat bahwa 198 hari terdiri dari 0 tahun 6 bulan dan 18 hari.
+
+
+// agaimana mengubahnya menjadi hari? Tinggal dibagi dengan banyak milidetik dalam 1 hari
+
+// Latihan 2
+var tanggalAwal = new Date("06/05/2016")
+var tanggalAkhir = new Date('12/20/2016');
+
+var satuHari    = 1000*60*60*24;   // 1 Milliar Detik dalam 1 Hari
+var satuBulan   = 1000*60*60*24*30;   // 1 Milliar detik dalam 1 Bulan 
+var satuTahun   = 1000*60*60*24*30*12; // 1 Milliar Detik dalam 1 Tahun
+
+var selisihTanggal = tanggalAkhir - tanggalAwal;
+
+var selisihTahun = Math.floor(selisihTanggal / satuTahun);
+var selisihBulan = Math.floor((selisihTanggal - (selisihTahun * satuTahun)) /  satuBulan);
+var selisihHari =  Math.floor((selisihTanggal - (selisihTahun * satuTahun) - (selisihBulan * satuBulan)) / satuHari)
+
+console.log("Selisih Tahunnya Adalah " + selisihTahun + " Tahun"); // Selisih Tahunnya Adalah 0 Tahun
+console.log("Selisih Bulannya Adalah " + selisihBulan + " Bulan"); // Selisih Bulannya Adalah 6 Bulan
+console.log("Selisih Harinya Adalah " + selisihHari + " Hari"); // Selisih Harinya Adalah 18 Hari
+
+
+// Latihan 3
+var tanggalAwal = new Date("11/28/2018")
+var tanggalAkhir = new Date();
+
+var satuHari    = 1000*60*60*24;   // 1 Milliar Detik dalam 1 Hari
+var satuBulan   = 1000*60*60*24*30;   // 1 Milliar detik dalam 1 Bulan 
+var satuTahun   = 1000*60*60*24*30*12; // 1 Milliar Detik dalam 1 Tahun
+
+var selisihTanggal = tanggalAkhir - tanggalAwal;
+
+var selisihTahun = Math.floor(selisihTanggal / satuTahun);
+var selisihBulan = Math.floor((selisihTanggal - (selisihTahun * satuTahun)) /  satuBulan);
+var selisihHari =  Math.floor((selisihTanggal - (selisihTahun * satuTahun) - (selisihBulan * satuBulan)) / satuHari)
+
+console.log("Selisih Tahunnya Adalah " + selisihTahun + " Tahun"); // Selisih Tahunnya Adalah 0 Tahun
+console.log("Selisih Bulannya Adalah " + selisihBulan + " Bulan"); // Selisih Bulannya Adalah 6 Bulan
+console.log("Selisih Harinya Adalah " + selisihHari + " Hari"); // Selisih Harinya Adalah 18 Hari
+
+</script>
+</body>
+</html>
