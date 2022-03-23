@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ============================  Pengertian DOM (Document Object Model) ====================
+    DOM (Document Object Model) adalah representasi kode HTML ke dalam bentuk object agar
+    bisa diproses oleh bahasa pemrograman, seperti JavaScript. setiap tag-tag HTML seperti <h1>, <p>, atau <form> dimodelkan
+    atau dibentuk menjadi sebuah object. -->
+    
+    <!-- Tag <html> memiliki 2 anak (child) yakni <head> dan <body>. Dengan kata lain, tag <html>
+    adalah induk (parent) dari tag <head> dan <body>. Tag <head> dan <body> merupakan saudara
+    kandung (sibling). -->
+    <h1>Belajar JavaScript</h1>        
+    <p>Sedang Belajar <em>Javascript</em> <b>dari Duniailkom</b> </p>
+
+    <!-- Berdasarkan diagram pohon diatas, berikut beberapa fakta yang bisa kita ambil:
+        • Tag <head> memiliki 2 child: tag <meta> dan <title>.
+        • Tag <body> memiliki 2 child: tag <h1> dan <title>.
+        • Tag <h1> merupakan first child dari tag <body>.
+        • Tag <p> merupakan last child dari tag <body>.
+        • Tag <body> merupakan parent dari tag <h1> dan <p>.
+        • Tag <p> merupakan sibling dari tag <h1>.
+        • Tag <h1> merupakan sibling dari tag <p>.
+        • Tag <b> merupakan last child dari tag <p>. -->
+<script>
+var foo = "Duniailkom";
+console.log(foo); // Duniailkom
+
+// Jika anda masih ingat tentang konsep object, ini merupakan cara peng-inputan nilai "JavaScript" ke dalam property
+// foo dari object window
+window.foo = "JavaScript";
+console.log(foo); // JavaScript
+
+window.bar = "Belajar";
+console.log(bar); // Belajar
+
+// Artinya, function salam() merupakan sesuatu yang sama dengan method salam() pada window object.
+function salam(a){
+return "Hello " + a;
+}
+
+var baz = window.salam("Jakarta");
+console.log( baz ); // Hello Jakart
+
+// ==================  Document Objec ===================================
+// Terlihat bahwa DOM berisi document object . Tag <html> yang menjadi root dari DOM juga ada di dalam document object
+console.log(window.document); // akan menampilkan seluruh property yang ada di dalam document object.
+
+var foo = window.document;
+console.log(foo.URL)  // file:///var/www/html/Prakter/PraktekJS/19.DOM/index.html
+console.log(foo.lastModified) // 10.03 23/03/2022
+console.log(foo.contentType) // text/html
+console.log(foo.title) //Document
+
+// Selain memiliki ratusan property, document object juga memiliki
+// berbagai method. Kita akan membahas hal ini di pertengahan bab nanti.
+
+// Jika yang diproses adalah element HTML seperti <body>, <h1> atau <p> dinamakan sebagai
+// element node. Sedangkan teks yang ada di dalam element HTML dinamakan sebagai text node.
+// Dalam diagram diatas, terdapat 9 element node dan 5 text node.
+
+// Sebagaimana layaknya object JavaScript lain, node object juga memiliki berbagai property dan
+// method. Property dan method inilah yang nantinya bisa kita akses untuk mengubah tampilan
+// dari element tersebut
+
+// Perintah document.getElementById() artinya kita memakai method getElementById() kepun-
+// yaan document object. Apakah terdapat method lain untuk mencari element node? Yup,
+// document object memiliki method getElementsByTagName(), querySelector() hingga query-
+// SelectorAll().
+
+// Sebelum masuk ke pembahasan tentang node object, kita telah mencoba mengakses property
+// dari document object. Document object sendiri sebenarnya juga termasuk ke dalam node
+// object, sehingga memiliki property yang berkaitan dengan Node.
+
+// berisi informasi mengenai nama dari node object yang saat ini sedang diakse
+console.og(document.nodeName); // #document
+// berisi informasi mengenai tipe atau jenis dari node object yang saat ini
+// sedang diakses. Angka 9 artinya document object termasuk ke dalam kelompok Document node.
+console.og(document.nodeType); // 9
+// Terdapat 12 jenis node di dalam DOM, yang bisa dilihat pada tabel berikut
+
+// Nilai Jenis Node Penjelasan
+// 1 Element node Element HTML
+// 2 Attr node Atribut dari sebuah element HTML
+// 3 Text node Teks yang biasanya berada di dalam element HTML
+// 4 CDATASection node CDATA section dari dokumen XML
+// 5 EntityReference node Sebuah referensi ke entity dari dokumen XML
+// 6 Entity node Entity dari sebuah DTD
+// 7 ProcessingInstruction node Sebuah instruksi pemrosesan
+// 8 Comment Komentar HTML atau XML
+// 9 Document node Root node dari seluruh element HTML
+// 10 DocumentType node DTD dari sebuah dokumen XML
+// 11 DocumentFragment node Ruang sementara (temporary storage) untuk menampung
+// bagian dari dokumen
+// 12 Notation node Notation dari DT
+
+// Untuk dokumen HTML, kita hanya akan berurusan dengan 5 jenis node saja: Document,
+// Element, Text, Attr dan Comment.
+
+// • Document node merupakan root object dari seluruh tag HTML. Object ini berisi berbagai
+// property dan method yang bisa digunakan untuk mencari dan mengubah node lain.
+// • Element node merupakan node object untuk tag HTML, seperti <p>, <h1>, atau <form>.
+// Element node bisa menjadi parent sekaligus child dari element node lain. Node inilah yang
+// nantinya paling banyak kita pakai.
+// • Text node adalah node object yang ada di dalam sebuah element HTML. Text node
+// merupakan child dari element node, serta tidak bisa memiliki child node lain.
+// • Attr node adalah node object yang berisi atribut dari sebuah element HTML. Dalam
+// standar terbaru, penggunaannya sudah tidak disarankan lagi. Untuk mengubah atribut
+// dari element HTML, kita bisa mengakses langsung dari element node.
+// • Comment node adalah node object yang terbentuk dari komentar HTML, yakni tag <!--
+// dan ->. Walaupun komentar tidak akan diproses oleh web browser, tapi bisa diakses dari
+// DOM
+
+// Berisi daftar anak (child) dari sebuah node object. 
+console.og(document.childNodes); // NodeList [DocumentType. <html>]
+// Berapa jumlahnya? Kita bisa akses dari property childNodes.length
+console.og(document.childNodes.length); // 2  // Artinya, child dari document object ada 2, yakni: DocumentType dan <html>
+
+// NodeList adalah istilah khusus untuk menyebut kumpulan dari berbagai node. NodeList ini mirip seperti array,
+// tapi bukan array. Dalam JavaScript, ia termasuk kategori collection
+</script>
+</body>
+</html>
