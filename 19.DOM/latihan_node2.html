@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid black;
+        }
+        tr {
+            padding: 8px 15px;
+            border: 1px black solid;
+        }
+        tr:nth-child(2n){
+            background-color: #F2F2F2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Belajar JavaScript</h1>
+    <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+<script>
+    var bodyNode = document.childNodes[1].childNodes[2];
+    var h1Node  = bodyNode.childNodes[1]
+    var pNode   = bodyNode.childNodes[3]
+    var emNode   = pNode.childNodes[1]
+    var bNode   = pNode.childNodes[2]
+    
+    var tableNode = document.createElement("table")
+    var i, trNode, tdNode1 , tdNode2, textNo, textRandom, randomNumber;
+
+    for($i=1; $i<= 10; $i++){
+        // Buat Element Object
+        trNode = document.createElement("tr")
+        tdNode1 = document.createElement("td")
+        tdNode2 = document.createElement("td")
+        
+        // Buat Text Object
+        textNo = document.createTextNode($i+ ".")
+        
+        // Buat text node untuk angka acak 
+        randomNumber = Math.floor(Math.random() * (90)) + 10;
+        textRandom = document.createTextNode(randomNumber);
+
+        // Gabungkan TD dengan Text
+        tdNode1.appendChild(textNo);
+        tdNode2.appendChild(textRandom);
+
+        // Gabungkan Tr dengan TD
+        trNode.appendChild(tdNode1);
+        trNode.appendChild(tdNode2)
+
+        // input tr kedalam Table
+        tableNode.appendChild(trNode)
+        
+    }
+    
+    bodyNode.insertBefore(tableNode,pNode)
+
+</script>
+</body>
+</html>

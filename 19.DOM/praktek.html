@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Belajar JavaScript</title>
+</head>
+<body>
+    <h1>Belajar Javascript</h1>
+    <p>Sedang Belajar <em>Javascript</em><b> dari Duniailkom</b></p>
+    <script>
+        var foo = document.childNodes[1].childNodes[0];
+        // console.log(foo.nodeName);
+        // console.log(foo.nodeType);
+        // console.log(foo.childNodes); //Dari hasil yang didapat, element node <head> memiliki nama nodeName HEAD, dan mempunyai
+// 5 child: NodeList [ #text " ", <meta>, #text " ", <title>, #text " " ].
+
+//     HEAD memiliki 3 text node, yang semuanya berasal dari karakter carriage return.
+// Jika saya menulis seluruh tag di dalam tag <head> dalam 1 baris panjang, text node ini tidak
+// akan ditemui:
+        // console.log(foo.childNodes.length);
+
+        // console.log("=======================================")
+
+        var bar = document.childNodes[1].childNodes[1];
+        // console.log(bar.nodeName); // text
+        // console.log(bar.nodeType); // 3
+        // console.log(bar.childNodes); // Nodelist [ ]
+        // console.log(bar.childNodes.length); // 0
+
+        // console.log("=======================================")
+        
+        var baz = document.childNodes[1].childNodes[2]
+        // console.log(baz.nodeName); // Body
+        // console.log(baz.nodeType); // 1
+        // console.log(baz.childNodes); //  NodeList [ #text " ", <h1>, #text " ", <p>, #text " ", <script> ]
+        // console.log(baz.childNodes.length); 6
+
+        // Child ketiga dari element node HTML adalah element node BODY, yang beralamat di docu-
+        // ment.childNodes[1].childNodes[2]. Berapakah jumlah child dari node ini? Ada 6: NodeList [
+        // #text " ", <h1>, #text " ", <p>, #text " ", <script> ]. Dimana 3 diantaranya berupa
+        // text node.
+        // Yang cukup unik, last child dari BODY adalah <script>. Ini merupakan tag <script> untuk
+        // menginput kode JavaScript. Kenapa bisa tampil disini? Karena tag <script> memang saya
+        // tempatkan di bagian akhir tag <body>. Hal ini juga membuktikan bahwa DOM bisa mengakses
+        // tag apapun, termasuk tag <script>.
+
+        // var foo = document.childNodes[1].childNodes[2].childNodes[6].childNodes[14];
+        // // Ini bisa dibaca dengan: “mulai dari document object, turun ke child node index 1, turun lagi ke
+        // // child node dengan index 2, turun lagi ke child node dengan index 6, dan terakhir turun lagi
+        // // ke child node dengan index 14”. Inilah materi yang paling penting dari DOM tree, yakni cara
+        // // menelusuri struktur DOM untuk menemukan sebuah element node.
+
+        // console.log("===================================")
+        // Latihan Menampilkan child ke 4 dri body
+        var buz = document.childNodes[1].childNodes[2].childNodes[3]
+        // console.log(buz.nodeName);
+        // console.log(buz.nodeType);
+        // console.log(buz.childNodes);
+        // console.log(buz.childNodes.length);
+        // console.log("===================================")
+        // Latihan Menampilkan chill em dari p
+        var buz = document.childNodes[1].childNodes[2].childNodes[3]
+        var bro = buz.lastChild;
+        // Untuk variabel bar, saya mengambil variabel foo, kemudian mencari lastChild dari foo. Hasilnya
+        // adalah element node B, yakni tag <b> yang menjadi last child dari tag <p
+        // console.log(bro.nodeName);
+        // console.log(bro.nodeType);
+        // console.log(bro.childNodes);
+        // console.log(bro.childNodes.length);
+       
+        // ============================= Node Object Property =========================
+       
+        var pNode = document.childNodes[1].childNodes[2].childNodes[3];
+        
+        console.log(pNode.baseURI); // file:///var/www/html/Praktek/PraktekJS/19.DOM/praktek.html
+
+        console.log(pNode.childNodes); //NodeList(3) [ #text, em, b ]
+
+        console.log(pNode.firstChild); // #text "Sedang Belajar "
+        console.log(pNode.lastChild);  // <b>
+        console.log(pNode.nodeName);   // P
+        console.log(pNode.nodeType);   // 1
+        console.log(pNode.nodeValue);  // null
+        console.log(pNode.ownerDocument); // HTMLDocument file:///var/www/html/Praktek/PraktekJS/19.DOM/praktek.html
+        
+        console.log(pNode.parentNode) // <body>
+        console.log(pNode.parentElement) // <body>
+        console.log(pNode.previousSibling) // #text " " . => Karena sebelum tag <p>, terdapatsebuah karakter carriage return.
+        console.log(pNode.textContent) // Sedang Belajar Javascript dari Duniailkom
+
+        // Perhatikan bahwa element H1 berada sebelum element P. Dengan demikian, saya bisa menggu-
+        // nakan perintah pNode.previousSibling. Sayangnya hasil dari pNode.previousSibling adalah
+        // sebuah text node yang berisi karakter carriage return. Ini karena tag <p> dengan tag <h1> ditulis
+        // terpisah di baris baru (tidak menyambung) sehingga terdapat karakter carriage return diantara
+        // keduanya
+        console.log("===============================================")
+        var h1Node = pNode.previousSibling.previousSibling;
+
+        console.log(h1Node.firstChild); // #text "Belajar Javascript"
+        console.log(h1Node.lastChild);  // text "Belajar Javascript"
+        console.log(h1Node.nodeName);   // h1
+        console.log(h1Node.nextSibling) // text " "
+        console.log(h1Node.previousSibling) // text " "
+        console.log(h1Node.nodeType);   // 1
+        console.log(h1Node.parentNode) // <body>
+        console.log(h1Node.textContent) // Belajar Javascript
+        // Yup, dengan menulis pNode.previousSibling.previousSibling kita sampai ke element H1.
+        // Property previousSibling perlu dipanggil 2 kali karena ada sebuah text node diantara tag <h1>
+        // dengan <p>.
+
+        // Latihan Mencari element node Title beranngkat dari pNode
+        console.log("==============================================")
+        var pNode = document.childNodes[1].childNodes[2].childNodes[3];
+        var bodyNode = pNode.parentNode;
+        var headNode = bodyNode.previousSibling.previousSibling;
+        var titleNode = headNode.lastChild.previousSibling;
+
+        console.log(titleNode.nodeName);
+        console.log(titleNode.textContent);
+        console.log(titleNode.firstChild)
+        console.log(titleNode.lastChild)
+        console.log(titleNode.parentNode)
+        console.log(titleNode.parentElement);
+        console.log(titleNode.previousSibling.previousSibling);
+
+
+        console.log("==== Merubah text dari node object ====")
+
+        var chNode = document.childNodes[1].childNodes[0].childNodes[3];
+        
+        console.log(chNode.textContent) // Title
+        chNode.textContent = "<em>Belajar JS </em>"; // Title pun berubah dari Belajar Javascript Menjadi Berubah
+
+        console.log("=== Latihan merubah element node <b> ===")
+        var bNode = document.childNodes[1].childNodes[2].childNodes[3].childNodes[2]
+
+        console.log(bNode.textContent);
+        bNode.textContent = " Ganti isi Tag B dengan Ini KWkwkwk"
+        
+        // ========================== Node Object Method ===============================
+        // Node object memiliki berbagai method yang bisa digunakan terutama untuk memanipulasi
+        // DOM, seperti menambah node baru, menghapus node, mencopy node, dst.
+
+        console.log("====== Node Object Method ======")
+        var bodyNode = document.childNodes[1].childNodes[2];
+        var h1Node = bodyNode.childNodes[1]
+        var pNode = bodyNode.childNodes[3]
+        var emNode = pNode.childNodes[1]
+        var bNode = pNode.childNodes[2]
+
+        console.log(bodyNode.nodeName) // Body
+        console.log(h1Node.nodeName) // h1
+        console.log(pNode.nodeName) // p
+        console.log(emNode.nodeName) // em
+        console.log(bNode.nodeName) // b
+
+        console.log("== Method Document.createElement() dan Document.createTextNode() ==")
+        var newPNode = document.createElement("p"); // Disini, variabel newPNode akan berisi sebuah node object bertipe element. Element tersebut
+        // adalah P atau tag <p>. 
+        var newTextNode = document.createTextNode("Ini Paragraf Baru"); // Variabel newTextNode akan berisi sebuah node object bertipe text,
+        
+
+        console.log(newPNode.nodeName)       // p
+        console.log(newPNode.nodeType)       // 1
+        console.log(newPNode.nodeValue)      // null
+        
+        console.log(newTextNode.nodeName)    // text
+        console.log(newTextNode.nodeType)    // 3
+        console.log(newTextNode.textContent) // Ini Paragraf Baru
+        // Kedua node ini harus disatukan agar bisa berfungsi, dimana newTextNode harus menjadi child
+        // dari newPNode. Ini kita lakukan menggunakan method dari node object: Node.appendChild().
+        
+
+        console.log("====  Method Node.appendChild() ===") 
+        // Fungsinya, untuk menginput sebuah node ke posisi terakhir dari node saat ini
+        var newPNode = document.createElement("p");
+        var newTextNode = document.createTextNode("Ini Paragraf Baru")
+        
+        newPNode.appendChild(newTextNode);
+        // Hasil dari perintah diatas, element node newPNode akan berisi teks "Sebuah paragraf baru".
+        // Atau dengan kata lain, newPNode memiliki sebuah child node, yakni newTextNode.
+
+        // Pekerjaan kita belum selesai, node object newPNode ini baru tersedia di dalam memory komputer,
+        // kita harus menginputnya ke dalam struktur DOM. Bagaimana caranya? Juga bisa menggunakan
+        // method appendChild(). Hanya saja kita akan menginput newPNode ke dalam element node BODY
+
+        bodyNode.appendChild(newPNode)
+        
+        console.log("Latihan menambah element object ke node object p")
+        var spanNode = document.createElement("span");
+        var textSpanNode = document.createTextNode(" Javascript Uncover");
+
+        spanNode.appendChild(textSpanNode);
+
+        pNode.appendChild(spanNode)
+
+        console.log("===  Method Node.insertBefore() ===")
+        // method insertBefore() membutuhkan 2 argumen: node baru
+        // yang ingin ditambahkan, dan node patokan. Node baru akan diinput pada posisi sebelum node
+        // patokan.
+
+        var bodyNode = document.childNodes[1].childNodes[2]
+        var h1Node = bodyNode.childNodes[1];
+        var pNode = bodyNode.childNodes[3]
+        var emNode = pNode.childNodes[1];
+        var bNode = pNode.childNodes[2]
+
+        newh1Node = document.createElement("h1") // membuat element object baru
+        newh1Text = document.createTextNode("Belajar Menambah Node baru"); // membuat text baru
+        
+        newh1Node.appendChild(newh1Text) // menggabungkan element obejct h1 dengan text node
+        
+        bodyNode.insertBefore(newh1Node,h1Node) // masukan element object sebelelum tag h1
+
+        console.log('Latihan Insert before')
+
+        DelNode = document.createElement('del')
+        TextDel = document.createTextNode("php ")
+        DelNode.appendChild(TextDel);
+
+        pNode.insertBefore(DelNode,emNode)
+        
+        console.log("=== Method Node.replaceChild() ===")
+    //     Method replaceChild() digunakan untuk mengganti sebuah node dengan node lain. Method
+    // ini membutuhkan 2 argumen: node baru yang akan ditambahkan dan node yang akan dihapus.
+    
+        newDelNode = document.createElement('b')
+        newDelText = document.createTextNode("php <del> dganti CSS ")
+        newDelNode.appendChild(newDelText);
+        
+        pNode.replaceChild(newDelNode,DelNode) // ganti element object del dengan b 
+
+        console.log("============  Method Node.removeChild() ==========")
+        var deltedNode = pNode.removeChild(emNode) // menghapus em node ("javascritp")
+        
+        // DelNode.appendChild(deltedNode) // mengembalikan nilai yg dihapus
+
+        console.log("=== Method Node.cloneNode() ====")
+        // Method cloneNode() digunakan untuk men-copy sebuah node. Method ini membutuhkan 1
+        // argumen berupa nilai boolean. Jika diinput true, seluruh child dari node tersebut akan ikut
+        // dicopy. Jika diinput false, hanya node itu saya yang dicopy (child node tidak ikut)
+
+        
+        var bodyNode = document.childNodes[1].childNodes[2]
+        var h1Node = bodyNode.childNodes[1];
+        var pNode = bodyNode.childNodes[3]
+        var emNode = pNode.childNodes[1];
+        var bNode = pNode.childNodes[2]
+
+        var newh1Node2 = h1Node.cloneNode(true)
+        bodyNode.appendChild(newh1Node2)
+        
+        console.log("==========  Method Node.contains() =========")
+        // Method contains() digunakan untuk memeriksa apakah sebuah node memiliki child node
+        // tertentu. Node yang ingin diperiksa diinput sebagai argument dari method contains(). Jika
+        // node tersebut ada, hasilnya true. Jika tidak ditemukan, hasilnya false.
+
+        var cekNode1 = pNode.contains(emNode);
+         console.log( cekNode1 ); // true
+
+         var cekNode5 = pNode.contains(h1Node);
+            console.log( cekNode5 )
+
+        // ===================== Method Node.hasChildNodes() ========================
+        // Method hasChildNodes() digunakan untuk memeriksa apakah sebuah node memiliki anak
+        // (child) atau tidak. Hasilnya true jika terdapat child (walaupun 1 node), dan false jika tidak punya
+        // child. Method ini tidak memerlukan argumen
+
+        var cekNode1 = pNode.hasChildNodes();
+        console.log( cekNode1 ); // true
+        
+        var cekNode2 = bodyNode.hasChildNodes();
+        console.log( cekNode2 ); // true
+        
+        var cekNode3 = bNode.hasChildNodes();
+        console.log( cekNode3 ); // true
+        
+        var cekNode4 = bNode.firstChild.hasChildNodes();
+        console.log( cekNode4 ); // false
+    </script>
+</body>
+</html>

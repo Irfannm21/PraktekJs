@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Belajar JavaScript</h1>
+   <p>Sedang belajar <em>JavaScript</em><b> dari Duniailkom</b></p>
+<script>
+
+var bodyNode = document.childNodes[1].childNodes[2]
+var h1Node   = bodyNode.childNodes[1];
+var pNode    = bodyNode.childNodes[3]
+var emNode   = pNode.childNodes[1];
+var bNode    = pNode.childNodes[2]
+
+var newOL   = document.createElement("ol")
+var newLI1  = document.createElement("li")
+var textLI1 = document.createTextNode("HTML")
+var textLI2 = document.createTextNode("CSS")
+var textLI3 = document.createTextNode("Javascript")
+
+// Masukan element object OL sebelum object p
+bodyNode.insertBefore(newOL,pNode)
+// Masukan  text LI1 kedalam LI1
+newLI1.appendChild(textLI1)
+
+// Copy tag li tidak dengan childnya (false)
+var newLI2 = newLI1.cloneNode(false)
+newLI2.appendChild(textLI2)
+
+var newLI3 = newLI1.cloneNode(false)
+newLI3.appendChild(textLI3)
+
+// Masukan Tag LI kedalam Tag OL
+newOL.appendChild(newLI1)
+newOL.appendChild(newLI2)
+newOL.appendChild(newLI3)
+console.log(bodyNode.nodeName)
+</script>
+</body>
+</html>
