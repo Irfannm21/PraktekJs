@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Belajar Document dan Element Object</title>
+    <style>
+        .hijau{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Belajar</h1>
+    <h1 class="hijau">Belajar</h1>
+    <h1 id="judul">Belajar Document dan Element</h1>
+    <p>
+        Sedang Belajar <em id="emID">Document dan element object</em> <b>dari Javascript</b>
+    </p>
+    <ol>
+        <li>Belajar Html</li>
+        <li>Belajar CSS</li>
+        <li>Belajar JS</li>
+    </ol>
+    <ol>
+        <li>Belajar PHP</li>
+        <li>Belajar Bootstrap</li>
+    </ol>
+<script>
+var emNode = document.getElementById("emID");
+
+console.log(emNode.nodeName);           // EM
+console.log(emNode.nodeType);           // 1
+console.log(emNode.childNodes);         // Nodelist [#text "Document dan Element Object"]
+console.log(emNode.textContent)       // Belajar
+
+emNode.textContent = "Document Object" // untuk merubah isi tag id em
+
+// Latihan merubah isi tag judul
+
+var h1Node = document.getElementById("judul")
+
+h1Node.textContent = "Belajar Document object Element Mantap"
+
+// Dalam teorinya, pada 1 dokumen HTML tidak boleh terdapat lebih dari 1 atribut id yang
+// memiliki nama sama. Bagaimana kalau kita coba membuat 2 buah atribut id yang sama?
+
+// Seperti yang terlihat, method document.getElementById() akan mengambil tag HTML pertama
+// yang memiliki id="judul", yakni tag <h1>
+
+
+// =====================  Method document.getElementsByTagName() ===============
+// Method getElementsByTagName() digunakan untuk mencari element node berdasarkan nama
+// tag, seperti "p", "h1", "em" atau "b"
+// Karena di dalam sebuah dokumen HTML bisa terdapat lebih dari 1 tag yang sama, method
+// ini akan mengembalikan HTMLCollection. HTMLCollection adalah kumpulan (collection) dari
+// element node yang mirip seperti NodeList. Sebagaimana layaknya collection, HTMLCollection
+// juga bisa diakses menggunakan tanda kurung siku seperti array
+
+var H1NodeTag = document.getElementsByTagName("h1")
+
+console.log(H1NodeTag[0].nodeName);           // Html Collection { <H1> <H1>}
+console.log(H1NodeTag[0].nodeType);           // 1
+console.log(H1NodeTag[0].childNodes);         // Nodelist [#text "Belajar"]
+console.log(H1NodeTag[0].childNodes.length)   // Javascript
+console.log(H1NodeTag[0].textContent)         // Belajar
+H1NodeTag[0].textContent = "Belajar JavaScript";
+
+console.log("===============================")
+var liTagNode = document.getElementsByTagName("li")
+console.log(liTagNode) // HTMLCollection [<li> <li> <li> <li> <li>]
+
+console.log(liTagNode.length)
+
+var liNode;
+for(liNode of liTagNode){
+    console.log(liNode.textContent)
+}
+// Variabel liTagNode berisi 5 tag <li>, yang kemudian saya proses menggunakan perulangan for
+// of untuk menampilkan isi property textContent dari setiap element
+
+// ====================== Method document.getElementsByClassName() =============================
+// Sesuai dengan namanya, method getElementsByClassName() berfungsi untuk mencari element
+// node yang memiliki class tertentu.
+
+console.log("========================================")
+var classNode = document.getElementsByClassName("hijau");
+
+console.log(classNode[0].nodeName);     // H1
+console.log(classNode[0].nodeType);     // 1
+console.log(classNode[0].childNodes);   // [#text "Belajar"]
+console.log(classNode[0].textContent);  // Belajar
+
+// ================ Method document.querySelector() ============================
+// Method document.querySelector() berfungsi untuk mencari element node menggunakan
+// selector CSS. Yup, method ini terbilang sangat powerfull, karena kita bisa membuat pencarian
+// yang cukup kompleks
+
+var cariNode = document.querySelector("p b");
+// cari elemnt b di dalam ps
+console.log(cariNode.nodeName)              // b
+console.log(cariNode.nodeType)              // 1
+console.log(cariNode.childNodes)            // #text [dari Duniailkom]
+console.log(cariNode.textContent)           // dari Duniailkom
+
+// Cara susah
+var cariUbahNode = document.querySelector("li:nth-child(2")
+cariUbahNode.textContent = "Ubah child ke 2";
+// String "li:nth-child(4)" adalah selector CSS yang dikenal sebagai “Structural Pseudo Class Selectors”
+
+// Percobaan berikutnya, bagaimana jika method querySelector() cocok dengan lebih dari 1
+// element? yal betul hanya element pertama saja yg diubah
+
+// =================  Method document.querySelectorAll() ==========================
+// Sama seperti method querySelector(), method querySelectorAll() juga menggunakan selec-
+// tor CSS untuk mencari element HTML. Bedanya, method ini bisa digunakan untuk mengakses
+// banyak node sekaligus.
+// Method getElementsByTagName() akan mengembalikan kumpulan element dalam berbentuk
+// NodeList. 
+
+var kumpulanNode = document.querySelectorAll("li")
+var kumpulanNode2 = document.querySelectorAll("li:nth-child(even)"); // saya ingin mencari tag <li> yang berada pada urutan genap (even)
+
+console.log(kumpulanNode.childNodes.length) // 5
+
+var isiNode;
+for(isiNode of kumpulanNode){
+    // isiNode.textContent = "Belajar Object Content"  // akan merubah isi li sebanyak jumlah li
+}
+</script>
+</body>
+</html>
