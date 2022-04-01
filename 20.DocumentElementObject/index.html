@@ -4,39 +4,97 @@
     <meta charset="UTF-8">
     <title>Belajar Document dan Element Object</title>
     <style>
-        .hijau{
-            color:green;
-            background-color: #ca8aca;
-        }
-        .merah{
-            color: red;
+        h2 {
+            color: green;
+            background-color: #cac8c3;
         }
     </style>
 </head>
 <body>
-    <h2 id="judul" class="merah">Belajar</h2>
-    <h1 class="hijau">Belajar</h1>
-    <h1 id="judul">Belajar Document dan Element</h1>
-    <div class="penampung"></div>
-    <p>
-        Sedang Belajar <em id="emID">Document dan element object</em> <b>dari Javascript</b>
+    <h1>Belajar</h1>
+    <h2 class="judul">Windows Computed Style</h2>
+    <h1 id="judul" title="sedang Belajar" style="color: green">Belajar Document dan Element</h1>
+    <p style="background-color: #cac8c3">
+        Sedang Belajar <em id="emID">Document dan element object </em>><b>dari Javascript</b>
     </p>
     <ol>
         <li>Belajar Html</li>
         <li>Belajar CSS</li>
         <li>Belajar JS</li>
-    </ol>
-    <ol>
         <li>Belajar PHP</li>
         <li>Belajar Bootstrap</li>
     </ol>
 <script>
+// ============================== Document dan Element Object =============================
+// Berbagai property dan method yang tersedia dalam kedua object ini, bisa digunakan untuk
+// mengeksplorasi lebih jauh cara mengubah element atau tag HTML, terutama yang berkaitan
+// dengan atribut dan style CSS
+
+// =============================  DOM Level =====================================
+// setiap peningkatan level menandakan perkembangan yang lebih baru dari sebelumnya
+
+// ======================================= DOM Level 0 ==================================
+// Sebagai contoh, untuk mencari seluruh gambar atau tag <img> di sebuah dokumen, bisa meng-
+// gunakan perintah document.images[]. Hasilnya berupa collection (array) dari seluruh tag <img>.
+// Untuk mencari seluruh link di halaman HTML, bisa di dapat dari perintah document.links[]
+// yang akan menghasilkan collection dari tag <a>
+
+// ========================================= DOM Level 1 =======================================
+// Pada saat itu DOM dipecah menjadi 2 modul. Modul pertama mendefenisikan inti DOM yang berlaku untuk
+// HTML dan XML, sedangkan modul kedua khusus ditujukan untuk HTML.
+// Beberapa object yang diperkenalkan dalam DOM level 1 adalah Document, Node, Attr, Element,
+// dan Text
+
+// ==================================== DOM Level 2 ===============================================
+// DOM Level 2 hadir di tahun 2000 untuk melengkapi beberapa method, property, dan event baru.sss
+// Sebagai contoh, method getElementById() dikembangkan pada DOM level 2. Dukungan untuk
+// CSS juga ditambahkan.
+// Padal level ini, modul terbaru dipecah menjadi beberapa jenis: The DOM2 Core, Views, Events,
+// Style, Traversal dan Range, serta the DOM2 HTML
+
+// =================================== DOM Level 3 =============================================
+// DOM Level 3 dikembangkan pada tahun 2004. DOM level ini menambahkan fitur-fitur lanjutan,
+// yang terdiri dari 5 jenis modul: The DOM3 Core, Load and Save, Validation, Events, dan XPath
+
+// ======================================= DOM Level 4 ===============================================
+// DOM Level 4 dikembangkan pada tahun 2015. DOM ini menjadi bagian dari WHATWG living
+// standard. Artinya, standar DOM Level 4 akan terus dikembangkan dan diimplementasikan
+// ke dalam web browser tanpa menunggu strandar tersebut komplit. Tujuannya agar fitur-fitur
+// terbaru bisa hadir dengan lebih cepat.
+
+// ============================ Apa pengaruh dari Level DOM ini? ==================================
+// Sebagai web programmer, sebaiknya kita hanya menggunakan fitur yang berjalan di mayoritas
+// web browser, untuk menghindari kemungkinan kode program gagal berjalan di web browser
+// yang relatif tua.
+
+// Mayoritas web browser yang beredar saat ini sudah mendukung penuh DOM Level 2. DOM
+// Level 3 masih di dukung sebagian, sedangkan untuk fitur terbaru yang ada di DOM level 4, kita
+// mungkin harus menunggu beberapa tahun agar mayoritas web browser mengimplementasikan
+// fitur terbaru ini
+
+// ============================ Referensi Property dan Method DOM =================================
+
+// ===============================  Mencari Element Node ==========================================
+// Sekarang saatnya kita mempelajari “cara mudah” untuk mencari element node. Document object
+// menyediakan berbagai method untuk keperluan ini:
+// • document.getElementById()
+// • document.getElementsByTagName()
+// • document.getElementsByClassName()
+// • document.querySelector()
+// • document.querySelectorAll()
+
+// ===================  Method document.getElementById() ===========================
+// Bisa dibilang, method document.getElementById() adalah cara pencarian element HTML yang
+// paling banyak dipakai dan juga paling sederhana.
+// Method document.getElementById() berfungsi untuk mencari element node HTML berdasarkan
+// nilai atribut id.
+
 var emNode = document.getElementById("emID");
 
 console.log(emNode.nodeName);           // EM
 console.log(emNode.nodeType);           // 1
 console.log(emNode.childNodes);         // Nodelist [#text "Document dan Element Object"]
-console.log(emNode.textContent)       // Belajar
+console.log(emNode.childNodes.length)   // Javascript
 
 emNode.textContent = "Document Object" // untuk merubah isi tag id em
 
@@ -52,7 +110,6 @@ h1Node.textContent = "Belajar Document object Element Mantap"
 // Seperti yang terlihat, method document.getElementById() akan mengambil tag HTML pertama
 // yang memiliki id="judul", yakni tag <h1>
 
-
 // =====================  Method document.getElementsByTagName() ===============
 // Method getElementsByTagName() digunakan untuk mencari element node berdasarkan nama
 // tag, seperti "p", "h1", "em" atau "b"
@@ -60,6 +117,7 @@ h1Node.textContent = "Belajar Document object Element Mantap"
 // ini akan mengembalikan HTMLCollection. HTMLCollection adalah kumpulan (collection) dari
 // element node yang mirip seperti NodeList. Sebagaimana layaknya collection, HTMLCollection
 // juga bisa diakses menggunakan tanda kurung siku seperti array
+
 
 var H1NodeTag = document.getElementsByTagName("h1")
 
@@ -87,7 +145,6 @@ for(liNode of liTagNode){
 // Sesuai dengan namanya, method getElementsByClassName() berfungsi untuk mencari element
 // node yang memiliki class tertentu.
 
-console.log("========================================")
 var classNode = document.getElementsByClassName("hijau");
 
 console.log(classNode[0].nodeName);     // H1
@@ -100,20 +157,16 @@ console.log(classNode[0].textContent);  // Belajar
 // selector CSS. Yup, method ini terbilang sangat powerfull, karena kita bisa membuat pencarian
 // yang cukup kompleks
 
-var cariNode = document.querySelector("p b");
-// cari elemnt b di dalam ps
-console.log(cariNode.nodeName)              // b
-console.log(cariNode.nodeType)              // 1
-console.log(cariNode.childNodes)            // #text [dari Duniailkom]
-console.log(cariNode.textContent)           // dari Duniailkom
+var cariNode = document.querySelector('p b');
+// Cari element b di dalam tag p
+console.log(cariNode.nodeName);     // b
+console.log(cariNode.nodeType);     // 1
+console.log(cariNode.childNodes);   // [#text "dari Duniailkom"]
+console.log(cariNode.textContent);  // dari Duniailkom
 
-// Cara susah
-var cariUbahNode = document.querySelector("li:nth-child(2")
-cariUbahNode.textContent = "Ubah child ke 2";
-// String "li:nth-child(4)" adalah selector CSS yang dikenal sebagai “Structural Pseudo Class Selectors”
-
-// Percobaan berikutnya, bagaimana jika method querySelector() cocok dengan lebih dari 1
-// element? yal betul hanya element pertama saja yg diubah
+// menggunakan cara lebih Rumit
+var cariUbahNode = document.querySelector(li:nth-child(3))
+cariNode.textContent = "Ubah child ke 3"
 
 // =================  Method document.querySelectorAll() ==========================
 // Sama seperti method querySelector(), method querySelectorAll() juga menggunakan selec-
@@ -132,11 +185,22 @@ for(isiNode of kumpulanNode){
     // isiNode.textContent = "Belajar Object Content"  // akan merubah isi li sebanyak jumlah li
 }
 
+// =========================== Element Object ===========================================
+// Dalam pemrograman berbasis object seperti JavaScript, sebuah object bisa “diturunkan” dari
+// object lain, dimana istilah programmingnya disebut “inheritance”
+
+// Secara teknis, element node dan text node adalah “turunan” dari node object. Setiap object
+// yang diturunkan dari object lain, otomatis akan memiliki seluruh property dan method dari
+// object induknya tersebut. Baik element node maupun text node sama-sama memiliki property
+// nodeName, nodeType dan textContent. Semua property ini berasal dari node object.
+
+
 // ==================================== Mengubah Konten Element =============================
 // Salah satu aspek yang sering dimanipulasi dari sebuah element HTML adalah mengubah konten
 // atau isi teks yang ada di dalam element tersebut.
 // Terdapat cara lain yang sebenarnya lebih mudah, yakni menggunakan 2 buah property bawaan
 // elemet node: Element.innerHTML dan Element.outerHTML
+
 var innerJudul = document.getElementById("judul")
 console.log(innerJudul.innerHTML) // Belajar Javascript
 innerJudul.innerHTML = "Sebagai alternatif, kita bisa menggunakan property innerHTML"; // Sebagai alternatif, kita bisa menggunakan property innerHTML
@@ -306,48 +370,8 @@ console.log(hairtStyle.color) // rgb(0,128,0)
 console.log(hairtStyle.backgroundColor)  // rgb(202.200.195.)
 console.log(hairtStyle.height)  // align-items
 
-// ================== Property Element.className ===============================
-// Menambah style CSS menggunakan property HTMLElement.style memang praktis namun tidak
-// efisien. Bagaimana jika property yang harus ditambahkan ada 10 atau 20? daripada menulis satu
-// persatu property CSS dari JavaScript, kita bisa menyiapkan sebuah class CSS, kemudian tinggal
-// ditambahkan kedalam Element HTML
 
-var h2Node = document.getElementById('judul')
-console.log(h2Node.className); /// merah
 
-h2Node.className = "Kuning"
-console.log(h2Node.className); // Kuning
-
-// =============================  Property Element.classList ===================================
-// Propert Element.classList berguna untuk menampilkan, menambah, dan menghapus class CSS
-// dengan lebih mudah
-
-var h1Node = document.getElementById("judul");
-console.log(h1Node.classList); // DOMTokenList [ "merah", "warning" ]
-
-h1Node.classList.add("penting");
-h1Node.classList.remove("merah");
-h1Node.classList.add("hijau");
-
-console.log(h1Node.classList); // DOMTokenList [ "warning", "penting", "hijau" ]
-console.log(h1Node.classList.length); // 3
-console.log(h1Node.classList.contains("penting")); // true
-console.log(h1Node.classList.contains("merah")); // false
-
-// ============================ Method document.write() ===================================
-// Menutup bab tentang document dan element object, saya ingin membahas 1 lagi method
-// yang biasanya sangat sering dipakai terutama untuk tutorial terkait JavaScript, yakni method
-// document.write().
-// Method write() digunakan untuk menulis sebuah teks ke dalam document HTML. Fungsinya
-// mirip seperti perintah echo atau print di dalam PHP.
-
-// Kelemahan lain dari document.write() adalah, method ini akan menghapus seluruh DOM tree
-// jika dipanggil setelah halaman selesai diproses (kebanyakan kode JavaScript diproses seperti ini).
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-// Intinya, kita disarankan menggunakan method innerHTML atau membuat Text node dan El-
-// ement node jika ingin menambah sesuatu ke dalam DOM tree. Sama seperti fungsi eval(),
-// method document.write() sebaiknya tidak dipakai.
 </script>
 </body>
 </html>
