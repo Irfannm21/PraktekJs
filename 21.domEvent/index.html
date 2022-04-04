@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="judul">Ini Judul</h1>
+<script>
+// =================================== Pengertian Event ===================================
+// Di dalam DOM, event adalah segala sesuatu yang bisa kita lakukan dengan halaman web, seperti
+// men-klik sebuah tombol, klik kanan paragraf, menggeser cursor mouse ke atas sebuah menu,
+// menginput sesuatu ke dalam form, menekan tombol tab, menekan tombol enter, dll\\
+
+// Secara teknis, kode program yang dibuat untuk “menangkap” event ini dikenal dengan
+// istilah event handler atau event listener.
+
+// Jumlah DOM event yang tersedia sangat banyak, lebih dari 200 dan terus bertambah. Secara
+// garis besar dalam di kelompokkan dalam beberapa tipe:
+
+// • Mouse events: Event yang terjadi ketika menggunakan mouse, seperti di klik, double klik,
+// klik kanan, seret (drag), dll.
+// • Keyboard events: Event yang terjadi saat mengetik sesuatu menggunakan keyboard
+// (biasanya sebagai sarana input ke dalam form). Contohnya ketika sebuah tombol ditekan,
+// saat sebuah tombol dilepaskan, dll.
+// • Progression events: Event yang terjadi pada “siklus hidup” DOM, seperti saat halaman
+// di tampilkan atau ketika halaman ditutup.
+// • Form events: Event yang terjadi saat suatu hal terjadi pada form, contohnya ketika
+// mengubah pilihan menu dari list, atau ketika sebuah checkbox dipilih.
+// • Mutation events: Event yang terjadi saat struktur DOM diubah, misalnya ketika ditam-
+// bahkan sebuah paragraf baru.
+// • Touch events: Event yang terjadi saat menyentuh layar, ini biasanya untuk perangkat
+// smartphone atau tablet yang memiliki fitur touchscreen.
+// • Error events: Event yang akan dijalankan ketika terjadi error
+
+// Dari semua event ini, yang paling banyak dipakai adalah event mouse, keyboard, dan form.
+// Dalam bab ini saya akan membahas event event mouse terlebih dahulu. Untuk event keyboard
+// dan form akan dibahas dalam bab berikutnya.
+
+// Kita ambil contoh event mouse, apa saja yang bisa dilakukan dengan menggunakan mouse?
+// Berikut diantaranya:
+// • click: Event ketika tombol kiri mouse di klik 1 kali.
+// • dblclick: Event ketika tombol kiri mouse di klik 2 kali dengan cepat (double click).
+// • contextmenu: Event ketika tombol kanan mouse di klik 1 kali.
+// • mouseenter: Event ketika cursor mouse masuk ke sebuah element.
+// • mouseover: Event ketika cursor mouse berada diatas sebuah element.
+// • mouseleave: Event ketika cursor mouse keluar dari sebuah element
+
+// ======================================  Event Handler dari Atribut HTML ==================================
+// Cara paling mudah dan paling singkat untuk menginput event adalah dengan menulisnya
+// langsung sebagai atribut dari sebuah element HTML. Sebagai contoh, event click ditulis sebagai
+// "onclick", event mouseover ditulis sebagai "onmouseover". Nilai dari atribut ini berupa kode
+// JavaScript yang akan dijalankan
+
+// <h1 onclick="alert('Saya di kloik');">onclick Alert</h1>
+//     <h1 ondblclick="alert=('Saya di Dobel Klick Kiri');">ondblclick</h1>
+//     <h1 oncontextmenu="alert('Saya klik Kanan');">oncontextmenu</h1>
+//     <h1 onmouseover="alert('Saya di MouseOver');">onmouseover</h1>
+
+//     <h1 onclick="tampilkan();">Manipulasi DOM</h1>
+//     <p></p>
+
+// Kita juga bisa membuat kode yang lebih kompleks seperti memanipulasi struktur DOM. Berikut contohnya:
+function tampilkan(){
+    document.querySelector("p").innerHTML="Manimpulasi DOM di klik";
+}
+
+// ================================= Event Handler dari Property Element ============================
+// Cara kedua untuk “memasang” event adalah dengan menginputnya ke dalam property khusus
+// dari Element Node (secara teknis property ini melekat ke GlobalEventHandlers3 ).
+
+// Di dalam JavaScript terdapat function tampilkan(). Function ini bertujuan untuk mengisi teks
+// "Judul di klik" ke dalam tag <p>. Tentunya function ini baru akan berjalan ketika sudah
+// dipanggil
+var h1Node = document.getElementById('judul');
+h1Node.onclick = tampilkan
+
+// ===================== Event Handler dari Method Element =================================
+// Cara ketiga untuk menginput event adalah dengan menggunakan method khusus yang bernama
+// addEventListener(). Ini merupakan metode yang paling disarankan dan menjadi standar DOM
+// W3C.
+// Membuat event handler menggunakan method addEventListener() tidak sulit, cukup menulis
+// method ini dengan 2 argument. Argumen pertama berupa nama event tanpa awalan on, seperti
+// "click", "dblclick" dan "mouseover". Dan argumen kedua diisi dengan nama function yang
+// akan dijalankan saat event terjadi
+function tampilkanOnContextMenuP(){
+    document.querySelector('p').innerHTML="Add Event Listener";
+}
+function tampilkanOnContextMenuH3(){
+    document.querySelector('h3').innerHTML="Add Event Listener";
+}
+
+var h2Node = document.getElementById('title');
+h2Node.addEventListener("click",tampilkanOnContextMenuP);
+h2Node.addEventListener("click",tampilkanOnContextMenuH3);
+
+// ika sudah tidak dibutuhkan, kita juga bisa menghapus salah satu function dari event tersebut,
+// dan function lain tetap akan berjalan normal
+
+// Sedikit catatan untuk method addEventListener() dan removeEventListener().
+// Walaupun kedua method ini adalah cara yang paling disarankan dan sesuai dengan
+// standar W3C, 
+
+// ======================================== Event Object ====================================
+// Sampai disini kita telah mengenal 3 cara penginputan event handler ke dalam HTML: diinput
+// dari atribut tag HTML, diinput sebagai property element node, dan menggunakan method
+// addEventListener(). Karena cara yang paling disarankan adalah menggunakan method ad-
+// dEventListener(), inilah yang akan banyak saya pakai
+
+// Event object adalah object khusus yang dibuat secara otomatis oleh web browser ketika event
+// terjadi. Object ini berisi berbagai informasi terkait event tersebut, seperti element apa yang di
+// klik, tombol apa yang di ketik, 
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        h1 {
+            border: 2px solid black;
+            width: auto;
+            padding: 10px;
+            text-align: center;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="judul">Judul</h1>
+    <h1 ondblclick="tampilkanDblClick()">dbl Click</h1>
+    <h1 id="title">addEventListener</h1>
+    <p></p>
+    <h3></h3>
+<script>
+// Kita juga bisa membuat kode yang lebih kompleks seperti memanipulasi struktur DOM. Berikut contohnya:
+
+function tampilkan(){
+    document.querySelector("p").innerHTML="Manimpulasi DOM di klik";
+}
+
+function tampilkanDblClick(){
+    document.querySelector("p").innerHTML="Manimpulasi DOM di klik";
+}
+
+var h1Node = document.getElementById('judul')
+h1Node.onclick = tampilkan;
+h1Node.ondblclick = tampilkanDblClick;
+
+// ===================== Event Handler dari Method Element =================================
+// Cara ketiga untuk menginput event adalah dengan menggunakan method khusus yang bernama
+// addEventListener(). Ini merupakan metode yang paling disarankan dan menjadi standar DOM
+// W3C.
+// Membuat event handler menggunakan method addEventListener() tidak sulit, cukup menulis
+// method ini dengan 2 argument. Argumen pertama berupa nama event tanpa awalan on, seperti
+// "click", "dblclick" dan "mouseover". Dan argumen kedua diisi dengan nama function yang
+// akan dijalankan saat event terjadi
+function tampilkanOnContextMenuP(){
+    document.querySelector('p').innerHTML="Add Event Listener";
+}
+function tampilkanOnContextMenuH3(){
+    document.querySelector('h3').innerHTML="Add Event Listener";
+}
+
+var h2Node = document.getElementById('title');
+h2Node.addEventListener("click",tampilkanOnContextMenuP);
+h2Node.addEventListener("click",tampilkanOnContextMenuH3);
+
+// ika sudah tidak dibutuhkan, kita juga bisa menghapus salah satu function dari event tersebut,
+// dan function lain tetap akan berjalan normal
+
+// Sedikit catatan untuk method addEventListener() dan removeEventListener().
+// Walaupun kedua method ini adalah cara yang paling disarankan dan sesuai dengan
+// standar W3C, 
+</script>
+</body>
+</html>
