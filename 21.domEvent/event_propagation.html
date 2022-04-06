@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="">
+        <h1>Sedang Belajar <em>Javascript</em></h1>
+    </div>
+    <a href="event_propagation.html">Belajar JS</a>
+   <script>
+           // ================================  Event Propagation ============================================
+    // Event propagation adalah istilah yang merujuk kepada cara event “ditangkap” oleh web
+    // browser. Sebagai contoh, dalam latihan untuk mewarnai tabel sebelum ini, saya meletakkan
+    // event click ke dalam tag <table>, namun jika yang di klik adalah sel tabel, isi dari property
+    // e.target adalah tag <td>, bukan tag <table> itu sendiri.
+    // Atau dengan sudut pandang lain, ketika tag <h1> di klik, bukan kah kita sebenarnya juga men-
+    // klik tag <body>? Aspek inilah yang dimaksud dengan vent propagation
+
+        var emNode = document.querySelector("em")
+        var h1Node = document.querySelector("h1")
+        var divNode = document.querySelector("div")
+
+        function tampilkanEm(){
+            console.log("Tag em di klik")
+            // Event object punya method stopProp- agation() untuk menghentikannya. 
+            e.stopPropagation(); // untuk menampilkan tag em saja
+        }
+        
+        function tampilkanH1(){
+            console.log("Tag H1 di klik")
+        }
+        function tampilkanDiv(){
+            console.log("Tag DIV di klik")
+        }
+        // event di jalankan dari element paling dalam yakni tag <em>, hingga element terluar,
+        divNode.addEventListener("click",tampilkanDiv)
+        emNode.addEventListener("click",tampilkanEm);
+        h1Node.addEventListener("click",tampilkanH1);
+
+        // urutan event yang dijalankan sudah bertukar. Saat tag <em> di klik, yang tampil lebih dulu adalah "Tag div di-klik"
+        divNode.addEventListener("click",tampilkanDiv,true)
+        emNode.addEventListener("click",tampilkanEm,true);
+        h1Node.addEventListener("click",tampilkanH1,true);
+
+        // Menghentikan Event Default
+        // beberapa tag HTML memiliki event bawaan. Sebagai contoh, link yang dibuat dari tag <a>
+        // memiliki event click yang akan membuat halaman saat ini pindah ke halaman lain. Jika kita
+        // menginput event click lagi ke dalam tag <a>, hasilnya akan “bergabung
+        function tampilkanA(){
+            alert("Link di Bio");
+            // Saya ingin ketika link di klik, halaman tidak berpindah dan hanya menampilkan jendela alert saja.
+            e.preventDefault();
+        }
+
+        var aNode = document.querySelector("a");
+        aNode.addEventListener("click",tampilkanA)
+   </script> 
+</body>
+</html>

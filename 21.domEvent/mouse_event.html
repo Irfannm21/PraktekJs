@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            border: 3px solid black;
+            width: 500px;
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        div.div3 {
+            border: 3px solid black;
+            width: 500px;
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            font-size: 20px;
+            background-color: lavender;
+        }
+
+        p {
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 20px;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="">Curssor mouse ke sini</div>
+    <hr>
+    <div id="div1"><p>Mouse Over dan Out</p></div>
+    <br>
+    <div id="div2"><p>Mouse Enter dan Leave</p></div>
+    <br>
+    <div>Cursor Mouse kesini</div>
+    <p>
+        Koordinat (screen) : X = <span id="sumbuXS"></span> Y = <span id="sumbuYS"></span>
+    </p>
+    <p>
+        Koordinat (client): X = <span id="sumbuXC"></span> Y = <span id="sumbuYC"></span>
+    </p>
+<script>
+// ======================================== Mouse Events ======================================
+// Mouse merupakan alat interaksi yang paling banyak dipakai dalam mengakses halaman web.
+// Karena itu pula mouse event perlu kita bahas dengan lebih detail.
+
+// • click: Event yang terjadi saat tombol kiri mouse di klik.
+// • contextmenu: Event yang terjadi saat tombol kanan mouse di klik.
+// • dblclick: Event yang terjadi saat tombol kiri mouse di klik 2x dengan cepat.
+// • mousedown: Event yang terjadi saat tombol mouse di tekan.
+// • mouseup: Event yang terjadi saat tombol mouse di lepaskan.
+// • mouseenter: Event yang terjadi saat cursor mouse masuk ke dalam area element.
+// • mouseleave: Event yang terjadi saat cursor mouse keluar dari area element.
+// • mouseover: Event yang terjadi saat cursor mouse masuk ke dalam area sebuah element
+// atau ke child dari element tersebut.
+// • mouseout: Event yang terjadi saat cursor mouse keluar dari area element atau ke child dari
+// element tersebut.
+// • mousemove: Event yang terjadi saat cursor mouse digerakkan dalam element.
+
+// =================================== Event mousedown, mouseup, mouseover dan mouseout ===============================
+function mouseOverEvent(e){
+    e.target.style.backgroundColor = "Lavender";
+    e.target.innerHTML = "Terjadi event di Mouse Over";
+}
+
+function mouuseOutEvent(e){
+    e.target.style.backgroundColor = "Aquamarine";
+    e.target.innerHTML = "Terjadi event di Mouse Out"
+}
+
+function mouseDownEvent(e){
+    e.target.style.backgroundColor = "Moccasin";
+    e.target.innerHTML = "Terjadi Event di Mouse Down";
+}
+
+function mouseUpEvent(e){
+    e.target.style.backgroundColor = "LightGreen";
+    e.target.innerHTML = "Terjadi Event di Mouse Up";
+}
+
+
+var divNode = document.querySelector('div');
+divNode.addEventListener("mouseover",mouseOverEvent);
+divNode.addEventListener("mouseout",mouuseOutEvent);
+divNode.addEventListener("mousedown",mouseDownEvent);
+divNode.addEventListener("mouseup",mouseUpEvent);
+
+// Pada saat cursor mouse masuk ke
+// element ini, event mouseover akan dijalankan 1 kali, hasilnya teks berubah menjadi "Terjadi
+// event mouseover" dan warna background berubah menjadi "Lavender" (ungu muda).
+// Kemudian coba tekan dan tahan sebentar tombol mouse di dalam tag <div>, event mousedown
+// akan berjalan. Hasilnya teks berubah menjadi "Terjadi event mousedown" dan warna back-
+// ground berubah menjadi "Moccasin" (kuning muda).
+// Saat tombol mouse dilepaskan, akan terjadi event mouseup. Hasilnya teks berubah menjadi "Ter-
+// jadi event mouseup"
+
+// ===================================== Event mouseenter dan mouseleave ================================
+// Event mouseover dan mouseenter sama-sama aktif ketika cursor mouse berada masuk ke dalam
+// sebuah element, sedangkan event mouseout dan mouseleave akan aktif ketika cursor mouse
+// keluar dari element tersebut. Perbedaannya ada di cara menangani child element.
+function keLavender(e){
+    e.target.style.backgroundColor = "Lavender"
+}
+
+function keAquamarine(e){
+    e.target.style.backgroundColor = "AquaMarine"
+}
+
+var divNode2 = document.getElementById("div1")
+divNode2.addEventListener("mouseover",keLavender)
+divNode2.addEventListener("mouseout",keAquamarine)
+
+var divNode3 = document.getElementById("div2")
+divNode3.addEventListener("mouseenter",keLavender)
+divNode3.addEventListener("mouseleave",keAquamarine)
+
+// ================================== Event mousemove =====================================
+// Event terakhir dari mouse event yang belum kita bahas adalah mousemove. Event ini aktif saat
+// cursor mouse di gerakkan di atas element.
+function mousemoveEvent(e){
+    spanXSNode.innerHTML = e.screenX;
+    spanYSNode.innerHTML = e.screenY;
+    spanXCNode.innerHTML = e.clientX;
+    spanYCNode.innerHTML = e.clientY;
+}
+
+var divNode4 = document.querySelector('div')
+var spanXSNode = document.getElementById("SumbuXS")
+var spanYSNode = document.getElementById("SumbuYS")
+var spanXCNode = document.getElementById("SumbuXC")
+var spanYSNode = document.getElementById("SumbuYC")
+divNode.addEventListener("mousemove",mousemoveEvent)
+</script>
+</body>
+</html>

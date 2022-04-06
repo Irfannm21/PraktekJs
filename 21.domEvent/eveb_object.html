@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        h1,h2,div {
+            background-color: pink;
+            width: auto;
+            padding: 10px;
+            text-align: center;
+            border: solid black;
+        }
+        table,td {
+            border: 1px solid black;
+        }
+        td {
+            padding: 10px 25px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="judul">Belajar JavaScript</h1>
+    <h2 id="judul2">Belajar CSS</h2>
+    <div id="tagDiv">Belajar PHP</div>
+    <p id="placeholder"></p>
+    <p></p>
+    <table>
+        <tr>
+            <td>red</td>
+            <td>blue</td>
+            <td>green</td>
+        </tr>
+        <tr>
+            <td>yellow</td>
+            <td>brown</td>
+            <td>pink</td>
+        </tr>
+        <tr>
+            <td>aqua</td>
+            <td>magenta</td>
+            <td>orange</td>
+        </tr>
+</table>
+<br><br><br><br><br>
+        <!-- Event Propagation -->
+        <div class="">
+            <h1>Belajar <em>Javascript</em></h1>
+        </div>
+    </table>
+    <script>
+        var h1Node = document.getElementById("judul");
+        var pNode = document.querySelector('p');
+        // Hasil yang ada di dalam tab Console merupakan isi dari event object. Terlihat ada property
+        // target yang berisi element node <h1#judul>, property buttons dengan nilai 0, clientX bernilai
+        // 227, clientY bernilai 77, layerX bernilai 227, dan layerY yang bernilai 7
+
+        // h1Node.addEventListener("click",function (sebuahObject) {
+        //     console.log(sebuahObject)
+        // })
+
+//         Selanjutnya, karena nilai-nilai event object ini berbentuk property, tentunya bisa kita akses
+// menggunakan dot notation
+        h1Node.addEventListener("click",function (event){
+            // console.log(event.target); 
+            // console.log(event.type);
+            // console.log(event.bubbles);
+            // console.log(event.cancelable);
+            // console.log(event.defaultPrevented);
+            // console.log(event.detail);
+            // console.log(event.currentTarget);
+            // console.log(event.relatedTarget);
+            // console.log(event.screenX);
+            // console.log(event.screenY);
+            // console.log(event.clientX);
+            // console.log(event.clientY);
+            // console.log(event.button);
+            // console.log(event.ctrlKey); 
+            // console.log(event.shiftKey); 
+            // console.log(event.altKey); 
+
+            // • event.target: Berisi node object tempat event terjadi.
+            // • event.type: Tipe dari event yang saat ini dijalankan.
+            // • event.bubbles: Berisi nilai boolean apakah event bersifat bubbles (akan kita bahas
+            // nantinya).
+            // • event.defaultPrevented: Berisi nilai boolean apakah event default sudah dihentikan
+            // (akan kita bahas nantinya).
+            // • event.cancelable: Berisi nilai boolean apakah event bisa di cancel.
+            // • event.detail: Jumlah klik dalam waktu singkat, untuk event dblclick akan berisi 2.
+            // • event.currentTarget: Node tempat event ditulis.
+            // • event.relatedTarget: Node yang berhubungan dengan event saat ini, hanya berisi nilai
+            // untuk event tertentu seperti mouseover, mouseout, mouseenter dan mouseleave.
+            // • event.screenX: Posisi cursor mouse pada sumbu x dengan patokan lebar layar.
+            // • event.screenY: Posisi cursor mouse pada sumbu y dengan patokan tinggi layar.
+            // • event.clientX: Posisi cursor mouse pada sumbu x dengan patokan lebar element.
+            // • event.clientY: Posisi cursor mouse pada sumbu y dengan patokan tinggi element.
+            // • event.button: Tombol mouse yang di klik, 0 = tombol kiri, 1 = tombol tengah, 2 = tombol
+            // kanan.
+            // • event.ctrlKey: Berisi nilai boolean apakah tombol keyboard CTRL di tahan saat event
+            // click terjadi.
+            // • event.shiftKey: Berisi nilai boolean apakah tombol keyboard SHIFT di tahan saat event
+            // click terjadi.
+            // • event.altKey: Berisi nilai boolean apakah tombol keyboard ALT di tahan saat event click
+            // terjadi.
+
+            // if(event.ctrlKey === true) {
+            //     pNode.innerHTML = "Tombol ctrl ditekan";
+            // } else if (event.altKey === true) {
+            //     pNode.innerHTML = "Tombol ALT ditekan";
+            // } else {
+            //     pNode.innerHTML = "Judul di click";
+            // }
+            /////////////// Agar lebih Rapi kita pindahkan functio ke baigan terpisah /////////////
+        })
+
+        // inilah cara penulisan argumen yang akan diisi dengan event object oleh webbrowser
+        function tampilkan(event){
+            if(event.ctrlKey === true){
+                pNode.innerHTML = "Ctrl ditekan";
+            } else if (event.altKey === true) {
+                pNode.innerHTML = "Alt ditekan";
+            } else {
+                pNode.innerHTML = "Judul di clickc"
+            }
+        }
+
+        // h1Node.addEventListener("click", tampilkan);
+
+    //         Dari seluruh daftar property event object, yang paling penting adalah property target. Property
+    // ini berisi element node dimana event terjadi. Loh, bukannya sudah jelas event berlangsung di
+    // tag <h1>?
+    // Betul, untuk contoh yang melibatkan 1 element, nilai dari property target sama dengan nilai
+    // property currentTarget, yakni lokasi node dimana event handler ditulis. Namun akan berbeda
+    // jika terdapat beberapa element yang menggunakan 1 function yang sama, 
+
+    var h2Node = document.getElementById('judul2')
+    var divNode = document.getElementById("tagDiv")
+    var PNode = document.getElementById('placeholder')
+
+    // Berdasarkan penjelasan sebelumnya, property target akan mengembalikan element node tem-
+    // pat dimana event berlangsung. 
+    function tampilkan(e){
+        var idTarget = e.target.getAttribute('id')
+        
+        if(idTarget === "judul") {
+            e.target.style.backgroundColor = "blue";
+        } else if (idTarget === "judul2") {
+            pNode.innerHTML = "Sedang Serius Belajar PHP";
+        } else if (idTarget === "tagDiv") {
+            pNode.innerHTML = "Sedang Serius Belajar ReactJS"
+        } else {
+            pNode.innerHTML = "Button di cllick"
+        }
+    }
+    // Berdasarkan penjelasan sebelumnya, property target akan mengembalikan element node tem-
+    // pat dimana event berlangsung. 
+    h1Node.addEventListener("click",tampilkan)
+    h2Node.addEventListener("click",tampilkan)
+    tagDiv.addEventListener("click",tampilkan)
+    pNode.addEventListener("click",tampilkan)
+
+    // Event click di “tempel” ke dalam tableNode dengan perintah tableNode.addEventListener("click",
+    // ubahWarna). Ketika sebuah sel tabel di click, property e.target otomatis berisi element node
+    // dimana terjadi klik.
+    var ubahColor = document.querySelector('table')
+
+    function ubah(e){
+        e.target.style.backgroundColor = e.target.innerHTML;
+    }
+
+    ubahColor.addEventListener("click",ubah)
+
+
+
+    </script>
+</body>
+</html> 
