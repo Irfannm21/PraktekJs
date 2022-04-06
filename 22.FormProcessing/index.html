@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Javascript</title>
+    <style>
+        span {
+            background-color: lavender;
+            padding: 5px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<!-- ====================================== Mencari form element ==============================
+Agar bisa “memprogram” form, hal pertama yang harus kita lakukan adalah mencari form
+element yang ingin dimanipulasi, atau lebih tepatnya mencari node object dari tag <form>, tag
+<input>, atau tag <select> yang menjadi penyusun form. -->
+
+<form name="formKu" method="get" action="prosses.php" id="formKu">
+<p>Username : <input type="text" name="username" id="username"></p>
+<p><input type="checkbox" name="js" id="js" value="Belajar Javascript">Belajar Javascript</p>
+<p><input id="submit" type="submit" name="submit" value="Kirim Data"> <input type="reset" id="reset" name="reset"></p>
+<p>
+<button id="copyData">Copy Data</button>
+</p>
+
+<!-- // ================================= Form Element: Event ======================================================================= -->
+<!-- <p>
+    <span id="spanSubmit">Submit Form</span>
+    <span id="spanReset">Reset Form</span>
+</p> -->
+
+<!-- Form Property -->
+<p>Hasil <span id="hasil"></span></p>
+</form>
+
+<script>
+// bagaimana cara mengambil nilai Node object cara yang paling praktis adalah menggunakan method 
+// andalan kita: getElementById(). 
+// var formNode = document.getElementById('formKu');
+var usernameNode = document.getElementById('username');
+var jsNode = document.getElementById('js');
+var submitNode = document.getElementById('submit');
+
+// console.log(formNode)
+// console.log(usernameNode)
+// console.log(jsNode)
+// console.log(submitNode)
+
+// Cara ini berasal dari era sebelum DOM W3C namun tetap didukung oleh
+// mayoritas web browser 
+// Sebelum era DOM, web browser menyediakan collection untuk element HTML yang sering
+// dipakai, seperti form, image dan link. Sebagai contoh, seluruh form yang ada di sebuah
+// halaman disimpan ke dalam collection document.forms. Form pertama bisa diakses dari doc-
+// ument.forms[0], form kedua di document.forms[1], dst.
+// Anggota dari form itu juga disimpan sebagai sub collection. Sebagai contoh, anggota pertama
+// dari form bisa diakses dengan perintah document.forms[0][0], anggota kedua form di docu-
+// ment.forms[0][1
+
+// var formNode = document.forms[0];
+// var usernameNode = document.forms[0][0]
+// var jsNode = document.forms[0][1]
+// var submitNode = document.forms[0][2]
+
+// var formNode = document.forms.formKu;
+// var usernameNode = document.forms.formKu.username;
+// var jsNode = document.forms.formKu.js
+// var submitNode = document.forms.formKu.submit
+
+// Jadi cara mana yang sebaiknya dipakai? Kalau mengikuti standar W3C, cara yang paling
+// disarankah adalah menggunakan method getElementById()
+
+// ================ Form Element: Property ===============================
+// Di dalam struktur DOM, tag <form> berisi element node yang disebut sebagai HTMLFormEle-
+// ment object. Selain memiliki property dan method sebagaimana layaknya Element object biasa,
+// HTMLFormElement juga memiliki property dan method khusus.
+
+var formNode = document.getElementById('formKu'); 
+console.log(formNode.elements); // HTMLFormControlsCollection { 0: input#username, 1: input#js, 2: input#submit, length: 3, … }
+console.log(formNode.length);   // 3
+console.log(formNode.name);     // formKu
+console.log(formNode.method);   // get
+console.log(formNode.target);   // empty String
+console.log(formNode.action);   // ile:///var/www/html/Praktek/PraktekJS/22.FormProcessing/prosses.php
+console.log(formNode.acceptCharset); // <empty string>
+console.log(formNode.encoding); //application/x-www-form-urlencoded
+
+// Berikut penjelasan dari nilai property diatas:
+// • HTMLFormElement.elements: Berisi collection dari anggota / element penyusun form.
+// • HTMLFormElement.length: Berisi jumlah anggota / element yang menyusun form
+// • HTMLFormElement.name: Berisi nilai atribut name dari tag <form>.
+// • HTMLFormElement.method: Berisi nilai atribut method dari tag <form>.
+// • HTMLFormElement.target: Berisi nilai atribut target dari tag <form>.
+// • HTMLFormElement.action: Berisi nilai atribut action dari tag <form>.
+// • HTMLFormElement.acceptCharset: Berisi nilai atribut acceptCharset dari tag <form>.
+// • HTMLFormElement.encoding: Berisi nilai atribut encoding dari tag <form>.
+
+// Selain property elements dan length, property diatas juga bisa digunakan untuk mengubah nilai
+// atribut, misalnya:
+var formNode = document.getElementById("formKu");
+formNode.action = "login.php";
+
+// =================================================  Form Element: Method =======================================
+// HTMLFormElement object memiliki 2 method yang cukup penting, yakni submit() dan reset(). kita
+// bisa membuat cara lain untuk men-submit dan me-reset form, tanpa harus menggunakan tombol
+// submit dan tombol reset bawaan.
+
+var spanSubmitNode = document.getElementById('spanSubmit')
+var spanResetNode = document.getElementById('spanReset')
+
+function diSubmit() {formNode.submit()}
+function diReset() {formNode.reset()}
+
+// Selanjutnya saya membuat event click untuk kedua span, ketika spanSubmitNode di klik,
+// jalankan fungsi diSubmit() yang isinya memanggil method formNode.submit(). Hasilnya,
+// ketika tag <span> di klik, formKu akan di kirim ke server, sama seperti ketika tombol submit
+// biasa.
+
+// spanSubmitNode.addEventListener('click',diSubmit)
+// spanResetNode.addEventListener('click',diReset)
+
+// ================================= Form Element: Event =======================================================================
+// Selain memiliki property dan method, form object juga memiliki 2 buah event, yakni submit
+// event dan reset event. Kedua event ini dipanggil saat form di submit dan saat form di reset.
+// Penggunaan paling banyak dari kedua event ini adalah untuk “menahan” form sebelum dikirim
+// ke server atau sebelum di reset
+
+// Artinya, ketika form di submit, jalankan function diStop(). Begitu juga ketika form di reset,
+// jalankan fungsi diStop(). Apa isi dari function diStop() ini?
+function diStop(e){
+    console.log(e.type)
+    e.preventDefault()
+    console.log(e.defaultPrevented)
+}
+// method preventDefault() akan menghentikan event
+// bawaan dari sebuah object. Efeknya, form akan ditahan untuk tidak ter-submit dan tidak ter-
+// reset.
+
+formNode.addEventListener('submit',diStop);
+formNode.addEventListener('reset',diStop);
+
+// Jika kita ingin memeriksa isian form untuk proses validasi, method preventDefault() seperti ini
+// perlu dipanggil. Setelah isian form sudah valid dan sesuai, kita bisa memanggil method submit()
+// agar form segera di kirim ke server.
+// Sampai disini saya juga ingin memastikan pemahaman anda tentang perbedaan method submit
+// dari form object, dengan event submit dari form object. Apa maksud keduanya?
+// Method submit digunakan untuk mengirim form ke server, sedangkan event submit adalah
+// event yang dipanggil saat form di submit. 
+
+// =================================  Input Element: Property ===================================================
+// Sebagian besar isi form dibuat mengunakan 1 tag HTML saja, yakni <input>. Nilai dari atribut
+// type lah yang akan membedakan bentuk dan jenis element yang dihasilka
+// Di dalam DOM, tag <input> akan menghasilkan sebuah element yang dikenal sebagai HTM-
+// LInputElement.
+// HTMLInputElement memiliki berbagai property yang bisa diakses. Tergantung jenis atribut
+// type, nilai property ini juga bisa bertambah. Kita akan mulai dari tag input type text terlebih
+// dahulu, yakni kotak isian berupa text box
+console.log("======================================")
+var usernameNode = document.getElementById('username')
+var spanHasil = document.getElementById('hasil')
+// Function diProses() diawali dengan method e.preventDefault(). Method ini berfungsi untuk
+// menahan form agar tidak dikirim ke server. Setelah itu terdapat berbagai perintah con-
+// sole.log() untuk menampilkan isi dari property usernameNode
+function diProses (e) {
+    e.preventDefault();
+    console.log(usernameNode.name); // username
+    console.log(usernameNode.type); // text
+    console.log(usernameNode.autofocus); // false
+    console.log(usernameNode.value);  // irfan
+    console.log(usernameNode.maxLength); // -1
+    console.log(usernameNode.size); // 20
+    console.log(usernameNode.readOnly); //false
+    console.log(usernameNode.placeholder); // empty String
+    // untuk memasukan value textbox ke span
+    spanHasil.innerHTML = usernameNode.value
+    // spanHasil.value = usernameNode.value
+    spanHasil.disabled = true;
+}
+// Di baris awal kode JavaScript, variabel formNode dan usernameNode digunakan untuk menam-
+// pung Node Object dari tag <form id="formKu"> dan <input type="text" id="username">.
+formNode.addEventListener('submit',diProses)
+
+// Berikut penjelasan dari berbagai property yang diakses:
+// • HTMLInputElement.form: Berisi element node dari form tempat dimana tag <input>
+// berada.
+// • HTMLInputElement.name: Berisi nilai atribut name dari tag <input>.
+// • HTMLInputElement.type: Berisi nilai atribut type dari tag <input>.
+// • HTMLInputElement.autofocus: Berisi nilai boolean apakah atribut autofocus aktif atau
+// tidak.
+// • HTMLInputElement.value: Berisi nilai atribut value dari tag <input>. Property ini juga
+// berisi nilai teks yang saat ini ada di dalam tag <input>,
+// • HTMLInputElement.maxLength: Berisi nilai atribut maxLength dari tag <input>, akan
+// menghasilkan nilai -1 jika atribut maxLength tidak ditulis.
+// • HTMLInputElement.size: Berisi nilai atribut size dari tag <input>. Secara default, panjang
+// dari tag <input> adalah 20.
+// • HTMLInputElement.readOnly: Berisi nilai boolean apakah atribut readOnly aktif atau
+// tidak.
+// • HTMLInputElement.placeholder: Berisi nilai atribut placeholder dari tag <input>.
+
+// Dari semua property ini, yang akan paling sering kita akses adalah property value, 
+
+// Mari kita ubah sedikit contoh praktek ini. Bagaimana dengan men-copy hasil text box ke dalam
+// text box lain?
+// Caranya tidak jauh berbeda. Cukup memindahkan nilai property value dari element pertama ke
+// property value elemen kedua
+
+// =========================================== Form yang tidak harus di dalam “form” ================================
+// Artinya, sebuah tag tidak harus berada di dalam <form> agar bisa diproses dengan JavaScript. Ini juga berlaku untuk anggota
+// form lainnya, seperti <textarea> maupun <select>
+var copyDataNode = document.getElementById('copyData')
+
+function diCopyNode(){
+    spanHasil.value = usernameNode.value;
+    spanHasil.disabled = "true";
+}
+copyDataNode.addEventListener('click',diCopyNode)
+
+// ========================================  Input Element: Event ============================================
+// Input element atau lengkapnya HTMLInputElement alias tag <input> memiliki berbagai event
+// yang bisa diakses. Karena HTMLInputElement adalah turunan dari element object, maka event
+// standar seperti click, dblclick, mouseover, dll juga berlaku kepada element ini.
+</script>
+</body>
+</html>
