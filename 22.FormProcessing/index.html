@@ -11,6 +11,8 @@
             padding: 5px 20px;
             cursor: pointer;
         }
+
+        #hasilKeyboard {width:300px; height: 50px; border: 2px solid black;}
     </style>
 </head>
 <body>
@@ -36,7 +38,61 @@ element yang ingin dimanipulasi, atau lebih tepatnya mencari node object dari ta
 <!-- Form Property -->
 <p>Hasil <span id="hasil"></span></p>
 </form>
+<hr>
+<p>Username : <input type="text" name="name" id="name"></p>
+<p>Email :<input type="email" name="email" id="email"></p>
+<p>Tempat Lahir :<input type="lahir" name="lahir" id="lahir"></p>
 
+<!-- Event Element Lain -->
+<button id="btn1">Tampilkan Pesan</button>
+<button id="btn2">Tampilkan Pesan juga</button>
+
+<!-- Keyboard Event -->
+<p>Test Keyboard Event <input type="text" name="keyboard" id="keyboard"></p>
+<div id="hasilKeyboard"></div>
+
+<p>Hasil Keydown <span id="hasilKeydown"></span></p>
+<p>Hasil KeyPress <span id="hasilKeypress"></span></p>
+<p>Hasil Keyup <span id="hasilKeyup"></span></p>
+<p>Jumlah Huruf "a" : <span id="hasilA"></span></p>
+<p>Jumlah Huruf 'e' : <span id="hasilE"></span></p>
+<hr>
+<p>Password : <input type="password" id="password"></p>
+<p><button id="buttonPassword">Tampilkan Password</button></p>
+<br>
+<br>
+<p>
+    Belajar : 
+    <input type="checkbox" id="html" value="HTML"> HTML
+    <input type="checkbox" id="css" value="CSS"> CSS      
+    <input type="checkbox" id="javascript" value="Javascript"> JavaScript
+</p>
+
+<p><button id="checkboxButton"> Periksa</button>
+    <button id="ceklisCheckbox">Ceklis</button>        
+    <button id="kosongCheckbox">Kosong</button></p>
+<p>Hasil : <span id="hasilCheckbox"></span>
+</p>
+<hr>
+<p>Belajar <select name="periksaSelect" id="periksaSelect">
+    <option value="HTML" id="selectHtml">HTML</option>
+    <option value="CSS" id="selectCSS">CSS</option>
+    <option value="Javascript" id="selectJS">JS</option>
+</select>
+</p>
+<p>Hasil <span id="hasilSelect"></span></p>
+<hr>
+<p>
+    Fakultas <select name="fakultas" id="fakultasSelect">
+            <option value="DKV">DKV</option>
+            <option value="RPL">RPL</option>
+            <option value="ANM">ANM</option>
+    </select>
+    Materi : <select name="jurusan" id="jurusanSelect">
+
+    </select>
+</p>
+<p>Hasil <span id="hasilGabungan"></span></p>
 <script>
 // bagaimana cara mengambil nilai Node object cara yang paling praktis adalah menggunakan method 
 // andalan kita: getElementById(). 
@@ -222,6 +278,316 @@ copyDataNode.addEventListener('click',diCopyNode)
 // Input element atau lengkapnya HTMLInputElement alias tag <input> memiliki berbagai event
 // yang bisa diakses. Karena HTMLInputElement adalah turunan dari element object, maka event
 // standar seperti click, dblclick, mouseover, dll juga berlaku kepada element ini.
+
+var nameNode = document.getElementById('name');
+var emailNode = document.getElementById('email');
+var lahirNode = document.getElementById('lahir')
+
+function diFocus(e){
+    e.target.style.border = "2px solid aqua";  
+};
+// Kemudian tekan tombol tab di keyboard untuk pindah ke box email,
+// bordernya juga akan berubah warna. Inilah yang dimaksud dengan event focus
+nameNode.addEventListener('focus',diFocus)
+emailNode.addEventListener('focus',diFocus)
+
+// ================================ Event Blur ====================================================
+// Event blur adalah kebalikan dari focus. Event ini terjadi ketika sebuah element kehilangan fokus,
+// yakni saat kita pindah ke element lain
+
+function diBlur(e){
+    e.target.style.border = "2px solid red";
+};
+
+nameNode.addEventListener('blur',diBlur)
+emailNode.addEventListener('blur',diBlur)
+
+// =================================== Event Change ============================================
+// Event change akan aktif ketika nilai sebuah element berubah, baik jika nilainya ditambah,
+// dikurangi atau dihapus. Khusus untuk text box, event ini akan aktif pada saat element tersebut
+// kehilangan focusnya
+
+lahirNode = document.getElementById('lahir')
+function diUbah(e){
+    e.target.style.border = '2px solid pink';
+}
+lahirNode.addEventListener('change', diUbah)
+
+// =============================  Menjalankan Event Element Lain ==================================
+// Dalam pembahasan mengenai event, kita masih menjalankan event untuk element itu sendiri.
+// JavaScript juga membolehkan menjalankan event milik element lain, yakni dengan cara me-
+// manggil method dari element tersebut
+
+var btnNode1 = document.getElementById('btn1')
+var btnNode2 = document.getElementById('btn2')
+
+function tampilkanPesan(e){
+    alert(e.target.id);
+}
+btnNode1.addEventListener('click',tampilkanPesan)
+
+function tampilkanPesanLagi(e){
+    alert(e.target.id);
+}
+
+btnNode2.addEventListener('click',function(){nameNode.focus();})
+
+// =============================== Keyboard Event ======================================
+// Event Keydown, Keypress, dan Keyup
+// Keyboard memiliki 3 event: keydown, keypress dan keyup. Karena mirip satu sama lain, saya
+// akan membahas ketiganya sekaligus.
+// Event keydown dan keypress terjadi saat tombol keyboard ditekan. Kedua event ini nyaris tidak
+// berbeda, namun event keydown akan dipanggil terlebih dahulu, baru kemudian diikuti dengan
+// event keypress. Situasi ini mirip seperti event mousedown dengan click
+
+var ketikNode = document.getElementById('keyboard')
+var divHasil = document.getElementById('hasilKeyboard')
+
+function diKeydown(){
+    divHasil.style.backgroundColor = "red";
+}
+
+function diKeypress(){
+    divHasil.style.backgroundColor = "blue"
+}
+
+function diKeyup(){
+    divHasil.style.backgroundColor = "yellow"
+}
+
+ketikNode.addEventListener('keydown',diKeydown)
+ketikNode.addEventListener('keypress',diKeypress)
+ketikNode.addEventListener('keydown',diKeydown)
+
+var keydownNode = document.getElementById('hasilKeydown')
+var keypressNode = document.getElementById('hasilKeypress')
+var keyupNode    = document.getElementById('hasilKeyup')
+
+function keyup(){
+    keyupNode.innerHTML = ketikNode.value;
+}
+
+function keypress(){
+    keypressNode.innerHTML = ketikNode.value;
+}
+
+function keydown(){
+    keydownNode.innerHTML = ketikNode.value;
+}
+
+// Jika saya mengetik huruf kedua, barulah huruf "a" akan tampil di "Hasil keydown" dan "Hasil
+// keypress", sebelum event keyup berjalan:
+ketikNode.addEventListener('keyup',keyup)
+ketikNode.addEventListener('keypress',keypress)
+ketikNode.addEventListener('keydown',keydown)
+
+// ============================ Keyboard event object ==========================================
+// Ketiga keyboard event yang kita bahas akan menghasilkan sebuah event object khusus yang
+// bernama KeyboardEvent.
+// KeyboardEvent object juga memiliki berbagai property yang bisa diakses, yang berisi apa
+// tombol yang saat ini sedang diketik, apakah tombol CRTL di tahan atau tidak, dll. Daftar lengkap
+// dari property dan method dari KeyboardEven
+// Mari kita lihat beberapa property KeyboardEven
+
+function liatProperty(e){
+    console.log(e.key); // a
+    console.log(e.charCode); // 97
+    console.log(e.keyCode); // 0
+    console.log(e.which); // 97
+    console.log(e.altKey); // false
+    console.log(e.ctrlKey); // false
+    console.log(e.shiftKey); // false
+}
+
+ketikNode.addEventListener('keypress', liatProperty)
+
+// KeyboardEvent.key: Berisi string dari tombol yang ditekan, seperti “A”, “c”, “5”, juga
+// tombol seperti “Enter”, “Tab” atau “ArrowUp”.
+// • KeyboardEvent.charCode: Berisi kode Unicode dari tombol yang ditekan, contohnya “A”
+// akan menjadi 65, karena kode Unicode untuk karakter “A” adalah 65. Property ini hanya
+// akan berisi untuk event keypress. charCode sebaiknya tidak dipakai lagi (deprecated),
+// disarankan menggunakan KeyboardEvent.key.
+// • KeyboardEvent.keyCode: Sama seperti charCode, khusus untuk event keydown dan
+// keyup. Di beberapa sistem, huruf ‘a’ kecil akan menghasilkan nilai unicode untuk
+// huruf “A” besar. keyCode juga sebaiknya tidak dipakai lagi (deprecated), disarankan
+// menggunakan KeyboardEvent.key.
+// • KeyboardEvent.which: Sama seperti keyCode dan charCode, berlaku untuk event key-
+// down, keyup maupun keypress. Property which sebaiknya tidak dipakai lagi (deprecated),
+// disarankan menggunakan KeyboardEvent.key.
+// • KeyboardEvent.altKey: Berisi nilai boolean apakah tombol ALT di tahan saat terjadi
+// event
+// • KeyboardEvent.ctrlKey: Berisi nilai boolean apakah tombol CRTL di tahan saat terjadi
+// event
+// • KeyboardEvent.shiftKey: Berisi nilai boolean apakah tombol SHIFT di tahan saat terjadi
+// even
+
+// Sebagai tambahan, jika anda ingin membuat kode program yang bisa membaca tombol khusus
+// seperti SHIFT, ALT dan CTRL secara terisah (tidak di kombinasikan dengan tombol lain), hanya
+// akan terbaca untuk event keydown dan keyup tapi tidak untuk event keypress.
+// Untuk pembuktiannya, silahkan anda ubah event keypress contoh kode kita sebelumnya,
+
+var hasilANode = document.getElementById('hasilA');
+var hasilENode = document.getElementById('hasilE');
+
+var jumlahA = 0;
+var jumlahE = 0;
+
+function diHitung(e){
+    if(e.key == "a"){
+        jumlahA++;
+        hasilANode.innerHTML = jumlahA;
+    }
+    if(e.key == 'e'){
+        jumlahE++;
+        hasilENode.innerHTML = jumlahE;
+    }
+}
+
+ketikNode.addEventListener('keypress', diHitung);
+
+// =============================== Input Element: Type Password =========================================
+// Input element type password adalah sebutan bagi tag <input type="password">. Element
+// ini digunakan untuk membuat kotak inputan password yang pada saat di ketik, teks akan
+// disamarkan dengan tanda bulatan hitam atau tanda bintang (tergantung web browser)
+
+var passwordNode = document.getElementById('password')
+var buttonPasswordNode = document.getElementById('buttonPassword') ;
+
+function lihatPassword(){
+    if(buttonPasswordNode.innerHTML === "Tampilkan Password"){
+        passwordNode.type = 'text';
+        buttonPasswordNode.innerHTML = "Sembunyikan Password"
+    } else {
+        passwordNode.type = 'password';
+        buttonPasswordNode.innerHTML = "Tampilkan Password"
+    }
+}
+
+buttonPasswordNode.addEventListener('click',lihatPassword)
+
+// ========================== 1 Input Element: Type Checkbox ========================
+// Element form berikutnya yang akan kita bahas adalah checkbox. Checkbox berbentuk tombol
+// checklist yang bisa dipilih Sama seperti textarea dan input type password, mayoritas atribut, property, dan event untuk
+// checkbox sama seperti element input form biasa, termasuk atribut value, event focus, blur, click,
+// dll.
+
+var htmlNode = document.getElementById('html')
+var cssNode  = document.getElementById('css')
+var jsNode = document.getElementById('javascript')
+var checkboxNode = document.getElementById('checkboxButton')
+var hasilCheckboxNode = document.getElementById('hasilCheckbox')
+var ceklisNode = document.getElementById('ceklisCheckbox')
+var kosongNode = document.getElementById('kosongCheckbox')
+function periksaCB(){
+    hasilCheckboxNode.innerHTML = " "
+  if(htmlNode.checked){
+      hasilCheckboxNode.innerHTML += htmlNode.value + " ";
+  }if(cssNode.checked){
+      hasilCheckboxNode.innerHTML += cssNode.value + " ";
+  }if(jsNode.checked){
+      hasilCheckboxNode.innerHTML += jsNode.value + " ";
+  }
+}
+
+function ceklisProses(){
+    htmlNode.checked = true
+    cssNode.checked = true
+    jsNode.checked = true
+}
+
+function unchecklisProses(){
+    htmlNode.checked = false
+    cssNode.checked = false
+    jsNode.checked = false
+}
+
+checkboxNode.addEventListener('click',periksaCB)
+ceklisNode.addEventListener('click',ceklisProses)
+kosongNode.addEventListener('click',unchecklisProses)
+
+// ============================ Input Element: Type Radio =======================================
+// Input element type radio atau disebut juga sebagai radio button sangat mirip seperti checkbox
+
+// =================================== Select Element =============================================
+// Jika dibandingkan dengan element form lain, select element mungkin yang paling kompleks,
+// karena kita butuh gabungan tag <select> dan tag <option> untuk membuat sebuah pilihan
+// dropdown
+
+var selectHtmlNode = document.getElementById('selectHtml')
+var selectCSSNode = document.getElementById('selectCSS')
+var selectJSNode = document.getElementById('selectJS')
+var selectButtonNode = document.getElementById('periksaSelect') 
+var hasilSelectNode = document.getElementById('hasilSelect')
+function periksaSelect(){
+    hasilSelectNode.innerHTML = " "
+    if(selectHtmlNode.selected){
+        hasilSelectNode.innerHTML = selectHtmlNode.value;
+    }if(selectCSSNode.selected){
+        hasilSelectNode.innerHTML = selectCSSNode.value;
+    }if(selectJSNode.selected){
+        hasilSelectNode.innerHTML = selectJSNode.value;
+    }
+}
+
+// Namun ada sedikit efek dari penggunaan event click. Ketika cursor mouse baru mulai memilih
+// pilihan (saat men-klik tombol “v” di sisi kanan) hasilnya sudah langsung ke dalam tag <span>
+selectButtonNode.addEventListener('change', periksaSelect)
+
+// =====================================  Case Study: Membuat Dropdown Dinamis ===================================
+// Sebagai case study dari tag <select>, saya ingin membuat sebuah pilihan dropdown dinamis.
+// Fitur seperti ini sering kita jumpai di internet. Dimana daftar pilihan akan berubah tergantung
+// pilihan dropdown lainnya.
+
+var fakultasNode = document.getElementById('fakultasSelect')
+var jurusanNode  = document.getElementById('jurusanSelect')
+var hasiLatihanNode = document.getElementById('hasilGabungan')
+var RPLMateriNode = "";
+var DKVMateriNode = "";
+var ANMMateriNode = "   ";
+
+function pilihJurusan(){
+if(fakultasNode.value === "RPL"){
+    RPLMateriNode = "<option value='Ilkom'>Ilmu Komputer</option>";
+    RPLMateriNode += "<option value='Informasi'>Sistem Informasi</option>";
+    RPLMateriNode += "<option value='Database'>Database</option>";
+    jurusanNode.innerHTML = RPLMateriNode;
+}
+if(fakultasNode.value === "DKV"){
+    DKVMateriNode = "<option value='Fotograpi'>Fotograpi</option>";
+    DKVMateriNode += "<option value='Designer'>Product Design</option>";
+    DKVMateriNode += "<option value='Database'>Database</option>";
+    jurusanNode.innerHTML = DKVMateriNode;
+}
+if(fakultasNode.value === "ANM"){
+    ANMMateriNode = "<option value='Foto'>Ilmu Foto</option>";
+    ANMMateriNode += "<option value='Game'>Game</option>";
+    ANMMateriNode += "<option value='Animasi'>Animasi</option>";
+    jurusanNode.innerHTML = ANMMateriNode;
+}
+}
+
+function tampilkanHasil(){
+    hasiLatihanNode.innerHTML = "Fakultas " + fakultasNode.value + ", " ;
+    hasiLatihanNode.innerHTML += " Jurusan " + jurusanNode.value + ",";
+}
+// Isi dropdown Jurusan hanya akan di-generate saat function tampilkanJurusan() dipanggil.
+// Kapan function ini dipanggil? Hanya jika terjadi event change dari fakultasNode. Yakni hanya
+// ketika pilihan jurusan berubah nilai (change event).
+
+window.addEventListener('load',pilihJurusan)
+fakultasNode.addEventListener('change',pilihJurusan)
+jurusanNode.addEventListener('change',tampilkanHasil)
+// Solusi dari masalah ini, kita harus memanggil function tampilkanJurusan() tepat saat halaman
+// tampil.
+
+// Akan tetapi karena event change untuk fakultasNode sudah tersedia, yakni untuk menjalankan
+// function tampilkanJurusan(), saya bisa menyisipkan pemanggilan function tampilkanHasil()
+// ke dalam tampilkanJurusan().
+
+// Selain itu, karena function tampilkanJurusan() juga akan dipanggil saat halaman ditampilkan
+// (berasal dari event load dari window object), maka teks juga akan otomatis tampil begitu
+// halaman di-load.
+
 </script>
 </body>
 </html>
