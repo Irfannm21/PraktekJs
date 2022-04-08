@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        #pesan {
+            color: red;
+            text-align: center;
+            padding: 6px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form action="#" name="formKu" method="get">
+        <p>
+            Username <input type="text" id="username">  <span id="pesan" class="pesan"></span>
+        </p>
+        <p>
+            Password <input type="password" id="password">  <span id="pesanPassword" class="password"></span>
+        </p>
+        <p>
+            Ulangi <input type="password" id="ulangi">  <span id="ulangiPassword" class="ulangi"></span>
+        </p>
+        <p>
+            <input type="checkbox" name="syarat" id="syarat"> Saya Setuju
+        </p>
+        <p><button type="submit" id="btnCek">Cek</button></p>
+    </form>
+</body>
+
+<script>
+    var usernameNode = document.getElementById('username');
+    var pesanNode = document.getElementById('pesan');
+    var passwordNode = document.getElementById('password');
+    var pesanPasswordNode = document.getElementById('pesanPassword');
+    var ulangiNode = document.getElementById('ulangi');
+    var ulangiPesanNode = document.getElementById('ulangiPassword');
+    var btnCekNode  = document.getElementById('btnCek');
+// =============================== Fitur Validasi: Trim =====================================
+// Dengan tampilan pesan error yang lebih rapi, kita bisa kembali membahas tentang validasi.
+// Terdapat 1 kelemahan dari kode program sebelumnya. Jika text box username diinput dengan
+// karakter whitespace seperti spasi, validasi akan lolos. Alasannya, karena spasi atau tab tetap
+// dianggap sebagai sebuah karakter
+    function cekForm(){
+        var usernameNode = "";
+        if(usernameNode.value.trim() === ""){
+            pesanNode.innerHTML = "Username Harus di isi";
+            pesanNode.className = "error"
+            e.preventDefault()
+        }else if(/\W/ .test(usernameNode.value.trim())){
+            pesanNode.innerHTML = "Tidak boleh menggunakan alfanumerik"
+            pesanNode.className = "error"
+            e.preventDefault()
+        }else if(usernameNode.value.trim().length < 6){
+            pesanNode.innerHTML = "Tidak boleh kurang dari 6 huruf"
+            pesanNode.className = "error";
+            e.preventDefault()
+        } else {
+            pesanNode.innerHTML = "";
+        }
+    }
+
+    function hapusError(e){
+        e.target.style.border  = "";
+        e.target.parentElement.lastChild.innerHTML = "";
+    }
+    usernameNode.addEventListener('focus',hapusError);
+    btnCekNode.addEventListener('click',cekForm)
+// ============================== Fitur Validasi: Regular Expression ==========================
+// Untuk membuat pola alfanumerik, kode RegExp yang diperlukan sangat simple, yakni: /\w/.
+// Pola /\w/ cocok dengan seluruh karakter alfabet dan angka (alfanumerik) serta karakter
+// underscore: _. Ini sama artinya dengan pola [A-Za-z0-9_]
+
+var pola = /\W/;
+console.log ( pola.test("aaa") ); // false
+console.log ( pola.test("123") ); // false
+console.log ( pola.test("ad43") ); // false
+console.log ( pola.test("AAA!") ); // true
+console.log ( pola.test("@aku") ); // true
+console.log ( pola.test("zzzzzzz.") ); // true
+</script>
+</html>
